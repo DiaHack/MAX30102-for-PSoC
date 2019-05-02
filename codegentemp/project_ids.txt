@@ -1,0 +1,7 @@
+C:\Users\furka\Desktop\Workspace10\Design01.cydsn\Design01.cyprj|f7a8dfb5-7fc9-47a3-b3a3-701b3adb6661
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|d28fe510-e8af-49ec-847d-f154ce6867a2
+C:\Users\furka\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|70bae746-87c5-4963-bf45-cb9ce60b1e22
+C:\Users\furka\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|f44c9c35-d939-4157-9e12-be7a096c4380
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8f898c9f-7e94-47c5-bc14-b384a94a65aa
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|abb24a0b-09f4-45a3-b59f-90af07a170d4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|41fb0f05-c334-49e7-b5d5-92d2c18ea3bd

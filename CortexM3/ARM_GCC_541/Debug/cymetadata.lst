@@ -1,0 +1,1379 @@
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_metadata
+  20              		.global	cy_meta_flashprotect
+  21              		.global	cy_meta_wonvl
+  22              		.global	cy_meta_custnvl
+  23              		.global	cy_meta_configecc
+  24              		.section	.cyconfigecc,"a",%progbits
+  25              		.align	2
+  26              		.type	cy_meta_configecc, %object
+  27              		.size	cy_meta_configecc, 852
+  28              	cy_meta_configecc:
+  29 0000 03       		.byte	3
+  30 0001 65       		.byte	101
+  31 0002 00       		.byte	0
+  32 0003 40       		.byte	64
+  33 0004 01       		.byte	1
+  34 0005 09       		.byte	9
+  35 0006 01       		.byte	1
+  36 0007 40       		.byte	64
+  37 0008 03       		.byte	3
+  38 0009 0B       		.byte	11
+  39 000a 01       		.byte	1
+  40 000b 40       		.byte	64
+  41 000c 01       		.byte	1
+  42 000d 15       		.byte	21
+  43 000e 01       		.byte	1
+  44 000f 40       		.byte	64
+  45 0010 14       		.byte	20
+  46 0011 18       		.byte	24
+  47 0012 01       		.byte	1
+  48 0013 40       		.byte	64
+  49 0014 39       		.byte	57
+  50 0015 19       		.byte	25
+  51 0016 01       		.byte	1
+  52 0017 40       		.byte	64
+  53 0018 69       		.byte	105
+  54 0019 1A       		.byte	26
+  55 001a 01       		.byte	1
+  56 001b 40       		.byte	64
+  57 001c 50       		.byte	80
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 2
+
+
+  58 001d 1B       		.byte	27
+  59 001e 01       		.byte	1
+  60 001f 40       		.byte	64
+  61 0020 02       		.byte	2
+  62 0021 42       		.byte	66
+  63 0022 01       		.byte	1
+  64 0023 40       		.byte	64
+  65 0024 01       		.byte	1
+  66 0025 43       		.byte	67
+  67 0026 01       		.byte	1
+  68 0027 40       		.byte	64
+  69 0028 05       		.byte	5
+  70 0029 44       		.byte	68
+  71 002a 01       		.byte	1
+  72 002b 40       		.byte	64
+  73 002c 02       		.byte	2
+  74 002d 45       		.byte	69
+  75 002e 01       		.byte	1
+  76 002f 40       		.byte	64
+  77 0030 02       		.byte	2
+  78 0031 46       		.byte	70
+  79 0032 01       		.byte	1
+  80 0033 40       		.byte	64
+  81 0034 01       		.byte	1
+  82 0035 47       		.byte	71
+  83 0036 01       		.byte	1
+  84 0037 40       		.byte	64
+  85 0038 01       		.byte	1
+  86 0039 48       		.byte	72
+  87 003a 01       		.byte	1
+  88 003b 40       		.byte	64
+  89 003c 02       		.byte	2
+  90 003d 49       		.byte	73
+  91 003e 01       		.byte	1
+  92 003f 40       		.byte	64
+  93 0040 08       		.byte	8
+  94 0041 4C       		.byte	76
+  95 0042 01       		.byte	1
+  96 0043 40       		.byte	64
+  97 0044 0A       		.byte	10
+  98 0045 4D       		.byte	77
+  99 0046 01       		.byte	1
+ 100 0047 40       		.byte	64
+ 101 0048 02       		.byte	2
+ 102 0049 50       		.byte	80
+ 103 004a 01       		.byte	1
+ 104 004b 40       		.byte	64
+ 105 004c 01       		.byte	1
+ 106 004d 51       		.byte	81
+ 107 004e 01       		.byte	1
+ 108 004f 40       		.byte	64
+ 109 0050 88       		.byte	-120
+ 110 0051 72       		.byte	114
+ 111 0052 89       		.byte	-119
+ 112 0053 38       		.byte	56
+ 113 0054 8B       		.byte	-117
+ 114 0055 0F       		.byte	15
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 3
+
+
+ 115 0056 96       		.byte	-106
+ 116 0057 01       		.byte	1
+ 117 0058 96       		.byte	-106
+ 118 0059 01       		.byte	1
+ 119 005a AE       		.byte	-82
+ 120 005b 01       		.byte	1
+ 121 005c E8       		.byte	-24
+ 122 005d 08       		.byte	8
+ 123 005e EA       		.byte	-22
+ 124 005f 01       		.byte	1
+ 125 0060 80       		.byte	-128
+ 126 0061 08       		.byte	8
+ 127 0062 86       		.byte	-122
+ 128 0063 04       		.byte	4
+ 129 0064 88       		.byte	-120
+ 130 0065 01       		.byte	1
+ 131 0066 A1       		.byte	-95
+ 132 0067 01       		.byte	1
+ 133 0068 A2       		.byte	-94
+ 134 0069 02       		.byte	2
+ 135 006a A4       		.byte	-92
+ 136 006b 01       		.byte	1
+ 137 006c AA       		.byte	-86
+ 138 006d 02       		.byte	2
+ 139 006e AC       		.byte	-84
+ 140 006f 01       		.byte	1
+ 141 0070 B0       		.byte	-80
+ 142 0071 02       		.byte	2
+ 143 0072 B2       		.byte	-78
+ 144 0073 04       		.byte	4
+ 145 0074 B4       		.byte	-76
+ 146 0075 01       		.byte	1
+ 147 0076 B5       		.byte	-75
+ 148 0077 01       		.byte	1
+ 149 0078 B6       		.byte	-74
+ 150 0079 08       		.byte	8
+ 151 007a BE       		.byte	-66
+ 152 007b 41       		.byte	65
+ 153 007c BF       		.byte	-65
+ 154 007d 10       		.byte	16
+ 155 007e D4       		.byte	-44
+ 156 007f 18       		.byte	24
+ 157 0080 D8       		.byte	-40
+ 158 0081 04       		.byte	4
+ 159 0082 D9       		.byte	-39
+ 160 0083 04       		.byte	4
+ 161 0084 DB       		.byte	-37
+ 162 0085 04       		.byte	4
+ 163 0086 DF       		.byte	-33
+ 164 0087 01       		.byte	1
+ 165 0088 01       		.byte	1
+ 166 0089 0A       		.byte	10
+ 167 008a 03       		.byte	3
+ 168 008b 08       		.byte	8
+ 169 008c 05       		.byte	5
+ 170 008d 29       		.byte	41
+ 171 008e 06       		.byte	6
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 4
+
+
+ 172 008f 02       		.byte	2
+ 173 0090 0C       		.byte	12
+ 174 0091 41       		.byte	65
+ 175 0092 0D       		.byte	13
+ 176 0093 02       		.byte	2
+ 177 0094 0E       		.byte	14
+ 178 0095 0A       		.byte	10
+ 179 0096 0F       		.byte	15
+ 180 0097 20       		.byte	32
+ 181 0098 10       		.byte	16
+ 182 0099 22       		.byte	34
+ 183 009a 12       		.byte	18
+ 184 009b 48       		.byte	72
+ 185 009c 16       		.byte	22
+ 186 009d 80       		.byte	-128
+ 187 009e 17       		.byte	23
+ 188 009f 14       		.byte	20
+ 189 00a0 1A       		.byte	26
+ 190 00a1 01       		.byte	1
+ 191 00a2 1B       		.byte	27
+ 192 00a3 15       		.byte	21
+ 193 00a4 1C       		.byte	28
+ 194 00a5 10       		.byte	16
+ 195 00a6 1D       		.byte	29
+ 196 00a7 21       		.byte	33
+ 197 00a8 1E       		.byte	30
+ 198 00a9 0A       		.byte	10
+ 199 00aa 1F       		.byte	31
+ 200 00ab 10       		.byte	16
+ 201 00ac 23       		.byte	35
+ 202 00ad 08       		.byte	8
+ 203 00ae 25       		.byte	37
+ 204 00af 0A       		.byte	10
+ 205 00b0 26       		.byte	38
+ 206 00b1 08       		.byte	8
+ 207 00b2 27       		.byte	39
+ 208 00b3 01       		.byte	1
+ 209 00b4 2B       		.byte	43
+ 210 00b5 40       		.byte	64
+ 211 00b6 2C       		.byte	44
+ 212 00b7 41       		.byte	65
+ 213 00b8 2D       		.byte	45
+ 214 00b9 20       		.byte	32
+ 215 00ba 2F       		.byte	47
+ 216 00bb 10       		.byte	16
+ 217 00bc 35       		.byte	53
+ 218 00bd 41       		.byte	65
+ 219 00be 37       		.byte	55
+ 220 00bf 14       		.byte	20
+ 221 00c0 3D       		.byte	61
+ 222 00c1 80       		.byte	-128
+ 223 00c2 3E       		.byte	62
+ 224 00c3 82       		.byte	-126
+ 225 00c4 3F       		.byte	63
+ 226 00c5 28       		.byte	40
+ 227 00c6 44       		.byte	68
+ 228 00c7 40       		.byte	64
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 5
+
+
+ 229 00c8 45       		.byte	69
+ 230 00c9 28       		.byte	40
+ 231 00ca 47       		.byte	71
+ 232 00cb 40       		.byte	64
+ 233 00cc 4F       		.byte	79
+ 234 00cd 20       		.byte	32
+ 235 00ce 55       		.byte	85
+ 236 00cf 01       		.byte	1
+ 237 00d0 56       		.byte	86
+ 238 00d1 40       		.byte	64
+ 239 00d2 5B       		.byte	91
+ 240 00d3 01       		.byte	1
+ 241 00d4 5C       		.byte	92
+ 242 00d5 10       		.byte	16
+ 243 00d6 60       		.byte	96
+ 244 00d7 04       		.byte	4
+ 245 00d8 63       		.byte	99
+ 246 00d9 02       		.byte	2
+ 247 00da 6C       		.byte	108
+ 248 00db 22       		.byte	34
+ 249 00dc 6E       		.byte	110
+ 250 00dd 04       		.byte	4
+ 251 00de 6F       		.byte	111
+ 252 00df 08       		.byte	8
+ 253 00e0 76       		.byte	118
+ 254 00e1 02       		.byte	2
+ 255 00e2 77       		.byte	119
+ 256 00e3 14       		.byte	20
+ 257 00e4 96       		.byte	-106
+ 258 00e5 01       		.byte	1
+ 259 00e6 C0       		.byte	-64
+ 260 00e7 FE       		.byte	-2
+ 261 00e8 C2       		.byte	-62
+ 262 00e9 F0       		.byte	-16
+ 263 00ea C4       		.byte	-60
+ 264 00eb 7F       		.byte	127
+ 265 00ec CA       		.byte	-54
+ 266 00ed F1       		.byte	-15
+ 267 00ee CC       		.byte	-52
+ 268 00ef F0       		.byte	-16
+ 269 00f0 CE       		.byte	-50
+ 270 00f1 F0       		.byte	-16
+ 271 00f2 D0       		.byte	-48
+ 272 00f3 F0       		.byte	-16
+ 273 00f4 D2       		.byte	-46
+ 274 00f5 20       		.byte	32
+ 275 00f6 D6       		.byte	-42
+ 276 00f7 21       		.byte	33
+ 277 00f8 D8       		.byte	-40
+ 278 00f9 0C       		.byte	12
+ 279 00fa 02       		.byte	2
+ 280 00fb 03       		.byte	3
+ 281 00fc 04       		.byte	4
+ 282 00fd 10       		.byte	16
+ 283 00fe 06       		.byte	6
+ 284 00ff 0C       		.byte	12
+ 285 0100 07       		.byte	7
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 6
+
+
+ 286 0101 08       		.byte	8
+ 287 0102 08       		.byte	8
+ 288 0103 10       		.byte	16
+ 289 0104 0C       		.byte	12
+ 290 0105 09       		.byte	9
+ 291 0106 0D       		.byte	13
+ 292 0107 80       		.byte	-128
+ 293 0108 0E       		.byte	14
+ 294 0109 10       		.byte	16
+ 295 010a 0F       		.byte	15
+ 296 010b 13       		.byte	19
+ 297 010c 12       		.byte	18
+ 298 010d 20       		.byte	32
+ 299 010e 15       		.byte	21
+ 300 010f 2C       		.byte	44
+ 301 0110 16       		.byte	22
+ 302 0111 20       		.byte	32
+ 303 0112 17       		.byte	23
+ 304 0113 43       		.byte	67
+ 305 0114 18       		.byte	24
+ 306 0115 0C       		.byte	12
+ 307 0116 19       		.byte	25
+ 308 0117 71       		.byte	113
+ 309 0118 1A       		.byte	26
+ 310 0119 11       		.byte	17
+ 311 011a 1B       		.byte	27
+ 312 011b 06       		.byte	6
+ 313 011c 23       		.byte	35
+ 314 011d 0C       		.byte	12
+ 315 011e 24       		.byte	36
+ 316 011f 14       		.byte	20
+ 317 0120 25       		.byte	37
+ 318 0121 71       		.byte	113
+ 319 0122 27       		.byte	39
+ 320 0123 0E       		.byte	14
+ 321 0124 28       		.byte	40
+ 322 0125 1C       		.byte	28
+ 323 0126 2A       		.byte	42
+ 324 0127 02       		.byte	2
+ 325 0128 30       		.byte	48
+ 326 0129 1F       		.byte	31
+ 327 012a 31       		.byte	49
+ 328 012b C0       		.byte	-64
+ 329 012c 33       		.byte	51
+ 330 012d 0F       		.byte	15
+ 331 012e 34       		.byte	52
+ 332 012f 20       		.byte	32
+ 333 0130 35       		.byte	53
+ 334 0131 30       		.byte	48
+ 335 0132 39       		.byte	57
+ 336 0133 22       		.byte	34
+ 337 0134 3B       		.byte	59
+ 338 0135 08       		.byte	8
+ 339 0136 3E       		.byte	62
+ 340 0137 10       		.byte	16
+ 341 0138 3F       		.byte	63
+ 342 0139 10       		.byte	16
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 7
+
+
+ 343 013a 40       		.byte	64
+ 344 013b 02       		.byte	2
+ 345 013c 45       		.byte	69
+ 346 013d 04       		.byte	4
+ 347 013e 49       		.byte	73
+ 348 013f FF       		.byte	-1
+ 349 0140 4A       		.byte	74
+ 350 0141 07       		.byte	7
+ 351 0142 4B       		.byte	75
+ 352 0143 FF       		.byte	-1
+ 353 0144 4C       		.byte	76
+ 354 0145 40       		.byte	64
+ 355 0146 4D       		.byte	77
+ 356 0147 20       		.byte	32
+ 357 0148 4E       		.byte	78
+ 358 0149 F0       		.byte	-16
+ 359 014a 4F       		.byte	79
+ 360 014b 05       		.byte	5
+ 361 014c 50       		.byte	80
+ 362 014d 08       		.byte	8
+ 363 014e 58       		.byte	88
+ 364 014f 04       		.byte	4
+ 365 0150 59       		.byte	89
+ 366 0151 04       		.byte	4
+ 367 0152 5A       		.byte	90
+ 368 0153 04       		.byte	4
+ 369 0154 5F       		.byte	95
+ 370 0155 01       		.byte	1
+ 371 0156 60       		.byte	96
+ 372 0157 40       		.byte	64
+ 373 0158 61       		.byte	97
+ 374 0159 A8       		.byte	-88
+ 375 015a 62       		.byte	98
+ 376 015b 40       		.byte	64
+ 377 015c 63       		.byte	99
+ 378 015d 20       		.byte	32
+ 379 015e 81       		.byte	-127
+ 380 015f 48       		.byte	72
+ 381 0160 82       		.byte	-126
+ 382 0161 35       		.byte	53
+ 383 0162 83       		.byte	-125
+ 384 0163 34       		.byte	52
+ 385 0164 84       		.byte	-124
+ 386 0165 4A       		.byte	74
+ 387 0166 85       		.byte	-123
+ 388 0167 F8       		.byte	-8
+ 389 0168 86       		.byte	-122
+ 390 0169 34       		.byte	52
+ 391 016a 88       		.byte	-120
+ 392 016b 13       		.byte	19
+ 393 016c 8A       		.byte	-118
+ 394 016d 2C       		.byte	44
+ 395 016e 8D       		.byte	-115
+ 396 016f 20       		.byte	32
+ 397 0170 8E       		.byte	-114
+ 398 0171 48       		.byte	72
+ 399 0172 8F       		.byte	-113
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 8
+
+
+ 400 0173 C2       		.byte	-62
+ 401 0174 93       		.byte	-109
+ 402 0175 01       		.byte	1
+ 403 0176 95       		.byte	-107
+ 404 0177 01       		.byte	1
+ 405 0178 98       		.byte	-104
+ 406 0179 03       		.byte	3
+ 407 017a 99       		.byte	-103
+ 408 017b 90       		.byte	-112
+ 409 017c 9A       		.byte	-102
+ 410 017d 14       		.byte	20
+ 411 017e 9B       		.byte	-101
+ 412 017f 2C       		.byte	44
+ 413 0180 A1       		.byte	-95
+ 414 0181 01       		.byte	1
+ 415 0182 A4       		.byte	-92
+ 416 0183 13       		.byte	19
+ 417 0184 A6       		.byte	-90
+ 418 0185 64       		.byte	100
+ 419 0186 A9       		.byte	-87
+ 420 0187 F8       		.byte	-8
+ 421 0188 AA       		.byte	-86
+ 422 0189 40       		.byte	64
+ 423 018a AF       		.byte	-81
+ 424 018b 01       		.byte	1
+ 425 018c B0       		.byte	-80
+ 426 018d 10       		.byte	16
+ 427 018e B1       		.byte	-79
+ 428 018f 06       		.byte	6
+ 429 0190 B2       		.byte	-78
+ 430 0191 68       		.byte	104
+ 431 0192 B3       		.byte	-77
+ 432 0193 01       		.byte	1
+ 433 0194 B4       		.byte	-76
+ 434 0195 0F       		.byte	15
+ 435 0196 B5       		.byte	-75
+ 436 0197 18       		.byte	24
+ 437 0198 B7       		.byte	-73
+ 438 0199 E0       		.byte	-32
+ 439 019a B9       		.byte	-71
+ 440 019b 08       		.byte	8
+ 441 019c BA       		.byte	-70
+ 442 019d 28       		.byte	40
+ 443 019e BE       		.byte	-66
+ 444 019f 01       		.byte	1
+ 445 01a0 BF       		.byte	-65
+ 446 01a1 01       		.byte	1
+ 447 01a2 C0       		.byte	-64
+ 448 01a3 24       		.byte	36
+ 449 01a4 C1       		.byte	-63
+ 450 01a5 03       		.byte	3
+ 451 01a6 C5       		.byte	-59
+ 452 01a7 0C       		.byte	12
+ 453 01a8 C6       		.byte	-58
+ 454 01a9 CE       		.byte	-50
+ 455 01aa C7       		.byte	-57
+ 456 01ab 0B       		.byte	11
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 9
+
+
+ 457 01ac C8       		.byte	-56
+ 458 01ad 1D       		.byte	29
+ 459 01ae C9       		.byte	-55
+ 460 01af FF       		.byte	-1
+ 461 01b0 CA       		.byte	-54
+ 462 01b1 FF       		.byte	-1
+ 463 01b2 CB       		.byte	-53
+ 464 01b3 FF       		.byte	-1
+ 465 01b4 CE       		.byte	-50
+ 466 01b5 F0       		.byte	-16
+ 467 01b6 CF       		.byte	-49
+ 468 01b7 44       		.byte	68
+ 469 01b8 D0       		.byte	-48
+ 470 01b9 0C       		.byte	12
+ 471 01ba D4       		.byte	-44
+ 472 01bb 01       		.byte	1
+ 473 01bc D8       		.byte	-40
+ 474 01bd 04       		.byte	4
+ 475 01be D9       		.byte	-39
+ 476 01bf 04       		.byte	4
+ 477 01c0 DA       		.byte	-38
+ 478 01c1 04       		.byte	4
+ 479 01c2 DB       		.byte	-37
+ 480 01c3 04       		.byte	4
+ 481 01c4 DF       		.byte	-33
+ 482 01c5 01       		.byte	1
+ 483 01c6 E6       		.byte	-26
+ 484 01c7 C0       		.byte	-64
+ 485 01c8 EA       		.byte	-22
+ 486 01c9 40       		.byte	64
+ 487 01ca EB       		.byte	-21
+ 488 01cb 02       		.byte	2
+ 489 01cc 00       		.byte	0
+ 490 01cd 60       		.byte	96
+ 491 01ce 01       		.byte	1
+ 492 01cf 02       		.byte	2
+ 493 01d0 03       		.byte	3
+ 494 01d1 10       		.byte	16
+ 495 01d2 04       		.byte	4
+ 496 01d3 40       		.byte	64
+ 497 01d4 05       		.byte	5
+ 498 01d5 10       		.byte	16
+ 499 01d6 06       		.byte	6
+ 500 01d7 41       		.byte	65
+ 501 01d8 07       		.byte	7
+ 502 01d9 20       		.byte	32
+ 503 01da 08       		.byte	8
+ 504 01db 20       		.byte	32
+ 505 01dc 09       		.byte	9
+ 506 01dd 09       		.byte	9
+ 507 01de 0F       		.byte	15
+ 508 01df 08       		.byte	8
+ 509 01e0 11       		.byte	17
+ 510 01e1 08       		.byte	8
+ 511 01e2 13       		.byte	19
+ 512 01e3 20       		.byte	32
+ 513 01e4 14       		.byte	20
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 10
+
+
+ 514 01e5 20       		.byte	32
+ 515 01e6 16       		.byte	22
+ 516 01e7 04       		.byte	4
+ 517 01e8 18       		.byte	24
+ 518 01e9 04       		.byte	4
+ 519 01ea 19       		.byte	25
+ 520 01eb 02       		.byte	2
+ 521 01ec 1D       		.byte	29
+ 522 01ed 14       		.byte	20
+ 523 01ee 1E       		.byte	30
+ 524 01ef 40       		.byte	64
+ 525 01f0 20       		.byte	32
+ 526 01f1 40       		.byte	64
+ 527 01f2 21       		.byte	33
+ 528 01f3 10       		.byte	16
+ 529 01f4 22       		.byte	34
+ 530 01f5 04       		.byte	4
+ 531 01f6 23       		.byte	35
+ 532 01f7 20       		.byte	32
+ 533 01f8 25       		.byte	37
+ 534 01f9 48       		.byte	72
+ 535 01fa 26       		.byte	38
+ 536 01fb 10       		.byte	16
+ 537 01fc 27       		.byte	39
+ 538 01fd 40       		.byte	64
+ 539 01fe 28       		.byte	40
+ 540 01ff 20       		.byte	32
+ 541 0200 29       		.byte	41
+ 542 0201 04       		.byte	4
+ 543 0202 2A       		.byte	42
+ 544 0203 01       		.byte	1
+ 545 0204 2C       		.byte	44
+ 546 0205 41       		.byte	65
+ 547 0206 2F       		.byte	47
+ 548 0207 08       		.byte	8
+ 549 0208 31       		.byte	49
+ 550 0209 10       		.byte	16
+ 551 020a 32       		.byte	50
+ 552 020b 04       		.byte	4
+ 553 020c 33       		.byte	51
+ 554 020d 10       		.byte	16
+ 555 020e 35       		.byte	53
+ 556 020f 21       		.byte	33
+ 557 0210 36       		.byte	54
+ 558 0211 14       		.byte	20
+ 559 0212 38       		.byte	56
+ 560 0213 80       		.byte	-128
+ 561 0214 3A       		.byte	58
+ 562 0215 04       		.byte	4
+ 563 0216 3B       		.byte	59
+ 564 0217 04       		.byte	4
+ 565 0218 3D       		.byte	61
+ 566 0219 80       		.byte	-128
+ 567 021a 3E       		.byte	62
+ 568 021b 06       		.byte	6
+ 569 021c 41       		.byte	65
+ 570 021d 10       		.byte	16
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 11
+
+
+ 571 021e 44       		.byte	68
+ 572 021f 20       		.byte	32
+ 573 0220 46       		.byte	70
+ 574 0221 40       		.byte	64
+ 575 0222 47       		.byte	71
+ 576 0223 10       		.byte	16
+ 577 0224 48       		.byte	72
+ 578 0225 10       		.byte	16
+ 579 0226 4B       		.byte	75
+ 580 0227 04       		.byte	4
+ 581 0228 4F       		.byte	79
+ 582 0229 08       		.byte	8
+ 583 022a 50       		.byte	80
+ 584 022b 40       		.byte	64
+ 585 022c 52       		.byte	82
+ 586 022d 40       		.byte	64
+ 587 022e 55       		.byte	85
+ 588 022f 04       		.byte	4
+ 589 0230 57       		.byte	87
+ 590 0231 50       		.byte	80
+ 591 0232 5D       		.byte	93
+ 592 0233 01       		.byte	1
+ 593 0234 5E       		.byte	94
+ 594 0235 40       		.byte	64
+ 595 0236 5F       		.byte	95
+ 596 0237 18       		.byte	24
+ 597 0238 63       		.byte	99
+ 598 0239 30       		.byte	48
+ 599 023a 79       		.byte	121
+ 600 023b 01       		.byte	1
+ 601 023c 7B       		.byte	123
+ 602 023d 40       		.byte	64
+ 603 023e 89       		.byte	-119
+ 604 023f 48       		.byte	72
+ 605 0240 8A       		.byte	-118
+ 606 0241 02       		.byte	2
+ 607 0242 92       		.byte	-110
+ 608 0243 04       		.byte	4
+ 609 0244 94       		.byte	-108
+ 610 0245 04       		.byte	4
+ 611 0246 98       		.byte	-104
+ 612 0247 41       		.byte	65
+ 613 0248 99       		.byte	-103
+ 614 0249 01       		.byte	1
+ 615 024a 9B       		.byte	-101
+ 616 024b 08       		.byte	8
+ 617 024c 9D       		.byte	-99
+ 618 024d 6A       		.byte	106
+ 619 024e 9F       		.byte	-97
+ 620 024f 40       		.byte	64
+ 621 0250 A1       		.byte	-95
+ 622 0251 01       		.byte	1
+ 623 0252 A2       		.byte	-94
+ 624 0253 04       		.byte	4
+ 625 0254 A3       		.byte	-93
+ 626 0255 08       		.byte	8
+ 627 0256 A5       		.byte	-91
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 12
+
+
+ 628 0257 40       		.byte	64
+ 629 0258 A7       		.byte	-89
+ 630 0259 40       		.byte	64
+ 631 025a C0       		.byte	-64
+ 632 025b FF       		.byte	-1
+ 633 025c C2       		.byte	-62
+ 634 025d 4E       		.byte	78
+ 635 025e C4       		.byte	-60
+ 636 025f 66       		.byte	102
+ 637 0260 CA       		.byte	-54
+ 638 0261 B3       		.byte	-77
+ 639 0262 CC       		.byte	-52
+ 640 0263 E6       		.byte	-26
+ 641 0264 CE       		.byte	-50
+ 642 0265 DA       		.byte	-38
+ 643 0266 D0       		.byte	-48
+ 644 0267 E4       		.byte	-28
+ 645 0268 D6       		.byte	-42
+ 646 0269 F0       		.byte	-16
+ 647 026a EA       		.byte	-22
+ 648 026b 01       		.byte	1
+ 649 026c 3E       		.byte	62
+ 650 026d 10       		.byte	16
+ 651 026e CE       		.byte	-50
+ 652 026f 20       		.byte	32
+ 653 0270 96       		.byte	-106
+ 654 0271 10       		.byte	16
+ 655 0272 10       		.byte	16
+ 656 0273 10       		.byte	16
+ 657 0274 14       		.byte	20
+ 658 0275 20       		.byte	32
+ 659 0276 76       		.byte	118
+ 660 0277 40       		.byte	64
+ 661 0278 C4       		.byte	-60
+ 662 0279 0C       		.byte	12
+ 663 027a DE       		.byte	-34
+ 664 027b 04       		.byte	4
+ 665 027c 98       		.byte	-104
+ 666 027d 30       		.byte	48
+ 667 027e 9E       		.byte	-98
+ 668 027f 40       		.byte	64
+ 669 0280 98       		.byte	-104
+ 670 0281 30       		.byte	48
+ 671 0282 AE       		.byte	-82
+ 672 0283 40       		.byte	64
+ 673 0284 98       		.byte	-104
+ 674 0285 30       		.byte	48
+ 675 0286 96       		.byte	-106
+ 676 0287 10       		.byte	16
+ 677 0288 AA       		.byte	-86
+ 678 0289 10       		.byte	16
+ 679 028a EA       		.byte	-22
+ 680 028b 80       		.byte	-128
+ 681 028c 12       		.byte	18
+ 682 028d 10       		.byte	16
+ 683 028e 13       		.byte	19
+ 684 028f 20       		.byte	32
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 13
+
+
+ 685 0290 16       		.byte	22
+ 686 0291 20       		.byte	32
+ 687 0292 78       		.byte	120
+ 688 0293 10       		.byte	16
+ 689 0294 7C       		.byte	124
+ 690 0295 20       		.byte	32
+ 691 0296 98       		.byte	-104
+ 692 0297 30       		.byte	48
+ 693 0298 C4       		.byte	-60
+ 694 0299 0E       		.byte	14
+ 695 029a DE       		.byte	-34
+ 696 029b 03       		.byte	3
+ 697 029c 10       		.byte	16
+ 698 029d 40       		.byte	64
+ 699 029e 72       		.byte	114
+ 700 029f 20       		.byte	32
+ 701 02a0 76       		.byte	118
+ 702 02a1 10       		.byte	16
+ 703 02a2 88       		.byte	-120
+ 704 02a3 40       		.byte	64
+ 705 02a4 9A       		.byte	-102
+ 706 02a5 30       		.byte	48
+ 707 02a6 AB       		.byte	-85
+ 708 02a7 20       		.byte	32
+ 709 02a8 C4       		.byte	-60
+ 710 02a9 08       		.byte	8
+ 711 02aa DC       		.byte	-36
+ 712 02ab 01       		.byte	1
+ 713 02ac DE       		.byte	-34
+ 714 02ad 04       		.byte	4
+ 715 02ae E2       		.byte	-30
+ 716 02af 01       		.byte	1
+ 717 02b0 10       		.byte	16
+ 718 02b1 01       		.byte	1
+ 719 02b2 1C       		.byte	28
+ 720 02b3 01       		.byte	1
+ 721 02b4 03       		.byte	3
+ 722 02b5 C0       		.byte	-64
+ 723 02b6 00       		.byte	0
+ 724 02b7 00       		.byte	0
+ 725 02b8 90       		.byte	-112
+ 726 02b9 30       		.byte	48
+ 727 02ba 00       		.byte	0
+ 728 02bb 00       		.byte	0
+ 729 02bc 78       		.byte	120
+ 730 02bd 00       		.byte	0
+ 731 02be 00       		.byte	0
+ 732 02bf 00       		.byte	0
+ 733 02c0 1F       		.byte	31
+ 734 02c1 10       		.byte	16
+ 735 02c2 20       		.byte	32
+ 736 02c3 00       		.byte	0
+ 737 02c4 01       		.byte	1
+ 738 02c5 00       		.byte	0
+ 739 02c6 00       		.byte	0
+ 740 02c7 04       		.byte	4
+ 741 02c8 02       		.byte	2
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 14
+
+
+ 742 02c9 00       		.byte	0
+ 743 02ca 00       		.byte	0
+ 744 02cb E3       		.byte	-29
+ 745 02cc 08       		.byte	8
+ 746 02cd C0       		.byte	-64
+ 747 02ce 00       		.byte	0
+ 748 02cf 00       		.byte	0
+ 749 02d0 1C       		.byte	28
+ 750 02d1 1C       		.byte	28
+ 751 02d2 23       		.byte	35
+ 752 02d3 E1       		.byte	-31
+ 753 02d4 00       		.byte	0
+ 754 02d5 08       		.byte	8
+ 755 02d6 23       		.byte	35
+ 756 02d7 00       		.byte	0
+ 757 02d8 33       		.byte	51
+ 758 02d9 18       		.byte	24
+ 759 02da 0C       		.byte	12
+ 760 02db 00       		.byte	0
+ 761 02dc 3F       		.byte	63
+ 762 02dd 44       		.byte	68
+ 763 02de 00       		.byte	0
+ 764 02df 00       		.byte	0
+ 765 02e0 03       		.byte	3
+ 766 02e1 FF       		.byte	-1
+ 767 02e2 00       		.byte	0
+ 768 02e3 00       		.byte	0
+ 769 02e4 04       		.byte	4
+ 770 02e5 E7       		.byte	-25
+ 771 02e6 00       		.byte	0
+ 772 02e7 18       		.byte	24
+ 773 02e8 0C       		.byte	12
+ 774 02e9 80       		.byte	-128
+ 775 02ea 00       		.byte	0
+ 776 02eb 00       		.byte	0
+ 777 02ec 00       		.byte	0
+ 778 02ed 3C       		.byte	60
+ 779 02ee 00       		.byte	0
+ 780 02ef C2       		.byte	-62
+ 781 02f0 2C       		.byte	44
+ 782 02f1 1F       		.byte	31
+ 783 02f2 10       		.byte	16
+ 784 02f3 38       		.byte	56
+ 785 02f4 0F       		.byte	15
+ 786 02f5 00       		.byte	0
+ 787 02f6 00       		.byte	0
+ 788 02f7 C0       		.byte	-64
+ 789 02f8 00       		.byte	0
+ 790 02f9 00       		.byte	0
+ 791 02fa A2       		.byte	-94
+ 792 02fb 02       		.byte	2
+ 793 02fc 00       		.byte	0
+ 794 02fd 00       		.byte	0
+ 795 02fe 04       		.byte	4
+ 796 02ff 00       		.byte	0
+ 797 0300 26       		.byte	38
+ 798 0301 04       		.byte	4
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 15
+
+
+ 799 0302 03       		.byte	3
+ 800 0303 00       		.byte	0
+ 801 0304 01       		.byte	1
+ 802 0305 00       		.byte	0
+ 803 0306 0C       		.byte	12
+ 804 0307 E0       		.byte	-32
+ 805 0308 24       		.byte	36
+ 806 0309 FF       		.byte	-1
+ 807 030a FF       		.byte	-1
+ 808 030b FF       		.byte	-1
+ 809 030c 62       		.byte	98
+ 810 030d A0       		.byte	-96
+ 811 030e F0       		.byte	-16
+ 812 030f 41       		.byte	65
+ 813 0310 0C       		.byte	12
+ 814 0311 00       		.byte	0
+ 815 0312 00       		.byte	0
+ 816 0313 00       		.byte	0
+ 817 0314 00       		.byte	0
+ 818 0315 00       		.byte	0
+ 819 0316 02       		.byte	2
+ 820 0317 11       		.byte	17
+ 821 0318 04       		.byte	4
+ 822 0319 04       		.byte	4
+ 823 031a 04       		.byte	4
+ 824 031b 04       		.byte	4
+ 825 031c 00       		.byte	0
+ 826 031d 00       		.byte	0
+ 827 031e 00       		.byte	0
+ 828 031f 01       		.byte	1
+ 829 0320 00       		.byte	0
+ 830 0321 00       		.byte	0
+ 831 0322 00       		.byte	0
+ 832 0323 00       		.byte	0
+ 833 0324 00       		.byte	0
+ 834 0325 00       		.byte	0
+ 835 0326 40       		.byte	64
+ 836 0327 02       		.byte	2
+ 837 0328 00       		.byte	0
+ 838 0329 10       		.byte	16
+ 839 032a 30       		.byte	48
+ 840 032b 10       		.byte	16
+ 841 032c 00       		.byte	0
+ 842 032d 10       		.byte	16
+ 843 032e 10       		.byte	16
+ 844 032f 12       		.byte	18
+ 845 0330 00       		.byte	0
+ 846 0331 00       		.byte	0
+ 847 0332 00       		.byte	0
+ 848 0333 00       		.byte	0
+ 849 0334 00       		.byte	0
+ 850 0335 00       		.byte	0
+ 851 0336 00       		.byte	0
+ 852 0337 00       		.byte	0
+ 853 0338 00       		.byte	0
+ 854 0339 00       		.byte	0
+ 855 033a 00       		.byte	0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 16
+
+
+ 856 033b 00       		.byte	0
+ 857 033c 00       		.byte	0
+ 858 033d 00       		.byte	0
+ 859 033e 00       		.byte	0
+ 860 033f 00       		.byte	0
+ 861 0340 B8       		.byte	-72
+ 862 0341 00       		.byte	0
+ 863 0342 40       		.byte	64
+ 864 0343 88       		.byte	-120
+ 865 0344 B0       		.byte	-80
+ 866 0345 00       		.byte	0
+ 867 0346 B0       		.byte	-80
+ 868 0347 00       		.byte	0
+ 869 0348 00       		.byte	0
+ 870 0349 00       		.byte	0
+ 871 034a 00       		.byte	0
+ 872 034b 00       		.byte	0
+ 873 034c 00       		.byte	0
+ 874 034d 0B       		.byte	11
+ 875 034e 0B       		.byte	11
+ 876 034f 00       		.byte	0
+ 877 0350 00       		.byte	0
+ 878 0351 00       		.byte	0
+ 879 0352 00       		.byte	0
+ 880 0353 00       		.byte	0
+ 881              		.section	.cywolatch,"a",%progbits
+ 882              		.align	2
+ 883              		.type	cy_meta_wonvl, %object
+ 884              		.size	cy_meta_wonvl, 4
+ 885              	cy_meta_wonvl:
+ 886 0000 BC       		.byte	-68
+ 887 0001 90       		.byte	-112
+ 888 0002 AC       		.byte	-84
+ 889 0003 AF       		.byte	-81
+ 890              		.section	.cycustnvl,"a",%progbits
+ 891              		.align	2
+ 892              		.type	cy_meta_custnvl, %object
+ 893              		.size	cy_meta_custnvl, 4
+ 894              	cy_meta_custnvl:
+ 895 0000 00       		.byte	0
+ 896 0001 00       		.byte	0
+ 897 0002 40       		.byte	64
+ 898 0003 05       		.byte	5
+ 899              		.section	.cymeta,"a",%progbits
+ 900              		.align	2
+ 901              		.type	cy_metadata, %object
+ 902              		.size	cy_metadata, 12
+ 903              	cy_metadata:
+ 904 0000 00       		.byte	0
+ 905 0001 01       		.byte	1
+ 906 0002 2E       		.byte	46
+ 907 0003 16       		.byte	22
+ 908 0004 10       		.byte	16
+ 909 0005 69       		.byte	105
+ 910 0006 00       		.byte	0
+ 911 0007 01       		.byte	1
+ 912 0008 00       		.byte	0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 17
+
+
+ 913 0009 00       		.byte	0
+ 914 000a 00       		.byte	0
+ 915 000b 00       		.byte	0
+ 916              		.section	.cyflashprotect,"a",%progbits
+ 917              		.align	2
+ 918              		.type	cy_meta_flashprotect, %object
+ 919              		.size	cy_meta_flashprotect, 256
+ 920              	cy_meta_flashprotect:
+ 921 0000 00000000 		.space	256
+ 921      00000000 
+ 921      00000000 
+ 921      00000000 
+ 921      00000000 
+ 922              		.text
+ 923              	.Letext0:
+ 924              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 925              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 926              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 927              		.section	.debug_info,"",%progbits
+ 928              	.Ldebug_info0:
+ 929 0000 31010000 		.4byte	0x131
+ 930 0004 0400     		.2byte	0x4
+ 931 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 932 000a 04       		.byte	0x4
+ 933 000b 01       		.uleb128 0x1
+ 934 000c 24000000 		.4byte	.LASF17
+ 935 0010 0C       		.byte	0xc
+ 936 0011 B0010000 		.4byte	.LASF18
+ 937 0015 D7000000 		.4byte	.LASF19
+ 938 0019 00000000 		.4byte	.Ldebug_line0
+ 939 001d 02       		.uleb128 0x2
+ 940 001e 01       		.byte	0x1
+ 941 001f 06       		.byte	0x6
+ 942 0020 A4010000 		.4byte	.LASF0
+ 943 0024 03       		.uleb128 0x3
+ 944 0025 00000000 		.4byte	.LASF9
+ 945 0029 01       		.byte	0x1
+ 946 002a 1D       		.byte	0x1d
+ 947 002b 2F000000 		.4byte	0x2f
+ 948 002f 02       		.uleb128 0x2
+ 949 0030 01       		.byte	0x1
+ 950 0031 08       		.byte	0x8
+ 951 0032 16000000 		.4byte	.LASF1
+ 952 0036 02       		.uleb128 0x2
+ 953 0037 02       		.byte	0x2
+ 954 0038 05       		.byte	0x5
+ 955 0039 91010000 		.4byte	.LASF2
+ 956 003d 02       		.uleb128 0x2
+ 957 003e 02       		.byte	0x2
+ 958 003f 07       		.byte	0x7
+ 959 0040 C4000000 		.4byte	.LASF3
+ 960 0044 02       		.uleb128 0x2
+ 961 0045 04       		.byte	0x4
+ 962 0046 05       		.byte	0x5
+ 963 0047 9B010000 		.4byte	.LASF4
+ 964 004b 02       		.uleb128 0x2
+ 965 004c 04       		.byte	0x4
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 18
+
+
+ 966 004d 07       		.byte	0x7
+ 967 004e B2000000 		.4byte	.LASF5
+ 968 0052 02       		.uleb128 0x2
+ 969 0053 08       		.byte	0x8
+ 970 0054 05       		.byte	0x5
+ 971 0055 83010000 		.4byte	.LASF6
+ 972 0059 02       		.uleb128 0x2
+ 973 005a 08       		.byte	0x8
+ 974 005b 07       		.byte	0x7
+ 975 005c 38010000 		.4byte	.LASF7
+ 976 0060 04       		.uleb128 0x4
+ 977 0061 04       		.byte	0x4
+ 978 0062 05       		.byte	0x5
+ 979 0063 696E7400 		.ascii	"int\000"
+ 980 0067 02       		.uleb128 0x2
+ 981 0068 04       		.byte	0x4
+ 982 0069 07       		.byte	0x7
+ 983 006a 2B010000 		.4byte	.LASF8
+ 984 006e 03       		.uleb128 0x3
+ 985 006f 4F010000 		.4byte	.LASF10
+ 986 0073 02       		.byte	0x2
+ 987 0074 18       		.byte	0x18
+ 988 0075 24000000 		.4byte	0x24
+ 989 0079 05       		.uleb128 0x5
+ 990 007a 91000000 		.4byte	0x91
+ 991 007e 8A000000 		.4byte	0x8a
+ 992 0082 06       		.uleb128 0x6
+ 993 0083 8A000000 		.4byte	0x8a
+ 994 0087 5303     		.2byte	0x353
+ 995 0089 00       		.byte	0
+ 996 008a 02       		.uleb128 0x2
+ 997 008b 04       		.byte	0x4
+ 998 008c 07       		.byte	0x7
+ 999 008d 7A010000 		.4byte	.LASF11
+ 1000 0091 07       		.uleb128 0x7
+ 1001 0092 6E000000 		.4byte	0x6e
+ 1002 0096 08       		.uleb128 0x8
+ 1003 0097 19010000 		.4byte	.LASF12
+ 1004 009b 03       		.byte	0x3
+ 1005 009c 1F       		.byte	0x1f
+ 1006 009d A7000000 		.4byte	0xa7
+ 1007 00a1 05       		.uleb128 0x5
+ 1008 00a2 03       		.byte	0x3
+ 1009 00a3 00000000 		.4byte	cy_meta_configecc
+ 1010 00a7 07       		.uleb128 0x7
+ 1011 00a8 79000000 		.4byte	0x79
+ 1012 00ac 05       		.uleb128 0x5
+ 1013 00ad 91000000 		.4byte	0x91
+ 1014 00b1 BC000000 		.4byte	0xbc
+ 1015 00b5 09       		.uleb128 0x9
+ 1016 00b6 8A000000 		.4byte	0x8a
+ 1017 00ba 03       		.byte	0x3
+ 1018 00bb 00       		.byte	0
+ 1019 00bc 08       		.uleb128 0x8
+ 1020 00bd 09010000 		.4byte	.LASF13
+ 1021 00c1 03       		.byte	0x3
+ 1022 00c2 97       		.byte	0x97
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 19
+
+
+ 1023 00c3 CD000000 		.4byte	0xcd
+ 1024 00c7 05       		.uleb128 0x5
+ 1025 00c8 03       		.byte	0x3
+ 1026 00c9 00000000 		.4byte	cy_meta_custnvl
+ 1027 00cd 07       		.uleb128 0x7
+ 1028 00ce AC000000 		.4byte	0xac
+ 1029 00d2 08       		.uleb128 0x8
+ 1030 00d3 6C010000 		.4byte	.LASF14
+ 1031 00d7 03       		.byte	0x3
+ 1032 00d8 A5       		.byte	0xa5
+ 1033 00d9 E3000000 		.4byte	0xe3
+ 1034 00dd 05       		.uleb128 0x5
+ 1035 00de 03       		.byte	0x3
+ 1036 00df 00000000 		.4byte	cy_meta_wonvl
+ 1037 00e3 07       		.uleb128 0x7
+ 1038 00e4 AC000000 		.4byte	0xac
+ 1039 00e8 05       		.uleb128 0x5
+ 1040 00e9 91000000 		.4byte	0x91
+ 1041 00ed F8000000 		.4byte	0xf8
+ 1042 00f1 09       		.uleb128 0x9
+ 1043 00f2 8A000000 		.4byte	0x8a
+ 1044 00f6 FF       		.byte	0xff
+ 1045 00f7 00       		.byte	0
+ 1046 00f8 08       		.uleb128 0x8
+ 1047 00f9 57010000 		.4byte	.LASF15
+ 1048 00fd 03       		.byte	0x3
+ 1049 00fe B3       		.byte	0xb3
+ 1050 00ff 09010000 		.4byte	0x109
+ 1051 0103 05       		.uleb128 0x5
+ 1052 0104 03       		.byte	0x3
+ 1053 0105 00000000 		.4byte	cy_meta_flashprotect
+ 1054 0109 07       		.uleb128 0x7
+ 1055 010a E8000000 		.4byte	0xe8
+ 1056 010e 05       		.uleb128 0x5
+ 1057 010f 91000000 		.4byte	0x91
+ 1058 0113 1E010000 		.4byte	0x11e
+ 1059 0117 09       		.uleb128 0x9
+ 1060 0118 8A000000 		.4byte	0x8a
+ 1061 011c 0B       		.byte	0xb
+ 1062 011d 00       		.byte	0
+ 1063 011e 08       		.uleb128 0x8
+ 1064 011f 0A000000 		.4byte	.LASF16
+ 1065 0123 03       		.byte	0x3
+ 1066 0124 E0       		.byte	0xe0
+ 1067 0125 2F010000 		.4byte	0x12f
+ 1068 0129 05       		.uleb128 0x5
+ 1069 012a 03       		.byte	0x3
+ 1070 012b 00000000 		.4byte	cy_metadata
+ 1071 012f 07       		.uleb128 0x7
+ 1072 0130 0E010000 		.4byte	0x10e
+ 1073 0134 00       		.byte	0
+ 1074              		.section	.debug_abbrev,"",%progbits
+ 1075              	.Ldebug_abbrev0:
+ 1076 0000 01       		.uleb128 0x1
+ 1077 0001 11       		.uleb128 0x11
+ 1078 0002 01       		.byte	0x1
+ 1079 0003 25       		.uleb128 0x25
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 20
+
+
+ 1080 0004 0E       		.uleb128 0xe
+ 1081 0005 13       		.uleb128 0x13
+ 1082 0006 0B       		.uleb128 0xb
+ 1083 0007 03       		.uleb128 0x3
+ 1084 0008 0E       		.uleb128 0xe
+ 1085 0009 1B       		.uleb128 0x1b
+ 1086 000a 0E       		.uleb128 0xe
+ 1087 000b 10       		.uleb128 0x10
+ 1088 000c 17       		.uleb128 0x17
+ 1089 000d 00       		.byte	0
+ 1090 000e 00       		.byte	0
+ 1091 000f 02       		.uleb128 0x2
+ 1092 0010 24       		.uleb128 0x24
+ 1093 0011 00       		.byte	0
+ 1094 0012 0B       		.uleb128 0xb
+ 1095 0013 0B       		.uleb128 0xb
+ 1096 0014 3E       		.uleb128 0x3e
+ 1097 0015 0B       		.uleb128 0xb
+ 1098 0016 03       		.uleb128 0x3
+ 1099 0017 0E       		.uleb128 0xe
+ 1100 0018 00       		.byte	0
+ 1101 0019 00       		.byte	0
+ 1102 001a 03       		.uleb128 0x3
+ 1103 001b 16       		.uleb128 0x16
+ 1104 001c 00       		.byte	0
+ 1105 001d 03       		.uleb128 0x3
+ 1106 001e 0E       		.uleb128 0xe
+ 1107 001f 3A       		.uleb128 0x3a
+ 1108 0020 0B       		.uleb128 0xb
+ 1109 0021 3B       		.uleb128 0x3b
+ 1110 0022 0B       		.uleb128 0xb
+ 1111 0023 49       		.uleb128 0x49
+ 1112 0024 13       		.uleb128 0x13
+ 1113 0025 00       		.byte	0
+ 1114 0026 00       		.byte	0
+ 1115 0027 04       		.uleb128 0x4
+ 1116 0028 24       		.uleb128 0x24
+ 1117 0029 00       		.byte	0
+ 1118 002a 0B       		.uleb128 0xb
+ 1119 002b 0B       		.uleb128 0xb
+ 1120 002c 3E       		.uleb128 0x3e
+ 1121 002d 0B       		.uleb128 0xb
+ 1122 002e 03       		.uleb128 0x3
+ 1123 002f 08       		.uleb128 0x8
+ 1124 0030 00       		.byte	0
+ 1125 0031 00       		.byte	0
+ 1126 0032 05       		.uleb128 0x5
+ 1127 0033 01       		.uleb128 0x1
+ 1128 0034 01       		.byte	0x1
+ 1129 0035 49       		.uleb128 0x49
+ 1130 0036 13       		.uleb128 0x13
+ 1131 0037 01       		.uleb128 0x1
+ 1132 0038 13       		.uleb128 0x13
+ 1133 0039 00       		.byte	0
+ 1134 003a 00       		.byte	0
+ 1135 003b 06       		.uleb128 0x6
+ 1136 003c 21       		.uleb128 0x21
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 21
+
+
+ 1137 003d 00       		.byte	0
+ 1138 003e 49       		.uleb128 0x49
+ 1139 003f 13       		.uleb128 0x13
+ 1140 0040 2F       		.uleb128 0x2f
+ 1141 0041 05       		.uleb128 0x5
+ 1142 0042 00       		.byte	0
+ 1143 0043 00       		.byte	0
+ 1144 0044 07       		.uleb128 0x7
+ 1145 0045 26       		.uleb128 0x26
+ 1146 0046 00       		.byte	0
+ 1147 0047 49       		.uleb128 0x49
+ 1148 0048 13       		.uleb128 0x13
+ 1149 0049 00       		.byte	0
+ 1150 004a 00       		.byte	0
+ 1151 004b 08       		.uleb128 0x8
+ 1152 004c 34       		.uleb128 0x34
+ 1153 004d 00       		.byte	0
+ 1154 004e 03       		.uleb128 0x3
+ 1155 004f 0E       		.uleb128 0xe
+ 1156 0050 3A       		.uleb128 0x3a
+ 1157 0051 0B       		.uleb128 0xb
+ 1158 0052 3B       		.uleb128 0x3b
+ 1159 0053 0B       		.uleb128 0xb
+ 1160 0054 49       		.uleb128 0x49
+ 1161 0055 13       		.uleb128 0x13
+ 1162 0056 3F       		.uleb128 0x3f
+ 1163 0057 19       		.uleb128 0x19
+ 1164 0058 02       		.uleb128 0x2
+ 1165 0059 18       		.uleb128 0x18
+ 1166 005a 00       		.byte	0
+ 1167 005b 00       		.byte	0
+ 1168 005c 09       		.uleb128 0x9
+ 1169 005d 21       		.uleb128 0x21
+ 1170 005e 00       		.byte	0
+ 1171 005f 49       		.uleb128 0x49
+ 1172 0060 13       		.uleb128 0x13
+ 1173 0061 2F       		.uleb128 0x2f
+ 1174 0062 0B       		.uleb128 0xb
+ 1175 0063 00       		.byte	0
+ 1176 0064 00       		.byte	0
+ 1177 0065 00       		.byte	0
+ 1178              		.section	.debug_aranges,"",%progbits
+ 1179 0000 14000000 		.4byte	0x14
+ 1180 0004 0200     		.2byte	0x2
+ 1181 0006 00000000 		.4byte	.Ldebug_info0
+ 1182 000a 04       		.byte	0x4
+ 1183 000b 00       		.byte	0
+ 1184 000c 0000     		.2byte	0
+ 1185 000e 0000     		.2byte	0
+ 1186 0010 00000000 		.4byte	0
+ 1187 0014 00000000 		.4byte	0
+ 1188              		.section	.debug_line,"",%progbits
+ 1189              	.Ldebug_line0:
+ 1190 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ 1190      02003701 
+ 1190      00000201 
+ 1190      FB0E0D00 
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 22
+
+
+ 1190      01010101 
+ 1191              	.LASF9:
+ 1192 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1192      6E74385F 
+ 1192      7400
+ 1193              	.LASF16:
+ 1194 000a 63795F6D 		.ascii	"cy_metadata\000"
+ 1194      65746164 
+ 1194      61746100 
+ 1195              	.LASF1:
+ 1196 0016 756E7369 		.ascii	"unsigned char\000"
+ 1196      676E6564 
+ 1196      20636861 
+ 1196      7200
+ 1197              	.LASF17:
+ 1198 0024 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1198      43313120 
+ 1198      352E342E 
+ 1198      31203230 
+ 1198      31363036 
+ 1199 0057 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1199      20726576 
+ 1199      6973696F 
+ 1199      6E203233 
+ 1199      37373135 
+ 1200 008a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1200      66756E63 
+ 1200      74696F6E 
+ 1200      2D736563 
+ 1200      74696F6E 
+ 1201              	.LASF5:
+ 1202 00b2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1202      20756E73 
+ 1202      69676E65 
+ 1202      6420696E 
+ 1202      7400
+ 1203              	.LASF3:
+ 1204 00c4 73686F72 		.ascii	"short unsigned int\000"
+ 1204      7420756E 
+ 1204      7369676E 
+ 1204      65642069 
+ 1204      6E7400
+ 1205              	.LASF19:
+ 1206 00d7 433A5C55 		.ascii	"C:\\Users\\furka\\Desktop\\Workspace10\\Design01.cy"
+ 1206      73657273 
+ 1206      5C667572 
+ 1206      6B615C44 
+ 1206      65736B74 
+ 1207 0105 64736E00 		.ascii	"dsn\000"
+ 1208              	.LASF13:
+ 1209 0109 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 1209      6574615F 
+ 1209      63757374 
+ 1209      6E766C00 
+ 1210              	.LASF12:
+ 1211 0119 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 1211      6574615F 
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccW9UY4h.s 			page 23
+
+
+ 1211      636F6E66 
+ 1211      69676563 
+ 1211      6300
+ 1212              	.LASF8:
+ 1213 012b 756E7369 		.ascii	"unsigned int\000"
+ 1213      676E6564 
+ 1213      20696E74 
+ 1213      00
+ 1214              	.LASF7:
+ 1215 0138 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1215      206C6F6E 
+ 1215      6720756E 
+ 1215      7369676E 
+ 1215      65642069 
+ 1216              	.LASF10:
+ 1217 014f 75696E74 		.ascii	"uint8_t\000"
+ 1217      385F7400 
+ 1218              	.LASF15:
+ 1219 0157 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 1219      6574615F 
+ 1219      666C6173 
+ 1219      6870726F 
+ 1219      74656374 
+ 1220              	.LASF14:
+ 1221 016c 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 1221      6574615F 
+ 1221      776F6E76 
+ 1221      6C00
+ 1222              	.LASF11:
+ 1223 017a 73697A65 		.ascii	"sizetype\000"
+ 1223      74797065 
+ 1223      00
+ 1224              	.LASF6:
+ 1225 0183 6C6F6E67 		.ascii	"long long int\000"
+ 1225      206C6F6E 
+ 1225      6720696E 
+ 1225      7400
+ 1226              	.LASF2:
+ 1227 0191 73686F72 		.ascii	"short int\000"
+ 1227      7420696E 
+ 1227      7400
+ 1228              	.LASF4:
+ 1229 019b 6C6F6E67 		.ascii	"long int\000"
+ 1229      20696E74 
+ 1229      00
+ 1230              	.LASF0:
+ 1231 01a4 7369676E 		.ascii	"signed char\000"
+ 1231      65642063 
+ 1231      68617200 
+ 1232              	.LASF18:
+ 1233 01b0 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 1233      72617465 
+ 1233      645F536F 
+ 1233      75726365 
+ 1233      5C50536F 
+ 1234              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

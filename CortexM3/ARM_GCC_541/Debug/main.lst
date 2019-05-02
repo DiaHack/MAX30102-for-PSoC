@@ -1,0 +1,4032 @@
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_ui2f
+  20              		.global	__aeabi_fdiv
+  21              		.global	__aeabi_fmul
+  22              		.global	__aeabi_f2iz
+  23              		.section	.text.main,"ax",%progbits
+  24              		.align	2
+  25              		.global	main
+  26              		.thumb
+  27              		.thumb_func
+  28              		.type	main, %function
+  29              	main:
+  30              	.LFB64:
+  31              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        **** *
+   3:main.c        **** * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        **** * All Rights Reserved
+   5:main.c        **** * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        **** *
+   7:main.c        **** * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        **** * WHICH IS THE PROPERTY OF your company.
+   9:main.c        **** *
+  10:main.c        **** * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** #include <stdlib.h>
+  14:main.c        **** #include <stdio.h>
+  15:main.c        **** #include <max30102.h>
+  16:main.c        **** #include <algorithm.h>
+  17:main.c        **** double temp,temp1,temp_frac;
+  18:main.c        **** #define MAX_BRIGHTNESS 255
+  19:main.c        **** 
+  20:main.c        **** int main(void)
+  21:main.c        **** {
+  32              		.loc 1 21 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 4032
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 2
+
+
+  37              		.cfi_def_cfa_offset 28
+  38              		.cfi_offset 4, -28
+  39              		.cfi_offset 5, -24
+  40              		.cfi_offset 6, -20
+  41              		.cfi_offset 7, -16
+  42              		.cfi_offset 8, -12
+  43              		.cfi_offset 9, -8
+  44              		.cfi_offset 14, -4
+  45 0004 ADF6D47D 		subw	sp, sp, #4052
+  46              		.cfi_def_cfa_offset 4080
+  22:main.c        ****      CyGlobalIntEnable;
+  47              		.loc 1 22 0
+  48              		.syntax unified
+  49              	@ 22 "main.c" 1
+  50 0008 62B6     		CPSIE   i
+  51              	@ 0 "" 2
+  23:main.c        ****    char str[15];
+  24:main.c        **** uint32_t aun_red_buffer[500]
+  25:main.c        **** ;
+  26:main.c        **** uint32_t aun_ir_buffer[500];
+  27:main.c        **** int32_t n_ir_buffer_length;    //data length
+  28:main.c        **** int32_t n_sp02; //SPO2 value
+  29:main.c        **** int8_t ch_spo2_valid;   //indicator to show if the SP02 calculation is valid
+  30:main.c        **** int32_t n_heart_rate;   //heart rate value
+  31:main.c        **** int8_t  ch_hr_valid;    //indicator to show if the heart rate calculation is valid
+  32:main.c        **** uint8_t uch_dummy;
+  33:main.c        ****   
+  34:main.c        ****   I2C_Start();
+  52              		.loc 1 34 0
+  53              		.thumb
+  54              		.syntax unified
+  55 000a FFF7FEFF 		bl	I2C_Start
+  56              	.LVL0:
+  35:main.c        ****   UART_1_Start();
+  57              		.loc 1 35 0
+  58 000e FFF7FEFF 		bl	UART_1_Start
+  59              	.LVL1:
+  36:main.c        ****   uint32_t un_min, un_max, un_prev_data;
+  37:main.c        **** int32_t n_brightness;
+  38:main.c        ****    float f_temp;
+  39:main.c        ****   
+  40:main.c        **** max_Reset();
+  60              		.loc 1 40 0
+  61 0012 FFF7FEFF 		bl	max_Reset
+  62              	.LVL2:
+  41:main.c        **** CyDelay(1000);  
+  63              		.loc 1 41 0
+  64 0016 4FF47A70 		mov	r0, #1000
+  65 001a FFF7FEFF 		bl	CyDelay
+  66              	.LVL3:
+  42:main.c        **** 
+  43:main.c        **** int i;
+  44:main.c        ****   max_ReadReg(0,&uch_dummy);
+  67              		.loc 1 44 0
+  68 001e 0DF11201 		add	r1, sp, #18
+  69 0022 0020     		movs	r0, #0
+  70 0024 FFF7FEFF 		bl	max_ReadReg
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 3
+
+
+  71              	.LVL4:
+  45:main.c        ****    while(UART_1_GetChar()==0)
+  72              		.loc 1 45 0
+  73 0028 0FE0     		b	.L2
+  74              	.L3:
+  46:main.c        ****    {
+  47:main.c        ****        sprintf(str,"Press any key to start conversion\n\r");
+  75              		.loc 1 47 0
+  76 002a 0DF57C64 		add	r4, sp, #4032
+  77 002e 904D     		ldr	r5, .L27
+  78 0030 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  79 0032 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  80 0034 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  81 0036 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  82 0038 2B68     		ldr	r3, [r5]
+  83 003a 2360     		str	r3, [r4]
+  48:main.c        ****        UART_1_PutString(str);
+  84              		.loc 1 48 0
+  85 003c 0DF57C60 		add	r0, sp, #4032
+  86 0040 FFF7FEFF 		bl	UART_1_PutString
+  87              	.LVL5:
+  49:main.c        ****         CyDelay(100);
+  88              		.loc 1 49 0
+  89 0044 6420     		movs	r0, #100
+  90 0046 FFF7FEFF 		bl	CyDelay
+  91              	.LVL6:
+  92              	.L2:
+  45:main.c        ****    {
+  93              		.loc 1 45 0
+  94 004a FFF7FEFF 		bl	UART_1_GetChar
+  95              	.LVL7:
+  96 004e 0028     		cmp	r0, #0
+  97 0050 EBD0     		beq	.L3
+  50:main.c        ****    }
+  51:main.c        ****    uch_dummy=getchar();
+  98              		.loc 1 51 0
+  99 0052 884B     		ldr	r3, .L27+4
+ 100 0054 1868     		ldr	r0, [r3]
+ 101 0056 4268     		ldr	r2, [r0, #4]
+ 102 0058 5368     		ldr	r3, [r2, #4]
+ 103 005a 013B     		subs	r3, r3, #1
+ 104 005c 5360     		str	r3, [r2, #4]
+ 105 005e 002B     		cmp	r3, #0
+ 106 0060 04DA     		bge	.L4
+ 107              		.loc 1 51 0 is_stmt 0 discriminator 1
+ 108 0062 4168     		ldr	r1, [r0, #4]
+ 109 0064 FFF7FEFF 		bl	__srget_r
+ 110              	.LVL8:
+ 111 0068 C0B2     		uxtb	r0, r0
+ 112 006a 04E0     		b	.L5
+ 113              	.L4:
+ 114              		.loc 1 51 0 discriminator 2
+ 115 006c 4268     		ldr	r2, [r0, #4]
+ 116 006e 1368     		ldr	r3, [r2]
+ 117 0070 591C     		adds	r1, r3, #1
+ 118 0072 1160     		str	r1, [r2]
+ 119 0074 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 4
+
+
+ 120              	.L5:
+ 121              		.loc 1 51 0 discriminator 4
+ 122 0076 8DF81200 		strb	r0, [sp, #18]
+ 123              	.LVL9:
+  52:main.c        ****   un_min=0x3FFFF;
+  53:main.c        ****    un_max=0;
+  54:main.c        **** n_brightness=0;
+  55:main.c        ****    maxim_max30102_init();
+ 124              		.loc 1 55 0 is_stmt 1 discriminator 4
+ 125 007a FFF7FEFF 		bl	maxim_max30102_init
+ 126              	.LVL10:
+  56:main.c        ****    
+  57:main.c        ****    n_ir_buffer_length=500;
+  58:main.c        ****    for( i=0;i<n_ir_buffer_length;i++){
+ 127              		.loc 1 58 0 discriminator 4
+ 128 007e 0024     		movs	r4, #0
+  53:main.c        **** n_brightness=0;
+ 129              		.loc 1 53 0 discriminator 4
+ 130 0080 2646     		mov	r6, r4
+  52:main.c        ****   un_min=0x3FFFF;
+ 131              		.loc 1 52 0 discriminator 4
+ 132 0082 7D4D     		ldr	r5, .L27+8
+ 133              		.loc 1 58 0 discriminator 4
+ 134 0084 29E0     		b	.L6
+ 135              	.LVL11:
+ 136              	.L7:
+  59:main.c        ****        
+  60:main.c        ****        while(MaxINT_Read()==1);
+ 137              		.loc 1 60 0 discriminator 1
+ 138 0086 FFF7FEFF 		bl	MaxINT_Read
+ 139              	.LVL12:
+ 140 008a 0128     		cmp	r0, #1
+ 141 008c FBD0     		beq	.L7
+  61:main.c        ****    max_Read_FIFO((aun_red_buffer+i),(aun_ir_buffer+i));
+ 142              		.loc 1 61 0
+ 143 008e A000     		lsls	r0, r4, #2
+ 144 0090 0DF5FE67 		add	r7, sp, #2032
+ 145 0094 08AB     		add	r3, sp, #32
+ 146 0096 1918     		adds	r1, r3, r0
+ 147 0098 3844     		add	r0, r0, r7
+ 148 009a FFF7FEFF 		bl	max_Read_FIFO
+ 149              	.LVL13:
+  62:main.c        ****    if(un_min>aun_red_buffer[i])
+ 150              		.loc 1 62 0
+ 151 009e 57F82420 		ldr	r2, [r7, r4, lsl #2]
+ 152 00a2 9542     		cmp	r5, r2
+ 153 00a4 00D9     		bls	.L8
+  63:main.c        ****            un_min=aun_red_buffer[i]; //update signal min
+ 154              		.loc 1 63 0
+ 155 00a6 1546     		mov	r5, r2
+ 156              	.LVL14:
+ 157              	.L8:
+  64:main.c        ****        if(un_max<aun_red_buffer[i])
+ 158              		.loc 1 64 0
+ 159 00a8 9642     		cmp	r6, r2
+ 160 00aa 00D2     		bcs	.L9
+  65:main.c        ****            un_max=aun_red_buffer[i];
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 5
+
+
+ 161              		.loc 1 65 0
+ 162 00ac 1646     		mov	r6, r2
+ 163              	.LVL15:
+ 164              	.L9:
+  66:main.c        ****            sprintf(str,"red %lu ",(unsigned long)aun_red_buffer[i]);
+ 165              		.loc 1 66 0 discriminator 2
+ 166 00ae 7349     		ldr	r1, .L27+12
+ 167 00b0 0DF57C60 		add	r0, sp, #4032
+ 168 00b4 FFF7FEFF 		bl	sprintf
+ 169              	.LVL16:
+  67:main.c        ****            UART_1_PutString(str);
+ 170              		.loc 1 67 0 discriminator 2
+ 171 00b8 0DF57C60 		add	r0, sp, #4032
+ 172 00bc FFF7FEFF 		bl	UART_1_PutString
+ 173              	.LVL17:
+  68:main.c        ****              sprintf(str,"ir %lu\r\n",(unsigned long)aun_ir_buffer[i]);
+ 174              		.loc 1 68 0 discriminator 2
+ 175 00c0 08AB     		add	r3, sp, #32
+ 176 00c2 53F82420 		ldr	r2, [r3, r4, lsl #2]
+ 177 00c6 6E49     		ldr	r1, .L27+16
+ 178 00c8 0DF57C60 		add	r0, sp, #4032
+ 179 00cc FFF7FEFF 		bl	sprintf
+ 180              	.LVL18:
+  69:main.c        ****            UART_1_PutString(str);
+ 181              		.loc 1 69 0 discriminator 2
+ 182 00d0 0DF57C60 		add	r0, sp, #4032
+ 183 00d4 FFF7FEFF 		bl	UART_1_PutString
+ 184              	.LVL19:
+  58:main.c        ****        
+ 185              		.loc 1 58 0 discriminator 2
+ 186 00d8 0134     		adds	r4, r4, #1
+ 187              	.LVL20:
+ 188              	.L6:
+  58:main.c        ****        
+ 189              		.loc 1 58 0 is_stmt 0 discriminator 1
+ 190 00da B4F5FA7F 		cmp	r4, #500
+ 191 00de D2DB     		blt	.L7
+ 192              	.LVL21:
+  70:main.c        ****    }
+  71:main.c        ****    un_prev_data=aun_red_buffer[i];
+  72:main.c        ****    maxim_heart_rate_and_oxygen_saturation(aun_ir_buffer, n_ir_buffer_length, aun_red_buffer, &n_sp0
+ 193              		.loc 1 72 0 is_stmt 1
+ 194 00e0 0DF11303 		add	r3, sp, #19
+ 195 00e4 0293     		str	r3, [sp, #8]
+ 196 00e6 05AB     		add	r3, sp, #20
+ 197 00e8 0193     		str	r3, [sp, #4]
+ 198 00ea 0DF11B03 		add	r3, sp, #27
+ 199 00ee 0093     		str	r3, [sp]
+ 200 00f0 07AB     		add	r3, sp, #28
+ 201 00f2 0DF5FE62 		add	r2, sp, #2032
+ 202 00f6 4FF4FA71 		mov	r1, #500
+ 203 00fa 08A8     		add	r0, sp, #32
+ 204 00fc FFF7FEFF 		bl	maxim_heart_rate_and_oxygen_saturation
+ 205              	.LVL22:
+  54:main.c        ****    maxim_max30102_init();
+ 206              		.loc 1 54 0
+ 207 0100 0025     		movs	r5, #0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 6
+
+
+ 208              	.LVL23:
+ 209              	.L19:
+  73:main.c        **** //max_Temperature();
+  74:main.c        **** for(;;)
+  75:main.c        ****   { 
+  76:main.c        ****       i=0;
+  77:main.c        ****        un_min=0x3FFFF;
+  78:main.c        ****        un_max=0;
+  79:main.c        ****        
+  80:main.c        ****        //dumping the first 100 sets of samples in the memory and shift the last 400 sets of samples
+  81:main.c        ****        for(i=100;i<500;i++)
+ 210              		.loc 1 81 0
+ 211 0102 6423     		movs	r3, #100
+  78:main.c        ****        
+ 212              		.loc 1 78 0
+ 213 0104 0027     		movs	r7, #0
+  77:main.c        ****        un_max=0;
+ 214              		.loc 1 77 0
+ 215 0106 5C4E     		ldr	r6, .L27+8
+ 216              		.loc 1 81 0
+ 217 0108 15E0     		b	.L10
+ 218              	.LVL24:
+ 219              	.L13:
+  82:main.c        ****        {
+  83:main.c        ****            aun_red_buffer[i-100]=aun_red_buffer[i];
+ 220              		.loc 1 83 0
+ 221 010a A3F16402 		sub	r2, r3, #100
+ 222 010e 0DF5FE61 		add	r1, sp, #2032
+ 223 0112 51F82300 		ldr	r0, [r1, r3, lsl #2]
+ 224 0116 41F82200 		str	r0, [r1, r2, lsl #2]
+  84:main.c        ****            aun_ir_buffer[i-100]=aun_ir_buffer[i];
+ 225              		.loc 1 84 0
+ 226 011a 08A8     		add	r0, sp, #32
+ 227 011c 50F82340 		ldr	r4, [r0, r3, lsl #2]
+ 228 0120 40F82240 		str	r4, [r0, r2, lsl #2]
+  85:main.c        ****            
+  86:main.c        ****            //update the signal min and max
+  87:main.c        ****            if(un_min>aun_red_buffer[i])
+ 229              		.loc 1 87 0
+ 230 0124 51F82320 		ldr	r2, [r1, r3, lsl #2]
+ 231 0128 9642     		cmp	r6, r2
+ 232 012a 00D9     		bls	.L11
+  88:main.c        ****            un_min=aun_red_buffer[i];
+ 233              		.loc 1 88 0
+ 234 012c 1646     		mov	r6, r2
+ 235              	.LVL25:
+ 236              	.L11:
+  89:main.c        ****            if(un_max<aun_red_buffer[i])
+ 237              		.loc 1 89 0
+ 238 012e 9742     		cmp	r7, r2
+ 239 0130 00D2     		bcs	.L12
+  90:main.c        ****            un_max=aun_red_buffer[i];
+ 240              		.loc 1 90 0
+ 241 0132 1746     		mov	r7, r2
+ 242              	.LVL26:
+ 243              	.L12:
+  81:main.c        ****        {
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 7
+
+
+ 244              		.loc 1 81 0 discriminator 2
+ 245 0134 0133     		adds	r3, r3, #1
+ 246              	.LVL27:
+ 247              	.L10:
+  81:main.c        ****        {
+ 248              		.loc 1 81 0 is_stmt 0 discriminator 1
+ 249 0136 B3F5FA7F 		cmp	r3, #500
+ 250 013a E6DB     		blt	.L13
+ 251 013c 4FF4C874 		mov	r4, #400
+ 252 0140 81E0     		b	.L14
+ 253              	.LVL28:
+ 254              	.L18:
+  91:main.c        ****        }
+  92:main.c        ****        
+  93:main.c        ****        //take 100 sets of samples before calculating the heart rate.
+  94:main.c        ****        for(i=400;i<500;i++)
+  95:main.c        ****        {
+  96:main.c        ****            un_prev_data=aun_red_buffer[i-1];
+ 255              		.loc 1 96 0 is_stmt 1
+ 256 0142 631E     		subs	r3, r4, #1
+ 257 0144 0DF5FE62 		add	r2, sp, #2032
+ 258 0148 52F82390 		ldr	r9, [r2, r3, lsl #2]
+ 259              	.LVL29:
+ 260              	.L15:
+  97:main.c        ****            while(MaxINT_Read()==1);
+ 261              		.loc 1 97 0 discriminator 1
+ 262 014c FFF7FEFF 		bl	MaxINT_Read
+ 263              	.LVL30:
+ 264 0150 0128     		cmp	r0, #1
+ 265 0152 FBD0     		beq	.L15
+  98:main.c        ****            max_Read_FIFO((aun_red_buffer+i), (aun_ir_buffer+i));
+ 266              		.loc 1 98 0
+ 267 0154 A000     		lsls	r0, r4, #2
+ 268 0156 0DF5FE68 		add	r8, sp, #2032
+ 269 015a 08AB     		add	r3, sp, #32
+ 270 015c 1918     		adds	r1, r3, r0
+ 271 015e 4044     		add	r0, r0, r8
+ 272 0160 FFF7FEFF 		bl	max_Read_FIFO
+ 273              	.LVL31:
+  99:main.c        ****        
+ 100:main.c        ****            if(aun_red_buffer[i]>un_prev_data)
+ 274              		.loc 1 100 0
+ 275 0164 58F82480 		ldr	r8, [r8, r4, lsl #2]
+ 276 0168 C145     		cmp	r9, r8
+ 277 016a 13D2     		bcs	.L16
+ 101:main.c        ****            {
+ 102:main.c        ****                f_temp=aun_red_buffer[i]-un_prev_data;
+ 278              		.loc 1 102 0
+ 279 016c C9EB0800 		rsb	r0, r9, r8
+ 280 0170 FFF7FEFF 		bl	__aeabi_ui2f
+ 281              	.LVL32:
+ 282 0174 8146     		mov	r9, r0
+ 283              	.LVL33:
+ 103:main.c        ****                f_temp/=(un_max-un_min);
+ 284              		.loc 1 103 0
+ 285 0176 B81B     		subs	r0, r7, r6
+ 286              	.LVL34:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 8
+
+
+ 287 0178 FFF7FEFF 		bl	__aeabi_ui2f
+ 288              	.LVL35:
+ 289 017c 0146     		mov	r1, r0
+ 290 017e 4846     		mov	r0, r9
+ 291 0180 FFF7FEFF 		bl	__aeabi_fdiv
+ 292              	.LVL36:
+ 104:main.c        ****                f_temp*=MAX_BRIGHTNESS;
+ 293              		.loc 1 104 0
+ 294 0184 3F49     		ldr	r1, .L27+20
+ 295 0186 FFF7FEFF 		bl	__aeabi_fmul
+ 296              	.LVL37:
+ 105:main.c        ****                n_brightness-=(int)f_temp;
+ 297              		.loc 1 105 0
+ 298 018a FFF7FEFF 		bl	__aeabi_f2iz
+ 299              	.LVL38:
+ 106:main.c        ****                if(n_brightness<0)
+ 300              		.loc 1 106 0
+ 301 018e 2D1A     		subs	r5, r5, r0
+ 302              	.LVL39:
+ 303 0190 18D5     		bpl	.L17
+ 304 0192 14E0     		b	.L24
+ 305              	.LVL40:
+ 306              	.L16:
+ 107:main.c        ****                    n_brightness=0;
+ 108:main.c        ****            }
+ 109:main.c        ****            else
+ 110:main.c        ****            {
+ 111:main.c        ****                f_temp=un_prev_data-aun_red_buffer[i];
+ 307              		.loc 1 111 0
+ 308 0194 C8EB0900 		rsb	r0, r8, r9
+ 309 0198 FFF7FEFF 		bl	__aeabi_ui2f
+ 310              	.LVL41:
+ 311 019c 8146     		mov	r9, r0
+ 312              	.LVL42:
+ 112:main.c        ****                f_temp/=(un_max-un_min);
+ 313              		.loc 1 112 0
+ 314 019e B81B     		subs	r0, r7, r6
+ 315              	.LVL43:
+ 316 01a0 FFF7FEFF 		bl	__aeabi_ui2f
+ 317              	.LVL44:
+ 318 01a4 0146     		mov	r1, r0
+ 319 01a6 4846     		mov	r0, r9
+ 320 01a8 FFF7FEFF 		bl	__aeabi_fdiv
+ 321              	.LVL45:
+ 113:main.c        ****                f_temp*=MAX_BRIGHTNESS;
+ 322              		.loc 1 113 0
+ 323 01ac 3549     		ldr	r1, .L27+20
+ 324 01ae FFF7FEFF 		bl	__aeabi_fmul
+ 325              	.LVL46:
+ 114:main.c        ****                n_brightness+=(int)f_temp;
+ 326              		.loc 1 114 0
+ 327 01b2 FFF7FEFF 		bl	__aeabi_f2iz
+ 328              	.LVL47:
+ 329 01b6 0544     		add	r5, r5, r0
+ 330              	.LVL48:
+ 115:main.c        ****                if(n_brightness>MAX_BRIGHTNESS)
+ 331              		.loc 1 115 0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 9
+
+
+ 332 01b8 FF2D     		cmp	r5, #255
+ 333 01ba 02DC     		bgt	.L25
+ 334 01bc 02E0     		b	.L17
+ 335              	.L24:
+ 107:main.c        ****            }
+ 336              		.loc 1 107 0
+ 337 01be 0025     		movs	r5, #0
+ 338              	.LVL49:
+ 339 01c0 00E0     		b	.L17
+ 340              	.LVL50:
+ 341              	.L25:
+ 116:main.c        ****                    n_brightness=MAX_BRIGHTNESS;
+ 342              		.loc 1 116 0
+ 343 01c2 FF25     		movs	r5, #255
+ 344              	.LVL51:
+ 345              	.L17:
+ 117:main.c        ****            }
+ 118:main.c        **** 
+ 119:main.c        ****            //send samples and calculation result to terminal program through UART
+ 120:main.c        ****            sprintf(str,"red=%lu ", (unsigned long)aun_red_buffer[i]);
+ 346              		.loc 1 120 0 discriminator 2
+ 347 01c4 4246     		mov	r2, r8
+ 348 01c6 3049     		ldr	r1, .L27+24
+ 349 01c8 0DF57C60 		add	r0, sp, #4032
+ 350 01cc FFF7FEFF 		bl	sprintf
+ 351              	.LVL52:
+ 121:main.c        ****            UART_1_PutString(str);
+ 352              		.loc 1 121 0 discriminator 2
+ 353 01d0 0DF57C60 		add	r0, sp, #4032
+ 354 01d4 FFF7FEFF 		bl	UART_1_PutString
+ 355              	.LVL53:
+ 122:main.c        ****            sprintf(str,"ir=%lu ", (unsigned long)aun_ir_buffer[i]);
+ 356              		.loc 1 122 0 discriminator 2
+ 357 01d8 08AB     		add	r3, sp, #32
+ 358 01da 53F82420 		ldr	r2, [r3, r4, lsl #2]
+ 359 01de 2B49     		ldr	r1, .L27+28
+ 360 01e0 0DF57C60 		add	r0, sp, #4032
+ 361 01e4 FFF7FEFF 		bl	sprintf
+ 362              	.LVL54:
+ 123:main.c        ****            UART_1_PutString(str);
+ 363              		.loc 1 123 0 discriminator 2
+ 364 01e8 0DF57C60 		add	r0, sp, #4032
+ 365 01ec FFF7FEFF 		bl	UART_1_PutString
+ 366              	.LVL55:
+ 124:main.c        ****            sprintf(str,"HR=%lu ", (unsigned long)n_heart_rate);
+ 367              		.loc 1 124 0 discriminator 2
+ 368 01f0 059A     		ldr	r2, [sp, #20]
+ 369 01f2 2749     		ldr	r1, .L27+32
+ 370 01f4 0DF57C60 		add	r0, sp, #4032
+ 371 01f8 FFF7FEFF 		bl	sprintf
+ 372              	.LVL56:
+ 125:main.c        ****            UART_1_PutString(str);
+ 373              		.loc 1 125 0 discriminator 2
+ 374 01fc 0DF57C60 		add	r0, sp, #4032
+ 375 0200 FFF7FEFF 		bl	UART_1_PutString
+ 376              	.LVL57:
+ 126:main.c        ****            sprintf( str,"HRvalid=%lu ", (unsigned long)ch_hr_valid);
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 10
+
+
+ 377              		.loc 1 126 0 discriminator 2
+ 378 0204 9DF91320 		ldrsb	r2, [sp, #19]
+ 379 0208 2249     		ldr	r1, .L27+36
+ 380 020a 0DF57C60 		add	r0, sp, #4032
+ 381 020e FFF7FEFF 		bl	sprintf
+ 382              	.LVL58:
+ 127:main.c        ****            UART_1_PutString(str);
+ 383              		.loc 1 127 0 discriminator 2
+ 384 0212 0DF57C60 		add	r0, sp, #4032
+ 385 0216 FFF7FEFF 		bl	UART_1_PutString
+ 386              	.LVL59:
+ 128:main.c        ****            sprintf(str,"SpO2=%lu ", (unsigned long)n_sp02);
+ 387              		.loc 1 128 0 discriminator 2
+ 388 021a 079A     		ldr	r2, [sp, #28]
+ 389 021c 1E49     		ldr	r1, .L27+40
+ 390 021e 0DF57C60 		add	r0, sp, #4032
+ 391 0222 FFF7FEFF 		bl	sprintf
+ 392              	.LVL60:
+ 129:main.c        ****            UART_1_PutString(str);
+ 393              		.loc 1 129 0 discriminator 2
+ 394 0226 0DF57C60 		add	r0, sp, #4032
+ 395 022a FFF7FEFF 		bl	UART_1_PutString
+ 396              	.LVL61:
+ 130:main.c        ****            sprintf(str,"SPO2Valid=%lu \n\r", (unsigned long)ch_spo2_valid);
+ 397              		.loc 1 130 0 discriminator 2
+ 398 022e 9DF91B20 		ldrsb	r2, [sp, #27]
+ 399 0232 1A49     		ldr	r1, .L27+44
+ 400 0234 0DF57C60 		add	r0, sp, #4032
+ 401 0238 FFF7FEFF 		bl	sprintf
+ 402              	.LVL62:
+ 131:main.c        ****            UART_1_PutString(str);
+ 403              		.loc 1 131 0 discriminator 2
+ 404 023c 0DF57C60 		add	r0, sp, #4032
+ 405 0240 FFF7FEFF 		bl	UART_1_PutString
+ 406              	.LVL63:
+  94:main.c        ****        {
+ 407              		.loc 1 94 0 discriminator 2
+ 408 0244 0134     		adds	r4, r4, #1
+ 409              	.LVL64:
+ 410              	.L14:
+  94:main.c        ****        {
+ 411              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 412 0246 B4F5FA7F 		cmp	r4, #500
+ 413 024a FFF67AAF 		blt	.L18
+ 132:main.c        ****           
+ 133:main.c        ****        }
+ 134:main.c        ****        maxim_heart_rate_and_oxygen_saturation(aun_ir_buffer, n_ir_buffer_length, aun_red_buffer, &n
+ 414              		.loc 1 134 0 is_stmt 1
+ 415 024e 0DF11303 		add	r3, sp, #19
+ 416 0252 0293     		str	r3, [sp, #8]
+ 417 0254 05AB     		add	r3, sp, #20
+ 418 0256 0193     		str	r3, [sp, #4]
+ 419 0258 0DF11B03 		add	r3, sp, #27
+ 420 025c 0093     		str	r3, [sp]
+ 421 025e 07AB     		add	r3, sp, #28
+ 422 0260 0DF5FE62 		add	r2, sp, #2032
+ 423 0264 4FF4FA71 		mov	r1, #500
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 11
+
+
+ 424 0268 08A8     		add	r0, sp, #32
+ 425 026a FFF7FEFF 		bl	maxim_heart_rate_and_oxygen_saturation
+ 426              	.LVL65:
+ 135:main.c        ****    }
+ 427              		.loc 1 135 0
+ 428 026e 48E7     		b	.L19
+ 429              	.L28:
+ 430              		.align	2
+ 431              	.L27:
+ 432 0270 00000000 		.word	.LC0
+ 433 0274 00000000 		.word	_impure_ptr
+ 434 0278 FFFF0300 		.word	262143
+ 435 027c 24000000 		.word	.LC1
+ 436 0280 30000000 		.word	.LC2
+ 437 0284 00007F43 		.word	1132396544
+ 438 0288 3C000000 		.word	.LC3
+ 439 028c 48000000 		.word	.LC4
+ 440 0290 50000000 		.word	.LC5
+ 441 0294 58000000 		.word	.LC6
+ 442 0298 68000000 		.word	.LC7
+ 443 029c 74000000 		.word	.LC8
+ 444              		.cfi_endproc
+ 445              	.LFE64:
+ 446              		.size	main, .-main
+ 447              		.comm	temp_frac,8,8
+ 448              		.comm	temp1,8,8
+ 449              		.comm	temp,8,8
+ 450              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 451              		.align	2
+ 452              	.LC0:
+ 453 0000 50726573 		.ascii	"Press any key to start conversion\012\015\000"
+ 453      7320616E 
+ 453      79206B65 
+ 453      7920746F 
+ 453      20737461 
+ 454              	.LC1:
+ 455 0024 72656420 		.ascii	"red %lu \000"
+ 455      256C7520 
+ 455      00
+ 456 002d 000000   		.space	3
+ 457              	.LC2:
+ 458 0030 69722025 		.ascii	"ir %lu\015\012\000"
+ 458      6C750D0A 
+ 458      00
+ 459 0039 000000   		.space	3
+ 460              	.LC3:
+ 461 003c 7265643D 		.ascii	"red=%lu \000"
+ 461      256C7520 
+ 461      00
+ 462 0045 000000   		.space	3
+ 463              	.LC4:
+ 464 0048 69723D25 		.ascii	"ir=%lu \000"
+ 464      6C752000 
+ 465              	.LC5:
+ 466 0050 48523D25 		.ascii	"HR=%lu \000"
+ 466      6C752000 
+ 467              	.LC6:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 12
+
+
+ 468 0058 48527661 		.ascii	"HRvalid=%lu \000"
+ 468      6C69643D 
+ 468      256C7520 
+ 468      00
+ 469 0065 000000   		.space	3
+ 470              	.LC7:
+ 471 0068 53704F32 		.ascii	"SpO2=%lu \000"
+ 471      3D256C75 
+ 471      2000
+ 472 0072 0000     		.space	2
+ 473              	.LC8:
+ 474 0074 53504F32 		.ascii	"SPO2Valid=%lu \012\015\000"
+ 474      56616C69 
+ 474      643D256C 
+ 474      75200A0D 
+ 474      00
+ 475              		.text
+ 476              	.Letext0:
+ 477              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 478              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 479              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 480              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 481              		.file 6 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 482              		.file 7 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 483              		.file 8 "Generated_Source\\PSoC5/core_cm3.h"
+ 484              		.file 9 "Generated_Source\\PSoC5/I2C.h"
+ 485              		.file 10 "Generated_Source\\PSoC5/UART_1.h"
+ 486              		.file 11 "./max30102.h"
+ 487              		.file 12 "Generated_Source\\PSoC5/CyLib.h"
+ 488              		.file 13 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4
+ 489              		.file 14 "Generated_Source\\PSoC5/MaxINT.h"
+ 490              		.file 15 "./algorithm.h"
+ 491              		.section	.debug_info,"",%progbits
+ 492              	.Ldebug_info0:
+ 493 0000 BF0D0000 		.4byte	0xdbf
+ 494 0004 0400     		.2byte	0x4
+ 495 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 496 000a 04       		.byte	0x4
+ 497 000b 01       		.uleb128 0x1
+ 498 000c 21020000 		.4byte	.LASF159
+ 499 0010 0C       		.byte	0xc
+ 500 0011 0F000000 		.4byte	.LASF160
+ 501 0015 E4010000 		.4byte	.LASF161
+ 502 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 503 001d 00000000 		.4byte	0
+ 504 0021 00000000 		.4byte	.Ldebug_line0
+ 505 0025 02       		.uleb128 0x2
+ 506 0026 76040000 		.4byte	.LASF0
+ 507 002a 02       		.byte	0x2
+ 508 002b 1B       		.byte	0x1b
+ 509 002c 30000000 		.4byte	0x30
+ 510 0030 03       		.uleb128 0x3
+ 511 0031 01       		.byte	0x1
+ 512 0032 06       		.byte	0x6
+ 513 0033 5B060000 		.4byte	.LASF2
+ 514 0037 02       		.uleb128 0x2
+ 515 0038 31050000 		.4byte	.LASF1
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 13
+
+
+ 516 003c 02       		.byte	0x2
+ 517 003d 1D       		.byte	0x1d
+ 518 003e 42000000 		.4byte	0x42
+ 519 0042 03       		.uleb128 0x3
+ 520 0043 01       		.byte	0x1
+ 521 0044 08       		.byte	0x8
+ 522 0045 DF050000 		.4byte	.LASF3
+ 523 0049 03       		.uleb128 0x3
+ 524 004a 02       		.byte	0x2
+ 525 004b 05       		.byte	0x5
+ 526 004c C3040000 		.4byte	.LASF4
+ 527 0050 03       		.uleb128 0x3
+ 528 0051 02       		.byte	0x2
+ 529 0052 07       		.byte	0x7
+ 530 0053 6E060000 		.4byte	.LASF5
+ 531 0057 02       		.uleb128 0x2
+ 532 0058 90000000 		.4byte	.LASF6
+ 533 005c 02       		.byte	0x2
+ 534 005d 3F       		.byte	0x3f
+ 535 005e 62000000 		.4byte	0x62
+ 536 0062 03       		.uleb128 0x3
+ 537 0063 04       		.byte	0x4
+ 538 0064 05       		.byte	0x5
+ 539 0065 CD040000 		.4byte	.LASF7
+ 540 0069 02       		.uleb128 0x2
+ 541 006a ED050000 		.4byte	.LASF8
+ 542 006e 02       		.byte	0x2
+ 543 006f 41       		.byte	0x41
+ 544 0070 74000000 		.4byte	0x74
+ 545 0074 03       		.uleb128 0x3
+ 546 0075 04       		.byte	0x4
+ 547 0076 07       		.byte	0x7
+ 548 0077 A3050000 		.4byte	.LASF9
+ 549 007b 03       		.uleb128 0x3
+ 550 007c 08       		.byte	0x8
+ 551 007d 05       		.byte	0x5
+ 552 007e BB030000 		.4byte	.LASF10
+ 553 0082 03       		.uleb128 0x3
+ 554 0083 08       		.byte	0x8
+ 555 0084 07       		.byte	0x7
+ 556 0085 74010000 		.4byte	.LASF11
+ 557 0089 04       		.uleb128 0x4
+ 558 008a 04       		.byte	0x4
+ 559 008b 05       		.byte	0x5
+ 560 008c 696E7400 		.ascii	"int\000"
+ 561 0090 03       		.uleb128 0x3
+ 562 0091 04       		.byte	0x4
+ 563 0092 07       		.byte	0x7
+ 564 0093 65000000 		.4byte	.LASF12
+ 565 0097 02       		.uleb128 0x2
+ 566 0098 27010000 		.4byte	.LASF13
+ 567 009c 03       		.byte	0x3
+ 568 009d 14       		.byte	0x14
+ 569 009e 25000000 		.4byte	0x25
+ 570 00a2 02       		.uleb128 0x2
+ 571 00a3 84030000 		.4byte	.LASF14
+ 572 00a7 03       		.byte	0x3
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 14
+
+
+ 573 00a8 18       		.byte	0x18
+ 574 00a9 37000000 		.4byte	0x37
+ 575 00ad 02       		.uleb128 0x2
+ 576 00ae C3050000 		.4byte	.LASF15
+ 577 00b2 03       		.byte	0x3
+ 578 00b3 2C       		.byte	0x2c
+ 579 00b4 57000000 		.4byte	0x57
+ 580 00b8 02       		.uleb128 0x2
+ 581 00b9 1E010000 		.4byte	.LASF16
+ 582 00bd 03       		.byte	0x3
+ 583 00be 30       		.byte	0x30
+ 584 00bf 69000000 		.4byte	0x69
+ 585 00c3 03       		.uleb128 0x3
+ 586 00c4 04       		.byte	0x4
+ 587 00c5 04       		.byte	0x4
+ 588 00c6 40010000 		.4byte	.LASF17
+ 589 00ca 03       		.uleb128 0x3
+ 590 00cb 08       		.byte	0x8
+ 591 00cc 04       		.byte	0x4
+ 592 00cd 90060000 		.4byte	.LASF18
+ 593 00d1 03       		.uleb128 0x3
+ 594 00d2 01       		.byte	0x1
+ 595 00d3 08       		.byte	0x8
+ 596 00d4 3E030000 		.4byte	.LASF19
+ 597 00d8 05       		.uleb128 0x5
+ 598 00d9 04       		.byte	0x4
+ 599 00da DE000000 		.4byte	0xde
+ 600 00de 06       		.uleb128 0x6
+ 601 00df 03       		.uleb128 0x3
+ 602 00e0 08       		.byte	0x8
+ 603 00e1 04       		.byte	0x4
+ 604 00e2 88040000 		.4byte	.LASF20
+ 605 00e6 02       		.uleb128 0x2
+ 606 00e7 AD000000 		.4byte	.LASF21
+ 607 00eb 04       		.byte	0x4
+ 608 00ec 07       		.byte	0x7
+ 609 00ed 89000000 		.4byte	0x89
+ 610 00f1 02       		.uleb128 0x2
+ 611 00f2 97060000 		.4byte	.LASF22
+ 612 00f6 05       		.byte	0x5
+ 613 00f7 2C       		.byte	0x2c
+ 614 00f8 62000000 		.4byte	0x62
+ 615 00fc 02       		.uleb128 0x2
+ 616 00fd E5000000 		.4byte	.LASF23
+ 617 0101 05       		.byte	0x5
+ 618 0102 72       		.byte	0x72
+ 619 0103 62000000 		.4byte	0x62
+ 620 0107 07       		.uleb128 0x7
+ 621 0108 BC050000 		.4byte	.LASF24
+ 622 010c 06       		.byte	0x6
+ 623 010d 6501     		.2byte	0x165
+ 624 010f 90000000 		.4byte	0x90
+ 625 0113 08       		.uleb128 0x8
+ 626 0114 04       		.byte	0x4
+ 627 0115 05       		.byte	0x5
+ 628 0116 A6       		.byte	0xa6
+ 629 0117 32010000 		.4byte	0x132
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 15
+
+
+ 630 011b 09       		.uleb128 0x9
+ 631 011c 78030000 		.4byte	.LASF25
+ 632 0120 05       		.byte	0x5
+ 633 0121 A8       		.byte	0xa8
+ 634 0122 07010000 		.4byte	0x107
+ 635 0126 09       		.uleb128 0x9
+ 636 0127 09050000 		.4byte	.LASF26
+ 637 012b 05       		.byte	0x5
+ 638 012c A9       		.byte	0xa9
+ 639 012d 32010000 		.4byte	0x132
+ 640 0131 00       		.byte	0
+ 641 0132 0A       		.uleb128 0xa
+ 642 0133 42000000 		.4byte	0x42
+ 643 0137 42010000 		.4byte	0x142
+ 644 013b 0B       		.uleb128 0xb
+ 645 013c 42010000 		.4byte	0x142
+ 646 0140 03       		.byte	0x3
+ 647 0141 00       		.byte	0
+ 648 0142 03       		.uleb128 0x3
+ 649 0143 04       		.byte	0x4
+ 650 0144 07       		.byte	0x7
+ 651 0145 9A050000 		.4byte	.LASF27
+ 652 0149 0C       		.uleb128 0xc
+ 653 014a 08       		.byte	0x8
+ 654 014b 05       		.byte	0x5
+ 655 014c A3       		.byte	0xa3
+ 656 014d 6A010000 		.4byte	0x16a
+ 657 0151 0D       		.uleb128 0xd
+ 658 0152 38010000 		.4byte	.LASF28
+ 659 0156 05       		.byte	0x5
+ 660 0157 A5       		.byte	0xa5
+ 661 0158 89000000 		.4byte	0x89
+ 662 015c 00       		.byte	0
+ 663 015d 0D       		.uleb128 0xd
+ 664 015e 04030000 		.4byte	.LASF29
+ 665 0162 05       		.byte	0x5
+ 666 0163 AA       		.byte	0xaa
+ 667 0164 13010000 		.4byte	0x113
+ 668 0168 04       		.byte	0x4
+ 669 0169 00       		.byte	0
+ 670 016a 02       		.uleb128 0x2
+ 671 016b 4A040000 		.4byte	.LASF30
+ 672 016f 05       		.byte	0x5
+ 673 0170 AB       		.byte	0xab
+ 674 0171 49010000 		.4byte	0x149
+ 675 0175 02       		.uleb128 0x2
+ 676 0176 6F030000 		.4byte	.LASF31
+ 677 017a 05       		.byte	0x5
+ 678 017b AF       		.byte	0xaf
+ 679 017c E6000000 		.4byte	0xe6
+ 680 0180 0E       		.uleb128 0xe
+ 681 0181 04       		.byte	0x4
+ 682 0182 05       		.uleb128 0x5
+ 683 0183 04       		.byte	0x4
+ 684 0184 D1000000 		.4byte	0xd1
+ 685 0188 02       		.uleb128 0x2
+ 686 0189 DF030000 		.4byte	.LASF32
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 16
+
+
+ 687 018d 07       		.byte	0x7
+ 688 018e 16       		.byte	0x16
+ 689 018f 74000000 		.4byte	0x74
+ 690 0193 0F       		.uleb128 0xf
+ 691 0194 04010000 		.4byte	.LASF37
+ 692 0198 18       		.byte	0x18
+ 693 0199 07       		.byte	0x7
+ 694 019a 2D       		.byte	0x2d
+ 695 019b E6010000 		.4byte	0x1e6
+ 696 019f 0D       		.uleb128 0xd
+ 697 01a0 D2020000 		.4byte	.LASF33
+ 698 01a4 07       		.byte	0x7
+ 699 01a5 2F       		.byte	0x2f
+ 700 01a6 E6010000 		.4byte	0x1e6
+ 701 01aa 00       		.byte	0
+ 702 01ab 10       		.uleb128 0x10
+ 703 01ac 5F6B00   		.ascii	"_k\000"
+ 704 01af 07       		.byte	0x7
+ 705 01b0 30       		.byte	0x30
+ 706 01b1 89000000 		.4byte	0x89
+ 707 01b5 04       		.byte	0x4
+ 708 01b6 0D       		.uleb128 0xd
+ 709 01b7 48050000 		.4byte	.LASF34
+ 710 01bb 07       		.byte	0x7
+ 711 01bc 30       		.byte	0x30
+ 712 01bd 89000000 		.4byte	0x89
+ 713 01c1 08       		.byte	0x8
+ 714 01c2 0D       		.uleb128 0xd
+ 715 01c3 E8040000 		.4byte	.LASF35
+ 716 01c7 07       		.byte	0x7
+ 717 01c8 30       		.byte	0x30
+ 718 01c9 89000000 		.4byte	0x89
+ 719 01cd 0C       		.byte	0xc
+ 720 01ce 0D       		.uleb128 0xd
+ 721 01cf AF010000 		.4byte	.LASF36
+ 722 01d3 07       		.byte	0x7
+ 723 01d4 30       		.byte	0x30
+ 724 01d5 89000000 		.4byte	0x89
+ 725 01d9 10       		.byte	0x10
+ 726 01da 10       		.uleb128 0x10
+ 727 01db 5F7800   		.ascii	"_x\000"
+ 728 01de 07       		.byte	0x7
+ 729 01df 31       		.byte	0x31
+ 730 01e0 EC010000 		.4byte	0x1ec
+ 731 01e4 14       		.byte	0x14
+ 732 01e5 00       		.byte	0
+ 733 01e6 05       		.uleb128 0x5
+ 734 01e7 04       		.byte	0x4
+ 735 01e8 93010000 		.4byte	0x193
+ 736 01ec 0A       		.uleb128 0xa
+ 737 01ed 88010000 		.4byte	0x188
+ 738 01f1 FC010000 		.4byte	0x1fc
+ 739 01f5 0B       		.uleb128 0xb
+ 740 01f6 42010000 		.4byte	0x142
+ 741 01fa 00       		.byte	0
+ 742 01fb 00       		.byte	0
+ 743 01fc 0F       		.uleb128 0xf
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 17
+
+
+ 744 01fd 8F050000 		.4byte	.LASF38
+ 745 0201 24       		.byte	0x24
+ 746 0202 07       		.byte	0x7
+ 747 0203 35       		.byte	0x35
+ 748 0204 75020000 		.4byte	0x275
+ 749 0208 0D       		.uleb128 0xd
+ 750 0209 B5020000 		.4byte	.LASF39
+ 751 020d 07       		.byte	0x7
+ 752 020e 37       		.byte	0x37
+ 753 020f 89000000 		.4byte	0x89
+ 754 0213 00       		.byte	0
+ 755 0214 0D       		.uleb128 0xd
+ 756 0215 46010000 		.4byte	.LASF40
+ 757 0219 07       		.byte	0x7
+ 758 021a 38       		.byte	0x38
+ 759 021b 89000000 		.4byte	0x89
+ 760 021f 04       		.byte	0x4
+ 761 0220 0D       		.uleb128 0xd
+ 762 0221 2E010000 		.4byte	.LASF41
+ 763 0225 07       		.byte	0x7
+ 764 0226 39       		.byte	0x39
+ 765 0227 89000000 		.4byte	0x89
+ 766 022b 08       		.byte	0x8
+ 767 022c 0D       		.uleb128 0xd
+ 768 022d 43030000 		.4byte	.LASF42
+ 769 0231 07       		.byte	0x7
+ 770 0232 3A       		.byte	0x3a
+ 771 0233 89000000 		.4byte	0x89
+ 772 0237 0C       		.byte	0xc
+ 773 0238 0D       		.uleb128 0xd
+ 774 0239 7F040000 		.4byte	.LASF43
+ 775 023d 07       		.byte	0x7
+ 776 023e 3B       		.byte	0x3b
+ 777 023f 89000000 		.4byte	0x89
+ 778 0243 10       		.byte	0x10
+ 779 0244 0D       		.uleb128 0xd
+ 780 0245 10050000 		.4byte	.LASF44
+ 781 0249 07       		.byte	0x7
+ 782 024a 3C       		.byte	0x3c
+ 783 024b 89000000 		.4byte	0x89
+ 784 024f 14       		.byte	0x14
+ 785 0250 0D       		.uleb128 0xd
+ 786 0251 0C010000 		.4byte	.LASF45
+ 787 0255 07       		.byte	0x7
+ 788 0256 3D       		.byte	0x3d
+ 789 0257 89000000 		.4byte	0x89
+ 790 025b 18       		.byte	0x18
+ 791 025c 0D       		.uleb128 0xd
+ 792 025d BE020000 		.4byte	.LASF46
+ 793 0261 07       		.byte	0x7
+ 794 0262 3E       		.byte	0x3e
+ 795 0263 89000000 		.4byte	0x89
+ 796 0267 1C       		.byte	0x1c
+ 797 0268 0D       		.uleb128 0xd
+ 798 0269 55040000 		.4byte	.LASF47
+ 799 026d 07       		.byte	0x7
+ 800 026e 3F       		.byte	0x3f
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 18
+
+
+ 801 026f 89000000 		.4byte	0x89
+ 802 0273 20       		.byte	0x20
+ 803 0274 00       		.byte	0
+ 804 0275 11       		.uleb128 0x11
+ 805 0276 16000000 		.4byte	.LASF48
+ 806 027a 0801     		.2byte	0x108
+ 807 027c 07       		.byte	0x7
+ 808 027d 48       		.byte	0x48
+ 809 027e B5020000 		.4byte	0x2b5
+ 810 0282 0D       		.uleb128 0xd
+ 811 0283 53060000 		.4byte	.LASF49
+ 812 0287 07       		.byte	0x7
+ 813 0288 49       		.byte	0x49
+ 814 0289 B5020000 		.4byte	0x2b5
+ 815 028d 00       		.byte	0
+ 816 028e 0D       		.uleb128 0xd
+ 817 028f CB050000 		.4byte	.LASF50
+ 818 0293 07       		.byte	0x7
+ 819 0294 4A       		.byte	0x4a
+ 820 0295 B5020000 		.4byte	0x2b5
+ 821 0299 80       		.byte	0x80
+ 822 029a 12       		.uleb128 0x12
+ 823 029b 81060000 		.4byte	.LASF51
+ 824 029f 07       		.byte	0x7
+ 825 02a0 4C       		.byte	0x4c
+ 826 02a1 88010000 		.4byte	0x188
+ 827 02a5 0001     		.2byte	0x100
+ 828 02a7 12       		.uleb128 0x12
+ 829 02a8 B9060000 		.4byte	.LASF52
+ 830 02ac 07       		.byte	0x7
+ 831 02ad 4F       		.byte	0x4f
+ 832 02ae 88010000 		.4byte	0x188
+ 833 02b2 0401     		.2byte	0x104
+ 834 02b4 00       		.byte	0
+ 835 02b5 0A       		.uleb128 0xa
+ 836 02b6 80010000 		.4byte	0x180
+ 837 02ba C5020000 		.4byte	0x2c5
+ 838 02be 0B       		.uleb128 0xb
+ 839 02bf 42010000 		.4byte	0x142
+ 840 02c3 1F       		.byte	0x1f
+ 841 02c4 00       		.byte	0
+ 842 02c5 11       		.uleb128 0x11
+ 843 02c6 B2040000 		.4byte	.LASF53
+ 844 02ca 9001     		.2byte	0x190
+ 845 02cc 07       		.byte	0x7
+ 846 02cd 5B       		.byte	0x5b
+ 847 02ce 03030000 		.4byte	0x303
+ 848 02d2 0D       		.uleb128 0xd
+ 849 02d3 D2020000 		.4byte	.LASF33
+ 850 02d7 07       		.byte	0x7
+ 851 02d8 5C       		.byte	0x5c
+ 852 02d9 03030000 		.4byte	0x303
+ 853 02dd 00       		.byte	0
+ 854 02de 0D       		.uleb128 0xd
+ 855 02df CD020000 		.4byte	.LASF54
+ 856 02e3 07       		.byte	0x7
+ 857 02e4 5D       		.byte	0x5d
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 19
+
+
+ 858 02e5 89000000 		.4byte	0x89
+ 859 02e9 04       		.byte	0x4
+ 860 02ea 0D       		.uleb128 0xd
+ 861 02eb ED000000 		.4byte	.LASF55
+ 862 02ef 07       		.byte	0x7
+ 863 02f0 5F       		.byte	0x5f
+ 864 02f1 09030000 		.4byte	0x309
+ 865 02f5 08       		.byte	0x8
+ 866 02f6 0D       		.uleb128 0xd
+ 867 02f7 16000000 		.4byte	.LASF48
+ 868 02fb 07       		.byte	0x7
+ 869 02fc 60       		.byte	0x60
+ 870 02fd 75020000 		.4byte	0x275
+ 871 0301 88       		.byte	0x88
+ 872 0302 00       		.byte	0
+ 873 0303 05       		.uleb128 0x5
+ 874 0304 04       		.byte	0x4
+ 875 0305 C5020000 		.4byte	0x2c5
+ 876 0309 0A       		.uleb128 0xa
+ 877 030a D8000000 		.4byte	0xd8
+ 878 030e 19030000 		.4byte	0x319
+ 879 0312 0B       		.uleb128 0xb
+ 880 0313 42010000 		.4byte	0x142
+ 881 0317 1F       		.byte	0x1f
+ 882 0318 00       		.byte	0
+ 883 0319 0F       		.uleb128 0xf
+ 884 031a 23060000 		.4byte	.LASF56
+ 885 031e 08       		.byte	0x8
+ 886 031f 07       		.byte	0x7
+ 887 0320 73       		.byte	0x73
+ 888 0321 3E030000 		.4byte	0x33e
+ 889 0325 0D       		.uleb128 0xd
+ 890 0326 C9030000 		.4byte	.LASF57
+ 891 032a 07       		.byte	0x7
+ 892 032b 74       		.byte	0x74
+ 893 032c 3E030000 		.4byte	0x33e
+ 894 0330 00       		.byte	0
+ 895 0331 0D       		.uleb128 0xd
+ 896 0332 8A060000 		.4byte	.LASF58
+ 897 0336 07       		.byte	0x7
+ 898 0337 75       		.byte	0x75
+ 899 0338 89000000 		.4byte	0x89
+ 900 033c 04       		.byte	0x4
+ 901 033d 00       		.byte	0
+ 902 033e 05       		.uleb128 0x5
+ 903 033f 04       		.byte	0x4
+ 904 0340 42000000 		.4byte	0x42
+ 905 0344 0F       		.uleb128 0xf
+ 906 0345 A7010000 		.4byte	.LASF59
+ 907 0349 68       		.byte	0x68
+ 908 034a 07       		.byte	0x7
+ 909 034b B3       		.byte	0xb3
+ 910 034c 6E040000 		.4byte	0x46e
+ 911 0350 10       		.uleb128 0x10
+ 912 0351 5F7000   		.ascii	"_p\000"
+ 913 0354 07       		.byte	0x7
+ 914 0355 B4       		.byte	0xb4
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 20
+
+
+ 915 0356 3E030000 		.4byte	0x33e
+ 916 035a 00       		.byte	0
+ 917 035b 10       		.uleb128 0x10
+ 918 035c 5F7200   		.ascii	"_r\000"
+ 919 035f 07       		.byte	0x7
+ 920 0360 B5       		.byte	0xb5
+ 921 0361 89000000 		.4byte	0x89
+ 922 0365 04       		.byte	0x4
+ 923 0366 10       		.uleb128 0x10
+ 924 0367 5F7700   		.ascii	"_w\000"
+ 925 036a 07       		.byte	0x7
+ 926 036b B6       		.byte	0xb6
+ 927 036c 89000000 		.4byte	0x89
+ 928 0370 08       		.byte	0x8
+ 929 0371 0D       		.uleb128 0xd
+ 930 0372 89000000 		.4byte	.LASF60
+ 931 0376 07       		.byte	0x7
+ 932 0377 B7       		.byte	0xb7
+ 933 0378 49000000 		.4byte	0x49
+ 934 037c 0C       		.byte	0xc
+ 935 037d 0D       		.uleb128 0xd
+ 936 037e 1D040000 		.4byte	.LASF61
+ 937 0382 07       		.byte	0x7
+ 938 0383 B8       		.byte	0xb8
+ 939 0384 49000000 		.4byte	0x49
+ 940 0388 0E       		.byte	0xe
+ 941 0389 10       		.uleb128 0x10
+ 942 038a 5F626600 		.ascii	"_bf\000"
+ 943 038e 07       		.byte	0x7
+ 944 038f B9       		.byte	0xb9
+ 945 0390 19030000 		.4byte	0x319
+ 946 0394 10       		.byte	0x10
+ 947 0395 0D       		.uleb128 0xd
+ 948 0396 80000000 		.4byte	.LASF62
+ 949 039a 07       		.byte	0x7
+ 950 039b BA       		.byte	0xba
+ 951 039c 89000000 		.4byte	0x89
+ 952 03a0 18       		.byte	0x18
+ 953 03a1 0D       		.uleb128 0xd
+ 954 03a2 F2000000 		.4byte	.LASF63
+ 955 03a6 07       		.byte	0x7
+ 956 03a7 C1       		.byte	0xc1
+ 957 03a8 80010000 		.4byte	0x180
+ 958 03ac 1C       		.byte	0x1c
+ 959 03ad 0D       		.uleb128 0xd
+ 960 03ae BF000000 		.4byte	.LASF64
+ 961 03b2 07       		.byte	0x7
+ 962 03b3 C3       		.byte	0xc3
+ 963 03b4 C4050000 		.4byte	0x5c4
+ 964 03b8 20       		.byte	0x20
+ 965 03b9 0D       		.uleb128 0xd
+ 966 03ba AB040000 		.4byte	.LASF65
+ 967 03be 07       		.byte	0x7
+ 968 03bf C5       		.byte	0xc5
+ 969 03c0 F3050000 		.4byte	0x5f3
+ 970 03c4 24       		.byte	0x24
+ 971 03c5 0D       		.uleb128 0xd
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 21
+
+
+ 972 03c6 D2060000 		.4byte	.LASF66
+ 973 03ca 07       		.byte	0x7
+ 974 03cb C8       		.byte	0xc8
+ 975 03cc 17060000 		.4byte	0x617
+ 976 03d0 28       		.byte	0x28
+ 977 03d1 0D       		.uleb128 0xd
+ 978 03d2 8C030000 		.4byte	.LASF67
+ 979 03d6 07       		.byte	0x7
+ 980 03d7 C9       		.byte	0xc9
+ 981 03d8 31060000 		.4byte	0x631
+ 982 03dc 2C       		.byte	0x2c
+ 983 03dd 10       		.uleb128 0x10
+ 984 03de 5F756200 		.ascii	"_ub\000"
+ 985 03e2 07       		.byte	0x7
+ 986 03e3 CC       		.byte	0xcc
+ 987 03e4 19030000 		.4byte	0x319
+ 988 03e8 30       		.byte	0x30
+ 989 03e9 10       		.uleb128 0x10
+ 990 03ea 5F757000 		.ascii	"_up\000"
+ 991 03ee 07       		.byte	0x7
+ 992 03ef CD       		.byte	0xcd
+ 993 03f0 3E030000 		.4byte	0x33e
+ 994 03f4 38       		.byte	0x38
+ 995 03f5 10       		.uleb128 0x10
+ 996 03f6 5F757200 		.ascii	"_ur\000"
+ 997 03fa 07       		.byte	0x7
+ 998 03fb CE       		.byte	0xce
+ 999 03fc 89000000 		.4byte	0x89
+ 1000 0400 3C       		.byte	0x3c
+ 1001 0401 0D       		.uleb128 0xd
+ 1002 0402 E9060000 		.4byte	.LASF68
+ 1003 0406 07       		.byte	0x7
+ 1004 0407 D1       		.byte	0xd1
+ 1005 0408 37060000 		.4byte	0x637
+ 1006 040c 40       		.byte	0x40
+ 1007 040d 0D       		.uleb128 0xd
+ 1008 040e 9E060000 		.4byte	.LASF69
+ 1009 0412 07       		.byte	0x7
+ 1010 0413 D2       		.byte	0xd2
+ 1011 0414 47060000 		.4byte	0x647
+ 1012 0418 43       		.byte	0x43
+ 1013 0419 10       		.uleb128 0x10
+ 1014 041a 5F6C6200 		.ascii	"_lb\000"
+ 1015 041e 07       		.byte	0x7
+ 1016 041f D5       		.byte	0xd5
+ 1017 0420 19030000 		.4byte	0x319
+ 1018 0424 44       		.byte	0x44
+ 1019 0425 0D       		.uleb128 0xd
+ 1020 0426 86050000 		.4byte	.LASF70
+ 1021 042a 07       		.byte	0x7
+ 1022 042b D8       		.byte	0xd8
+ 1023 042c 89000000 		.4byte	0x89
+ 1024 0430 4C       		.byte	0x4c
+ 1025 0431 0D       		.uleb128 0xd
+ 1026 0432 DC010000 		.4byte	.LASF71
+ 1027 0436 07       		.byte	0x7
+ 1028 0437 D9       		.byte	0xd9
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 22
+
+
+ 1029 0438 F1000000 		.4byte	0xf1
+ 1030 043c 50       		.byte	0x50
+ 1031 043d 0D       		.uleb128 0xd
+ 1032 043e 03050000 		.4byte	.LASF72
+ 1033 0442 07       		.byte	0x7
+ 1034 0443 DC       		.byte	0xdc
+ 1035 0444 8C040000 		.4byte	0x48c
+ 1036 0448 54       		.byte	0x54
+ 1037 0449 0D       		.uleb128 0xd
+ 1038 044a 94050000 		.4byte	.LASF73
+ 1039 044e 07       		.byte	0x7
+ 1040 044f E0       		.byte	0xe0
+ 1041 0450 75010000 		.4byte	0x175
+ 1042 0454 58       		.byte	0x58
+ 1043 0455 0D       		.uleb128 0xd
+ 1044 0456 BA040000 		.4byte	.LASF74
+ 1045 045a 07       		.byte	0x7
+ 1046 045b E2       		.byte	0xe2
+ 1047 045c 6A010000 		.4byte	0x16a
+ 1048 0460 5C       		.byte	0x5c
+ 1049 0461 0D       		.uleb128 0xd
+ 1050 0462 B1060000 		.4byte	.LASF75
+ 1051 0466 07       		.byte	0x7
+ 1052 0467 E3       		.byte	0xe3
+ 1053 0468 89000000 		.4byte	0x89
+ 1054 046c 64       		.byte	0x64
+ 1055 046d 00       		.byte	0
+ 1056 046e 13       		.uleb128 0x13
+ 1057 046f 89000000 		.4byte	0x89
+ 1058 0473 8C040000 		.4byte	0x48c
+ 1059 0477 14       		.uleb128 0x14
+ 1060 0478 8C040000 		.4byte	0x48c
+ 1061 047c 14       		.uleb128 0x14
+ 1062 047d 80010000 		.4byte	0x180
+ 1063 0481 14       		.uleb128 0x14
+ 1064 0482 82010000 		.4byte	0x182
+ 1065 0486 14       		.uleb128 0x14
+ 1066 0487 89000000 		.4byte	0x89
+ 1067 048b 00       		.byte	0
+ 1068 048c 05       		.uleb128 0x5
+ 1069 048d 04       		.byte	0x4
+ 1070 048e 92040000 		.4byte	0x492
+ 1071 0492 15       		.uleb128 0x15
+ 1072 0493 67060000 		.4byte	.LASF76
+ 1073 0497 2804     		.2byte	0x428
+ 1074 0499 07       		.byte	0x7
+ 1075 049a 3802     		.2byte	0x238
+ 1076 049c C4050000 		.4byte	0x5c4
+ 1077 04a0 16       		.uleb128 0x16
+ 1078 04a1 9A000000 		.4byte	.LASF77
+ 1079 04a5 07       		.byte	0x7
+ 1080 04a6 3A02     		.2byte	0x23a
+ 1081 04a8 89000000 		.4byte	0x89
+ 1082 04ac 00       		.byte	0
+ 1083 04ad 16       		.uleb128 0x16
+ 1084 04ae A5030000 		.4byte	.LASF78
+ 1085 04b2 07       		.byte	0x7
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 23
+
+
+ 1086 04b3 3F02     		.2byte	0x23f
+ 1087 04b5 9E060000 		.4byte	0x69e
+ 1088 04b9 04       		.byte	0x4
+ 1089 04ba 16       		.uleb128 0x16
+ 1090 04bb DD000000 		.4byte	.LASF79
+ 1091 04bf 07       		.byte	0x7
+ 1092 04c0 3F02     		.2byte	0x23f
+ 1093 04c2 9E060000 		.4byte	0x69e
+ 1094 04c6 08       		.byte	0x8
+ 1095 04c7 16       		.uleb128 0x16
+ 1096 04c8 D8060000 		.4byte	.LASF80
+ 1097 04cc 07       		.byte	0x7
+ 1098 04cd 3F02     		.2byte	0x23f
+ 1099 04cf 9E060000 		.4byte	0x69e
+ 1100 04d3 0C       		.byte	0xc
+ 1101 04d4 16       		.uleb128 0x16
+ 1102 04d5 C8020000 		.4byte	.LASF81
+ 1103 04d9 07       		.byte	0x7
+ 1104 04da 4102     		.2byte	0x241
+ 1105 04dc 89000000 		.4byte	0x89
+ 1106 04e0 10       		.byte	0x10
+ 1107 04e1 16       		.uleb128 0x16
+ 1108 04e2 16020000 		.4byte	.LASF82
+ 1109 04e6 07       		.byte	0x7
+ 1110 04e7 4202     		.2byte	0x242
+ 1111 04e9 80080000 		.4byte	0x880
+ 1112 04ed 14       		.byte	0x14
+ 1113 04ee 16       		.uleb128 0x16
+ 1114 04ef 5A050000 		.4byte	.LASF83
+ 1115 04f3 07       		.byte	0x7
+ 1116 04f4 4402     		.2byte	0x244
+ 1117 04f6 89000000 		.4byte	0x89
+ 1118 04fa 30       		.byte	0x30
+ 1119 04fb 16       		.uleb128 0x16
+ 1120 04fc F3040000 		.4byte	.LASF84
+ 1121 0500 07       		.byte	0x7
+ 1122 0501 4502     		.2byte	0x245
+ 1123 0503 E8050000 		.4byte	0x5e8
+ 1124 0507 34       		.byte	0x34
+ 1125 0508 16       		.uleb128 0x16
+ 1126 0509 93030000 		.4byte	.LASF85
+ 1127 050d 07       		.byte	0x7
+ 1128 050e 4702     		.2byte	0x247
+ 1129 0510 89000000 		.4byte	0x89
+ 1130 0514 38       		.byte	0x38
+ 1131 0515 16       		.uleb128 0x16
+ 1132 0516 40040000 		.4byte	.LASF86
+ 1133 051a 07       		.byte	0x7
+ 1134 051b 4902     		.2byte	0x249
+ 1135 051d 9B080000 		.4byte	0x89b
+ 1136 0521 3C       		.byte	0x3c
+ 1137 0522 16       		.uleb128 0x16
+ 1138 0523 16010000 		.4byte	.LASF87
+ 1139 0527 07       		.byte	0x7
+ 1140 0528 4C02     		.2byte	0x24c
+ 1141 052a E6010000 		.4byte	0x1e6
+ 1142 052e 40       		.byte	0x40
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 24
+
+
+ 1143 052f 16       		.uleb128 0x16
+ 1144 0530 6A010000 		.4byte	.LASF88
+ 1145 0534 07       		.byte	0x7
+ 1146 0535 4D02     		.2byte	0x24d
+ 1147 0537 89000000 		.4byte	0x89
+ 1148 053b 44       		.byte	0x44
+ 1149 053c 16       		.uleb128 0x16
+ 1150 053d 0C030000 		.4byte	.LASF89
+ 1151 0541 07       		.byte	0x7
+ 1152 0542 4E02     		.2byte	0x24e
+ 1153 0544 E6010000 		.4byte	0x1e6
+ 1154 0548 48       		.byte	0x48
+ 1155 0549 16       		.uleb128 0x16
+ 1156 054a CF030000 		.4byte	.LASF90
+ 1157 054e 07       		.byte	0x7
+ 1158 054f 4F02     		.2byte	0x24f
+ 1159 0551 A1080000 		.4byte	0x8a1
+ 1160 0555 4C       		.byte	0x4c
+ 1161 0556 16       		.uleb128 0x16
+ 1162 0557 40050000 		.4byte	.LASF91
+ 1163 055b 07       		.byte	0x7
+ 1164 055c 5202     		.2byte	0x252
+ 1165 055e 89000000 		.4byte	0x89
+ 1166 0562 50       		.byte	0x50
+ 1167 0563 16       		.uleb128 0x16
+ 1168 0564 D7050000 		.4byte	.LASF92
+ 1169 0568 07       		.byte	0x7
+ 1170 0569 5302     		.2byte	0x253
+ 1171 056b 82010000 		.4byte	0x182
+ 1172 056f 54       		.byte	0x54
+ 1173 0570 16       		.uleb128 0x16
+ 1174 0571 3B050000 		.4byte	.LASF93
+ 1175 0575 07       		.byte	0x7
+ 1176 0576 7602     		.2byte	0x276
+ 1177 0578 5E080000 		.4byte	0x85e
+ 1178 057c 58       		.byte	0x58
+ 1179 057d 17       		.uleb128 0x17
+ 1180 057e B2040000 		.4byte	.LASF53
+ 1181 0582 07       		.byte	0x7
+ 1182 0583 7A02     		.2byte	0x27a
+ 1183 0585 03030000 		.4byte	0x303
+ 1184 0589 4801     		.2byte	0x148
+ 1185 058b 17       		.uleb128 0x17
+ 1186 058c 66030000 		.4byte	.LASF94
+ 1187 0590 07       		.byte	0x7
+ 1188 0591 7B02     		.2byte	0x27b
+ 1189 0593 C5020000 		.4byte	0x2c5
+ 1190 0597 4C01     		.2byte	0x14c
+ 1191 0599 17       		.uleb128 0x17
+ 1192 059a 4D030000 		.4byte	.LASF95
+ 1193 059e 07       		.byte	0x7
+ 1194 059f 7F02     		.2byte	0x27f
+ 1195 05a1 B2080000 		.4byte	0x8b2
+ 1196 05a5 DC02     		.2byte	0x2dc
+ 1197 05a7 17       		.uleb128 0x17
+ 1198 05a8 30060000 		.4byte	.LASF96
+ 1199 05ac 07       		.byte	0x7
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 25
+
+
+ 1200 05ad 8402     		.2byte	0x284
+ 1201 05af 63060000 		.4byte	0x663
+ 1202 05b3 E002     		.2byte	0x2e0
+ 1203 05b5 17       		.uleb128 0x17
+ 1204 05b6 E3040000 		.4byte	.LASF97
+ 1205 05ba 07       		.byte	0x7
+ 1206 05bb 8502     		.2byte	0x285
+ 1207 05bd BE080000 		.4byte	0x8be
+ 1208 05c1 EC02     		.2byte	0x2ec
+ 1209 05c3 00       		.byte	0
+ 1210 05c4 05       		.uleb128 0x5
+ 1211 05c5 04       		.byte	0x4
+ 1212 05c6 6E040000 		.4byte	0x46e
+ 1213 05ca 13       		.uleb128 0x13
+ 1214 05cb 89000000 		.4byte	0x89
+ 1215 05cf E8050000 		.4byte	0x5e8
+ 1216 05d3 14       		.uleb128 0x14
+ 1217 05d4 8C040000 		.4byte	0x48c
+ 1218 05d8 14       		.uleb128 0x14
+ 1219 05d9 80010000 		.4byte	0x180
+ 1220 05dd 14       		.uleb128 0x14
+ 1221 05de E8050000 		.4byte	0x5e8
+ 1222 05e2 14       		.uleb128 0x14
+ 1223 05e3 89000000 		.4byte	0x89
+ 1224 05e7 00       		.byte	0
+ 1225 05e8 05       		.uleb128 0x5
+ 1226 05e9 04       		.byte	0x4
+ 1227 05ea EE050000 		.4byte	0x5ee
+ 1228 05ee 18       		.uleb128 0x18
+ 1229 05ef D1000000 		.4byte	0xd1
+ 1230 05f3 05       		.uleb128 0x5
+ 1231 05f4 04       		.byte	0x4
+ 1232 05f5 CA050000 		.4byte	0x5ca
+ 1233 05f9 13       		.uleb128 0x13
+ 1234 05fa FC000000 		.4byte	0xfc
+ 1235 05fe 17060000 		.4byte	0x617
+ 1236 0602 14       		.uleb128 0x14
+ 1237 0603 8C040000 		.4byte	0x48c
+ 1238 0607 14       		.uleb128 0x14
+ 1239 0608 80010000 		.4byte	0x180
+ 1240 060c 14       		.uleb128 0x14
+ 1241 060d FC000000 		.4byte	0xfc
+ 1242 0611 14       		.uleb128 0x14
+ 1243 0612 89000000 		.4byte	0x89
+ 1244 0616 00       		.byte	0
+ 1245 0617 05       		.uleb128 0x5
+ 1246 0618 04       		.byte	0x4
+ 1247 0619 F9050000 		.4byte	0x5f9
+ 1248 061d 13       		.uleb128 0x13
+ 1249 061e 89000000 		.4byte	0x89
+ 1250 0622 31060000 		.4byte	0x631
+ 1251 0626 14       		.uleb128 0x14
+ 1252 0627 8C040000 		.4byte	0x48c
+ 1253 062b 14       		.uleb128 0x14
+ 1254 062c 80010000 		.4byte	0x180
+ 1255 0630 00       		.byte	0
+ 1256 0631 05       		.uleb128 0x5
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 26
+
+
+ 1257 0632 04       		.byte	0x4
+ 1258 0633 1D060000 		.4byte	0x61d
+ 1259 0637 0A       		.uleb128 0xa
+ 1260 0638 42000000 		.4byte	0x42
+ 1261 063c 47060000 		.4byte	0x647
+ 1262 0640 0B       		.uleb128 0xb
+ 1263 0641 42010000 		.4byte	0x142
+ 1264 0645 02       		.byte	0x2
+ 1265 0646 00       		.byte	0
+ 1266 0647 0A       		.uleb128 0xa
+ 1267 0648 42000000 		.4byte	0x42
+ 1268 064c 57060000 		.4byte	0x657
+ 1269 0650 0B       		.uleb128 0xb
+ 1270 0651 42010000 		.4byte	0x142
+ 1271 0655 00       		.byte	0
+ 1272 0656 00       		.byte	0
+ 1273 0657 07       		.uleb128 0x7
+ 1274 0658 C2010000 		.4byte	.LASF98
+ 1275 065c 07       		.byte	0x7
+ 1276 065d 1D01     		.2byte	0x11d
+ 1277 065f 44030000 		.4byte	0x344
+ 1278 0663 19       		.uleb128 0x19
+ 1279 0664 2A060000 		.4byte	.LASF99
+ 1280 0668 0C       		.byte	0xc
+ 1281 0669 07       		.byte	0x7
+ 1282 066a 2101     		.2byte	0x121
+ 1283 066c 98060000 		.4byte	0x698
+ 1284 0670 16       		.uleb128 0x16
+ 1285 0671 D2020000 		.4byte	.LASF33
+ 1286 0675 07       		.byte	0x7
+ 1287 0676 2301     		.2byte	0x123
+ 1288 0678 98060000 		.4byte	0x698
+ 1289 067c 00       		.byte	0
+ 1290 067d 16       		.uleb128 0x16
+ 1291 067e B5050000 		.4byte	.LASF100
+ 1292 0682 07       		.byte	0x7
+ 1293 0683 2401     		.2byte	0x124
+ 1294 0685 89000000 		.4byte	0x89
+ 1295 0689 04       		.byte	0x4
+ 1296 068a 16       		.uleb128 0x16
+ 1297 068b 7E030000 		.4byte	.LASF101
+ 1298 068f 07       		.byte	0x7
+ 1299 0690 2501     		.2byte	0x125
+ 1300 0692 9E060000 		.4byte	0x69e
+ 1301 0696 08       		.byte	0x8
+ 1302 0697 00       		.byte	0
+ 1303 0698 05       		.uleb128 0x5
+ 1304 0699 04       		.byte	0x4
+ 1305 069a 63060000 		.4byte	0x663
+ 1306 069e 05       		.uleb128 0x5
+ 1307 069f 04       		.byte	0x4
+ 1308 06a0 57060000 		.4byte	0x657
+ 1309 06a4 19       		.uleb128 0x19
+ 1310 06a5 62010000 		.4byte	.LASF102
+ 1311 06a9 0E       		.byte	0xe
+ 1312 06aa 07       		.byte	0x7
+ 1313 06ab 3D01     		.2byte	0x13d
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 27
+
+
+ 1314 06ad D9060000 		.4byte	0x6d9
+ 1315 06b1 16       		.uleb128 0x16
+ 1316 06b2 C1060000 		.4byte	.LASF103
+ 1317 06b6 07       		.byte	0x7
+ 1318 06b7 3E01     		.2byte	0x13e
+ 1319 06b9 D9060000 		.4byte	0x6d9
+ 1320 06bd 00       		.byte	0
+ 1321 06be 16       		.uleb128 0x16
+ 1322 06bf D9030000 		.4byte	.LASF104
+ 1323 06c3 07       		.byte	0x7
+ 1324 06c4 3F01     		.2byte	0x13f
+ 1325 06c6 D9060000 		.4byte	0x6d9
+ 1326 06ca 06       		.byte	0x6
+ 1327 06cb 16       		.uleb128 0x16
+ 1328 06cc 05060000 		.4byte	.LASF105
+ 1329 06d0 07       		.byte	0x7
+ 1330 06d1 4001     		.2byte	0x140
+ 1331 06d3 50000000 		.4byte	0x50
+ 1332 06d7 0C       		.byte	0xc
+ 1333 06d8 00       		.byte	0
+ 1334 06d9 0A       		.uleb128 0xa
+ 1335 06da 50000000 		.4byte	0x50
+ 1336 06de E9060000 		.4byte	0x6e9
+ 1337 06e2 0B       		.uleb128 0xb
+ 1338 06e3 42010000 		.4byte	0x142
+ 1339 06e7 02       		.byte	0x2
+ 1340 06e8 00       		.byte	0
+ 1341 06e9 1A       		.uleb128 0x1a
+ 1342 06ea D0       		.byte	0xd0
+ 1343 06eb 07       		.byte	0x7
+ 1344 06ec 5702     		.2byte	0x257
+ 1345 06ee EA070000 		.4byte	0x7ea
+ 1346 06f2 16       		.uleb128 0x16
+ 1347 06f3 A4060000 		.4byte	.LASF106
+ 1348 06f7 07       		.byte	0x7
+ 1349 06f8 5902     		.2byte	0x259
+ 1350 06fa 90000000 		.4byte	0x90
+ 1351 06fe 00       		.byte	0
+ 1352 06ff 16       		.uleb128 0x16
+ 1353 0700 38060000 		.4byte	.LASF107
+ 1354 0704 07       		.byte	0x7
+ 1355 0705 5A02     		.2byte	0x25a
+ 1356 0707 82010000 		.4byte	0x182
+ 1357 070b 04       		.byte	0x4
+ 1358 070c 16       		.uleb128 0x16
+ 1359 070d 9A010000 		.4byte	.LASF108
+ 1360 0711 07       		.byte	0x7
+ 1361 0712 5B02     		.2byte	0x25b
+ 1362 0714 EA070000 		.4byte	0x7ea
+ 1363 0718 08       		.byte	0x8
+ 1364 0719 16       		.uleb128 0x16
+ 1365 071a 1A050000 		.4byte	.LASF109
+ 1366 071e 07       		.byte	0x7
+ 1367 071f 5C02     		.2byte	0x25c
+ 1368 0721 FC010000 		.4byte	0x1fc
+ 1369 0725 24       		.byte	0x24
+ 1370 0726 16       		.uleb128 0x16
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 28
+
+
+ 1371 0727 AC030000 		.4byte	.LASF110
+ 1372 072b 07       		.byte	0x7
+ 1373 072c 5D02     		.2byte	0x25d
+ 1374 072e 89000000 		.4byte	0x89
+ 1375 0732 48       		.byte	0x48
+ 1376 0733 16       		.uleb128 0x16
+ 1377 0734 C7060000 		.4byte	.LASF111
+ 1378 0738 07       		.byte	0x7
+ 1379 0739 5E02     		.2byte	0x25e
+ 1380 073b 82000000 		.4byte	0x82
+ 1381 073f 50       		.byte	0x50
+ 1382 0740 16       		.uleb128 0x16
+ 1383 0741 54000000 		.4byte	.LASF112
+ 1384 0745 07       		.byte	0x7
+ 1385 0746 5F02     		.2byte	0x25f
+ 1386 0748 A4060000 		.4byte	0x6a4
+ 1387 074c 58       		.byte	0x58
+ 1388 074d 16       		.uleb128 0x16
+ 1389 074e 31030000 		.4byte	.LASF113
+ 1390 0752 07       		.byte	0x7
+ 1391 0753 6002     		.2byte	0x260
+ 1392 0755 6A010000 		.4byte	0x16a
+ 1393 0759 68       		.byte	0x68
+ 1394 075a 16       		.uleb128 0x16
+ 1395 075b 45060000 		.4byte	.LASF114
+ 1396 075f 07       		.byte	0x7
+ 1397 0760 6102     		.2byte	0x261
+ 1398 0762 6A010000 		.4byte	0x16a
+ 1399 0766 70       		.byte	0x70
+ 1400 0767 16       		.uleb128 0x16
+ 1401 0768 38000000 		.4byte	.LASF115
+ 1402 076c 07       		.byte	0x7
+ 1403 076d 6202     		.2byte	0x262
+ 1404 076f 6A010000 		.4byte	0x16a
+ 1405 0773 78       		.byte	0x78
+ 1406 0774 16       		.uleb128 0x16
+ 1407 0775 50050000 		.4byte	.LASF116
+ 1408 0779 07       		.byte	0x7
+ 1409 077a 6302     		.2byte	0x263
+ 1410 077c FA070000 		.4byte	0x7fa
+ 1411 0780 80       		.byte	0x80
+ 1412 0781 16       		.uleb128 0x16
+ 1413 0782 59000000 		.4byte	.LASF117
+ 1414 0786 07       		.byte	0x7
+ 1415 0787 6402     		.2byte	0x264
+ 1416 0789 0A080000 		.4byte	0x80a
+ 1417 078d 88       		.byte	0x88
+ 1418 078e 16       		.uleb128 0x16
+ 1419 078f F8050000 		.4byte	.LASF118
+ 1420 0793 07       		.byte	0x7
+ 1421 0794 6502     		.2byte	0x265
+ 1422 0796 89000000 		.4byte	0x89
+ 1423 079a A0       		.byte	0xa0
+ 1424 079b 16       		.uleb128 0x16
+ 1425 079c C5000000 		.4byte	.LASF119
+ 1426 07a0 07       		.byte	0x7
+ 1427 07a1 6602     		.2byte	0x266
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 29
+
+
+ 1428 07a3 6A010000 		.4byte	0x16a
+ 1429 07a7 A4       		.byte	0xa4
+ 1430 07a8 16       		.uleb128 0x16
+ 1431 07a9 57030000 		.4byte	.LASF120
+ 1432 07ad 07       		.byte	0x7
+ 1433 07ae 6702     		.2byte	0x267
+ 1434 07b0 6A010000 		.4byte	0x16a
+ 1435 07b4 AC       		.byte	0xac
+ 1436 07b5 16       		.uleb128 0x16
+ 1437 07b6 D8020000 		.4byte	.LASF121
+ 1438 07ba 07       		.byte	0x7
+ 1439 07bb 6802     		.2byte	0x268
+ 1440 07bd 6A010000 		.4byte	0x16a
+ 1441 07c1 B4       		.byte	0xb4
+ 1442 07c2 16       		.uleb128 0x16
+ 1443 07c3 0E040000 		.4byte	.LASF122
+ 1444 07c7 07       		.byte	0x7
+ 1445 07c8 6902     		.2byte	0x269
+ 1446 07ca 6A010000 		.4byte	0x16a
+ 1447 07ce BC       		.byte	0xbc
+ 1448 07cf 16       		.uleb128 0x16
+ 1449 07d0 20030000 		.4byte	.LASF123
+ 1450 07d4 07       		.byte	0x7
+ 1451 07d5 6A02     		.2byte	0x26a
+ 1452 07d7 6A010000 		.4byte	0x16a
+ 1453 07db C4       		.byte	0xc4
+ 1454 07dc 16       		.uleb128 0x16
+ 1455 07dd 60040000 		.4byte	.LASF124
+ 1456 07e1 07       		.byte	0x7
+ 1457 07e2 6B02     		.2byte	0x26b
+ 1458 07e4 89000000 		.4byte	0x89
+ 1459 07e8 CC       		.byte	0xcc
+ 1460 07e9 00       		.byte	0
+ 1461 07ea 0A       		.uleb128 0xa
+ 1462 07eb D1000000 		.4byte	0xd1
+ 1463 07ef FA070000 		.4byte	0x7fa
+ 1464 07f3 0B       		.uleb128 0xb
+ 1465 07f4 42010000 		.4byte	0x142
+ 1466 07f8 19       		.byte	0x19
+ 1467 07f9 00       		.byte	0
+ 1468 07fa 0A       		.uleb128 0xa
+ 1469 07fb D1000000 		.4byte	0xd1
+ 1470 07ff 0A080000 		.4byte	0x80a
+ 1471 0803 0B       		.uleb128 0xb
+ 1472 0804 42010000 		.4byte	0x142
+ 1473 0808 07       		.byte	0x7
+ 1474 0809 00       		.byte	0
+ 1475 080a 0A       		.uleb128 0xa
+ 1476 080b D1000000 		.4byte	0xd1
+ 1477 080f 1A080000 		.4byte	0x81a
+ 1478 0813 0B       		.uleb128 0xb
+ 1479 0814 42010000 		.4byte	0x142
+ 1480 0818 17       		.byte	0x17
+ 1481 0819 00       		.byte	0
+ 1482 081a 1A       		.uleb128 0x1a
+ 1483 081b F0       		.byte	0xf0
+ 1484 081c 07       		.byte	0x7
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 30
+
+
+ 1485 081d 7002     		.2byte	0x270
+ 1486 081f 3E080000 		.4byte	0x83e
+ 1487 0823 16       		.uleb128 0x16
+ 1488 0824 5B010000 		.4byte	.LASF125
+ 1489 0828 07       		.byte	0x7
+ 1490 0829 7302     		.2byte	0x273
+ 1491 082b 3E080000 		.4byte	0x83e
+ 1492 082f 00       		.byte	0
+ 1493 0830 16       		.uleb128 0x16
+ 1494 0831 E0060000 		.4byte	.LASF126
+ 1495 0835 07       		.byte	0x7
+ 1496 0836 7402     		.2byte	0x274
+ 1497 0838 4E080000 		.4byte	0x84e
+ 1498 083c 78       		.byte	0x78
+ 1499 083d 00       		.byte	0
+ 1500 083e 0A       		.uleb128 0xa
+ 1501 083f 3E030000 		.4byte	0x33e
+ 1502 0843 4E080000 		.4byte	0x84e
+ 1503 0847 0B       		.uleb128 0xb
+ 1504 0848 42010000 		.4byte	0x142
+ 1505 084c 1D       		.byte	0x1d
+ 1506 084d 00       		.byte	0
+ 1507 084e 0A       		.uleb128 0xa
+ 1508 084f 90000000 		.4byte	0x90
+ 1509 0853 5E080000 		.4byte	0x85e
+ 1510 0857 0B       		.uleb128 0xb
+ 1511 0858 42010000 		.4byte	0x142
+ 1512 085c 1D       		.byte	0x1d
+ 1513 085d 00       		.byte	0
+ 1514 085e 1B       		.uleb128 0x1b
+ 1515 085f F0       		.byte	0xf0
+ 1516 0860 07       		.byte	0x7
+ 1517 0861 5502     		.2byte	0x255
+ 1518 0863 80080000 		.4byte	0x880
+ 1519 0867 1C       		.uleb128 0x1c
+ 1520 0868 67060000 		.4byte	.LASF76
+ 1521 086c 07       		.byte	0x7
+ 1522 086d 6C02     		.2byte	0x26c
+ 1523 086f E9060000 		.4byte	0x6e9
+ 1524 0873 1C       		.uleb128 0x1c
+ 1525 0874 29050000 		.4byte	.LASF127
+ 1526 0878 07       		.byte	0x7
+ 1527 0879 7502     		.2byte	0x275
+ 1528 087b 1A080000 		.4byte	0x81a
+ 1529 087f 00       		.byte	0
+ 1530 0880 0A       		.uleb128 0xa
+ 1531 0881 D1000000 		.4byte	0xd1
+ 1532 0885 90080000 		.4byte	0x890
+ 1533 0889 0B       		.uleb128 0xb
+ 1534 088a 42010000 		.4byte	0x142
+ 1535 088e 18       		.byte	0x18
+ 1536 088f 00       		.byte	0
+ 1537 0890 1D       		.uleb128 0x1d
+ 1538 0891 9B080000 		.4byte	0x89b
+ 1539 0895 14       		.uleb128 0x14
+ 1540 0896 8C040000 		.4byte	0x48c
+ 1541 089a 00       		.byte	0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 31
+
+
+ 1542 089b 05       		.uleb128 0x5
+ 1543 089c 04       		.byte	0x4
+ 1544 089d 90080000 		.4byte	0x890
+ 1545 08a1 05       		.uleb128 0x5
+ 1546 08a2 04       		.byte	0x4
+ 1547 08a3 E6010000 		.4byte	0x1e6
+ 1548 08a7 1D       		.uleb128 0x1d
+ 1549 08a8 B2080000 		.4byte	0x8b2
+ 1550 08ac 14       		.uleb128 0x14
+ 1551 08ad 89000000 		.4byte	0x89
+ 1552 08b1 00       		.byte	0
+ 1553 08b2 05       		.uleb128 0x5
+ 1554 08b3 04       		.byte	0x4
+ 1555 08b4 B8080000 		.4byte	0x8b8
+ 1556 08b8 05       		.uleb128 0x5
+ 1557 08b9 04       		.byte	0x4
+ 1558 08ba A7080000 		.4byte	0x8a7
+ 1559 08be 0A       		.uleb128 0xa
+ 1560 08bf 57060000 		.4byte	0x657
+ 1561 08c3 CE080000 		.4byte	0x8ce
+ 1562 08c7 0B       		.uleb128 0xb
+ 1563 08c8 42010000 		.4byte	0x142
+ 1564 08cc 02       		.byte	0x2
+ 1565 08cd 00       		.byte	0
+ 1566 08ce 1E       		.uleb128 0x1e
+ 1567 08cf A6040000 		.4byte	.LASF162
+ 1568 08d3 01       		.byte	0x1
+ 1569 08d4 14       		.byte	0x14
+ 1570 08d5 89000000 		.4byte	0x89
+ 1571 08d9 00000000 		.4byte	.LFB64
+ 1572 08dd A0020000 		.4byte	.LFE64-.LFB64
+ 1573 08e1 01       		.uleb128 0x1
+ 1574 08e2 9C       		.byte	0x9c
+ 1575 08e3 C10C0000 		.4byte	0xcc1
+ 1576 08e7 1F       		.uleb128 0x1f
+ 1577 08e8 73747200 		.ascii	"str\000"
+ 1578 08ec 01       		.byte	0x1
+ 1579 08ed 17       		.byte	0x17
+ 1580 08ee C10C0000 		.4byte	0xcc1
+ 1581 08f2 02       		.uleb128 0x2
+ 1582 08f3 91       		.byte	0x91
+ 1583 08f4 50       		.sleb128 -48
+ 1584 08f5 20       		.uleb128 0x20
+ 1585 08f6 11030000 		.4byte	.LASF128
+ 1586 08fa 01       		.byte	0x1
+ 1587 08fb 18       		.byte	0x18
+ 1588 08fc D10C0000 		.4byte	0xcd1
+ 1589 0900 03       		.uleb128 0x3
+ 1590 0901 91       		.byte	0x91
+ 1591 0902 8070     		.sleb128 -2048
+ 1592 0904 20       		.uleb128 0x20
+ 1593 0905 72000000 		.4byte	.LASF129
+ 1594 0909 01       		.byte	0x1
+ 1595 090a 1A       		.byte	0x1a
+ 1596 090b D10C0000 		.4byte	0xcd1
+ 1597 090f 03       		.uleb128 0x3
+ 1598 0910 91       		.byte	0x91
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 32
+
+
+ 1599 0911 B060     		.sleb128 -4048
+ 1600 0913 21       		.uleb128 0x21
+ 1601 0914 C9010000 		.4byte	.LASF130
+ 1602 0918 01       		.byte	0x1
+ 1603 0919 1B       		.byte	0x1b
+ 1604 091a AD000000 		.4byte	0xad
+ 1605 091e F401     		.2byte	0x1f4
+ 1606 0920 20       		.uleb128 0x20
+ 1607 0921 00000000 		.4byte	.LASF131
+ 1608 0925 01       		.byte	0x1
+ 1609 0926 1C       		.byte	0x1c
+ 1610 0927 AD000000 		.4byte	0xad
+ 1611 092b 03       		.uleb128 0x3
+ 1612 092c 91       		.byte	0x91
+ 1613 092d AC60     		.sleb128 -4052
+ 1614 092f 20       		.uleb128 0x20
+ 1615 0930 46000000 		.4byte	.LASF132
+ 1616 0934 01       		.byte	0x1
+ 1617 0935 1D       		.byte	0x1d
+ 1618 0936 97000000 		.4byte	0x97
+ 1619 093a 03       		.uleb128 0x3
+ 1620 093b 91       		.byte	0x91
+ 1621 093c AB60     		.sleb128 -4053
+ 1622 093e 20       		.uleb128 0x20
+ 1623 093f 16060000 		.4byte	.LASF133
+ 1624 0943 01       		.byte	0x1
+ 1625 0944 1E       		.byte	0x1e
+ 1626 0945 AD000000 		.4byte	0xad
+ 1627 0949 03       		.uleb128 0x3
+ 1628 094a 91       		.byte	0x91
+ 1629 094b A460     		.sleb128 -4060
+ 1630 094d 20       		.uleb128 0x20
+ 1631 094e A1000000 		.4byte	.LASF134
+ 1632 0952 01       		.byte	0x1
+ 1633 0953 1F       		.byte	0x1f
+ 1634 0954 97000000 		.4byte	0x97
+ 1635 0958 03       		.uleb128 0x3
+ 1636 0959 91       		.byte	0x91
+ 1637 095a A360     		.sleb128 -4061
+ 1638 095c 20       		.uleb128 0x20
+ 1639 095d FA000000 		.4byte	.LASF135
+ 1640 0961 01       		.byte	0x1
+ 1641 0962 20       		.byte	0x20
+ 1642 0963 A2000000 		.4byte	0xa2
+ 1643 0967 03       		.uleb128 0x3
+ 1644 0968 91       		.byte	0x91
+ 1645 0969 A260     		.sleb128 -4062
+ 1646 096b 22       		.uleb128 0x22
+ 1647 096c EF060000 		.4byte	.LASF136
+ 1648 0970 01       		.byte	0x1
+ 1649 0971 24       		.byte	0x24
+ 1650 0972 B8000000 		.4byte	0xb8
+ 1651 0976 00000000 		.4byte	.LLST0
+ 1652 097a 22       		.uleb128 0x22
+ 1653 097b 9E030000 		.4byte	.LASF137
+ 1654 097f 01       		.byte	0x1
+ 1655 0980 24       		.byte	0x24
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 33
+
+
+ 1656 0981 B8000000 		.4byte	0xb8
+ 1657 0985 3E000000 		.4byte	.LLST1
+ 1658 0989 22       		.uleb128 0x22
+ 1659 098a 79050000 		.4byte	.LASF138
+ 1660 098e 01       		.byte	0x1
+ 1661 098f 24       		.byte	0x24
+ 1662 0990 B8000000 		.4byte	0xb8
+ 1663 0994 74000000 		.4byte	.LLST2
+ 1664 0998 22       		.uleb128 0x22
+ 1665 0999 69040000 		.4byte	.LASF139
+ 1666 099d 01       		.byte	0x1
+ 1667 099e 25       		.byte	0x25
+ 1668 099f AD000000 		.4byte	0xad
+ 1669 09a3 92000000 		.4byte	.LLST3
+ 1670 09a7 22       		.uleb128 0x22
+ 1671 09a8 FD020000 		.4byte	.LASF140
+ 1672 09ac 01       		.byte	0x1
+ 1673 09ad 26       		.byte	0x26
+ 1674 09ae C3000000 		.4byte	0xc3
+ 1675 09b2 D7000000 		.4byte	.LLST4
+ 1676 09b6 23       		.uleb128 0x23
+ 1677 09b7 6900     		.ascii	"i\000"
+ 1678 09b9 01       		.byte	0x1
+ 1679 09ba 2B       		.byte	0x2b
+ 1680 09bb 89000000 		.4byte	0x89
+ 1681 09bf 37010000 		.4byte	.LLST5
+ 1682 09c3 24       		.uleb128 0x24
+ 1683 09c4 0E000000 		.4byte	.LVL0
+ 1684 09c8 320D0000 		.4byte	0xd32
+ 1685 09cc 24       		.uleb128 0x24
+ 1686 09cd 12000000 		.4byte	.LVL1
+ 1687 09d1 3D0D0000 		.4byte	0xd3d
+ 1688 09d5 24       		.uleb128 0x24
+ 1689 09d6 16000000 		.4byte	.LVL2
+ 1690 09da 480D0000 		.4byte	0xd48
+ 1691 09de 25       		.uleb128 0x25
+ 1692 09df 1E000000 		.4byte	.LVL3
+ 1693 09e3 530D0000 		.4byte	0xd53
+ 1694 09e7 F3090000 		.4byte	0x9f3
+ 1695 09eb 26       		.uleb128 0x26
+ 1696 09ec 01       		.uleb128 0x1
+ 1697 09ed 50       		.byte	0x50
+ 1698 09ee 03       		.uleb128 0x3
+ 1699 09ef 0A       		.byte	0xa
+ 1700 09f0 E803     		.2byte	0x3e8
+ 1701 09f2 00       		.byte	0
+ 1702 09f3 25       		.uleb128 0x25
+ 1703 09f4 28000000 		.4byte	.LVL4
+ 1704 09f8 5E0D0000 		.4byte	0xd5e
+ 1705 09fc 0D0A0000 		.4byte	0xa0d
+ 1706 0a00 26       		.uleb128 0x26
+ 1707 0a01 01       		.uleb128 0x1
+ 1708 0a02 50       		.byte	0x50
+ 1709 0a03 01       		.uleb128 0x1
+ 1710 0a04 30       		.byte	0x30
+ 1711 0a05 26       		.uleb128 0x26
+ 1712 0a06 01       		.uleb128 0x1
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 34
+
+
+ 1713 0a07 51       		.byte	0x51
+ 1714 0a08 03       		.uleb128 0x3
+ 1715 0a09 91       		.byte	0x91
+ 1716 0a0a A260     		.sleb128 -4062
+ 1717 0a0c 00       		.byte	0
+ 1718 0a0d 25       		.uleb128 0x25
+ 1719 0a0e 44000000 		.4byte	.LVL5
+ 1720 0a12 690D0000 		.4byte	0xd69
+ 1721 0a16 210A0000 		.4byte	0xa21
+ 1722 0a1a 26       		.uleb128 0x26
+ 1723 0a1b 01       		.uleb128 0x1
+ 1724 0a1c 50       		.byte	0x50
+ 1725 0a1d 02       		.uleb128 0x2
+ 1726 0a1e 74       		.byte	0x74
+ 1727 0a1f 60       		.sleb128 -32
+ 1728 0a20 00       		.byte	0
+ 1729 0a21 25       		.uleb128 0x25
+ 1730 0a22 4A000000 		.4byte	.LVL6
+ 1731 0a26 530D0000 		.4byte	0xd53
+ 1732 0a2a 350A0000 		.4byte	0xa35
+ 1733 0a2e 26       		.uleb128 0x26
+ 1734 0a2f 01       		.uleb128 0x1
+ 1735 0a30 50       		.byte	0x50
+ 1736 0a31 02       		.uleb128 0x2
+ 1737 0a32 08       		.byte	0x8
+ 1738 0a33 64       		.byte	0x64
+ 1739 0a34 00       		.byte	0
+ 1740 0a35 24       		.uleb128 0x24
+ 1741 0a36 4E000000 		.4byte	.LVL7
+ 1742 0a3a 740D0000 		.4byte	0xd74
+ 1743 0a3e 24       		.uleb128 0x24
+ 1744 0a3f 68000000 		.4byte	.LVL8
+ 1745 0a43 7F0D0000 		.4byte	0xd7f
+ 1746 0a47 24       		.uleb128 0x24
+ 1747 0a48 7E000000 		.4byte	.LVL10
+ 1748 0a4c 8B0D0000 		.4byte	0xd8b
+ 1749 0a50 24       		.uleb128 0x24
+ 1750 0a51 8A000000 		.4byte	.LVL12
+ 1751 0a55 960D0000 		.4byte	0xd96
+ 1752 0a59 25       		.uleb128 0x25
+ 1753 0a5a 9E000000 		.4byte	.LVL13
+ 1754 0a5e A10D0000 		.4byte	0xda1
+ 1755 0a62 810A0000 		.4byte	0xa81
+ 1756 0a66 26       		.uleb128 0x26
+ 1757 0a67 01       		.uleb128 0x1
+ 1758 0a68 50       		.byte	0x50
+ 1759 0a69 07       		.uleb128 0x7
+ 1760 0a6a 74       		.byte	0x74
+ 1761 0a6b 00       		.sleb128 0
+ 1762 0a6c 32       		.byte	0x32
+ 1763 0a6d 24       		.byte	0x24
+ 1764 0a6e 77       		.byte	0x77
+ 1765 0a6f 00       		.sleb128 0
+ 1766 0a70 22       		.byte	0x22
+ 1767 0a71 26       		.uleb128 0x26
+ 1768 0a72 01       		.uleb128 0x1
+ 1769 0a73 51       		.byte	0x51
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 35
+
+
+ 1770 0a74 0B       		.uleb128 0xb
+ 1771 0a75 74       		.byte	0x74
+ 1772 0a76 00       		.sleb128 0
+ 1773 0a77 32       		.byte	0x32
+ 1774 0a78 24       		.byte	0x24
+ 1775 0a79 91       		.byte	0x91
+ 1776 0a7a 00       		.sleb128 0
+ 1777 0a7b 22       		.byte	0x22
+ 1778 0a7c 0A       		.byte	0xa
+ 1779 0a7d D00F     		.2byte	0xfd0
+ 1780 0a7f 1C       		.byte	0x1c
+ 1781 0a80 00       		.byte	0
+ 1782 0a81 25       		.uleb128 0x25
+ 1783 0a82 B8000000 		.4byte	.LVL16
+ 1784 0a86 AC0D0000 		.4byte	0xdac
+ 1785 0a8a 9E0A0000 		.4byte	0xa9e
+ 1786 0a8e 26       		.uleb128 0x26
+ 1787 0a8f 01       		.uleb128 0x1
+ 1788 0a90 50       		.byte	0x50
+ 1789 0a91 02       		.uleb128 0x2
+ 1790 0a92 91       		.byte	0x91
+ 1791 0a93 50       		.sleb128 -48
+ 1792 0a94 26       		.uleb128 0x26
+ 1793 0a95 01       		.uleb128 0x1
+ 1794 0a96 51       		.byte	0x51
+ 1795 0a97 05       		.uleb128 0x5
+ 1796 0a98 03       		.byte	0x3
+ 1797 0a99 24000000 		.4byte	.LC1
+ 1798 0a9d 00       		.byte	0
+ 1799 0a9e 25       		.uleb128 0x25
+ 1800 0a9f C0000000 		.4byte	.LVL17
+ 1801 0aa3 690D0000 		.4byte	0xd69
+ 1802 0aa7 B20A0000 		.4byte	0xab2
+ 1803 0aab 26       		.uleb128 0x26
+ 1804 0aac 01       		.uleb128 0x1
+ 1805 0aad 50       		.byte	0x50
+ 1806 0aae 02       		.uleb128 0x2
+ 1807 0aaf 91       		.byte	0x91
+ 1808 0ab0 50       		.sleb128 -48
+ 1809 0ab1 00       		.byte	0
+ 1810 0ab2 25       		.uleb128 0x25
+ 1811 0ab3 D0000000 		.4byte	.LVL18
+ 1812 0ab7 AC0D0000 		.4byte	0xdac
+ 1813 0abb CF0A0000 		.4byte	0xacf
+ 1814 0abf 26       		.uleb128 0x26
+ 1815 0ac0 01       		.uleb128 0x1
+ 1816 0ac1 50       		.byte	0x50
+ 1817 0ac2 02       		.uleb128 0x2
+ 1818 0ac3 91       		.byte	0x91
+ 1819 0ac4 50       		.sleb128 -48
+ 1820 0ac5 26       		.uleb128 0x26
+ 1821 0ac6 01       		.uleb128 0x1
+ 1822 0ac7 51       		.byte	0x51
+ 1823 0ac8 05       		.uleb128 0x5
+ 1824 0ac9 03       		.byte	0x3
+ 1825 0aca 30000000 		.4byte	.LC2
+ 1826 0ace 00       		.byte	0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 36
+
+
+ 1827 0acf 25       		.uleb128 0x25
+ 1828 0ad0 D8000000 		.4byte	.LVL19
+ 1829 0ad4 690D0000 		.4byte	0xd69
+ 1830 0ad8 E30A0000 		.4byte	0xae3
+ 1831 0adc 26       		.uleb128 0x26
+ 1832 0add 01       		.uleb128 0x1
+ 1833 0ade 50       		.byte	0x50
+ 1834 0adf 02       		.uleb128 0x2
+ 1835 0ae0 91       		.byte	0x91
+ 1836 0ae1 50       		.sleb128 -48
+ 1837 0ae2 00       		.byte	0
+ 1838 0ae3 25       		.uleb128 0x25
+ 1839 0ae4 00010000 		.4byte	.LVL22
+ 1840 0ae8 B70D0000 		.4byte	0xdb7
+ 1841 0aec 250B0000 		.4byte	0xb25
+ 1842 0af0 26       		.uleb128 0x26
+ 1843 0af1 01       		.uleb128 0x1
+ 1844 0af2 50       		.byte	0x50
+ 1845 0af3 03       		.uleb128 0x3
+ 1846 0af4 91       		.byte	0x91
+ 1847 0af5 B060     		.sleb128 -4048
+ 1848 0af7 26       		.uleb128 0x26
+ 1849 0af8 01       		.uleb128 0x1
+ 1850 0af9 51       		.byte	0x51
+ 1851 0afa 03       		.uleb128 0x3
+ 1852 0afb 0A       		.byte	0xa
+ 1853 0afc F401     		.2byte	0x1f4
+ 1854 0afe 26       		.uleb128 0x26
+ 1855 0aff 01       		.uleb128 0x1
+ 1856 0b00 52       		.byte	0x52
+ 1857 0b01 03       		.uleb128 0x3
+ 1858 0b02 91       		.byte	0x91
+ 1859 0b03 8070     		.sleb128 -2048
+ 1860 0b05 26       		.uleb128 0x26
+ 1861 0b06 01       		.uleb128 0x1
+ 1862 0b07 53       		.byte	0x53
+ 1863 0b08 03       		.uleb128 0x3
+ 1864 0b09 91       		.byte	0x91
+ 1865 0b0a AC60     		.sleb128 -4052
+ 1866 0b0c 26       		.uleb128 0x26
+ 1867 0b0d 02       		.uleb128 0x2
+ 1868 0b0e 7D       		.byte	0x7d
+ 1869 0b0f 00       		.sleb128 0
+ 1870 0b10 03       		.uleb128 0x3
+ 1871 0b11 91       		.byte	0x91
+ 1872 0b12 AB60     		.sleb128 -4053
+ 1873 0b14 26       		.uleb128 0x26
+ 1874 0b15 02       		.uleb128 0x2
+ 1875 0b16 7D       		.byte	0x7d
+ 1876 0b17 04       		.sleb128 4
+ 1877 0b18 03       		.uleb128 0x3
+ 1878 0b19 91       		.byte	0x91
+ 1879 0b1a A460     		.sleb128 -4060
+ 1880 0b1c 26       		.uleb128 0x26
+ 1881 0b1d 02       		.uleb128 0x2
+ 1882 0b1e 7D       		.byte	0x7d
+ 1883 0b1f 08       		.sleb128 8
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 37
+
+
+ 1884 0b20 03       		.uleb128 0x3
+ 1885 0b21 91       		.byte	0x91
+ 1886 0b22 A360     		.sleb128 -4061
+ 1887 0b24 00       		.byte	0
+ 1888 0b25 24       		.uleb128 0x24
+ 1889 0b26 50010000 		.4byte	.LVL30
+ 1890 0b2a 960D0000 		.4byte	0xd96
+ 1891 0b2e 25       		.uleb128 0x25
+ 1892 0b2f 64010000 		.4byte	.LVL31
+ 1893 0b33 A10D0000 		.4byte	0xda1
+ 1894 0b37 560B0000 		.4byte	0xb56
+ 1895 0b3b 26       		.uleb128 0x26
+ 1896 0b3c 01       		.uleb128 0x1
+ 1897 0b3d 50       		.byte	0x50
+ 1898 0b3e 07       		.uleb128 0x7
+ 1899 0b3f 74       		.byte	0x74
+ 1900 0b40 00       		.sleb128 0
+ 1901 0b41 32       		.byte	0x32
+ 1902 0b42 24       		.byte	0x24
+ 1903 0b43 78       		.byte	0x78
+ 1904 0b44 00       		.sleb128 0
+ 1905 0b45 22       		.byte	0x22
+ 1906 0b46 26       		.uleb128 0x26
+ 1907 0b47 01       		.uleb128 0x1
+ 1908 0b48 51       		.byte	0x51
+ 1909 0b49 0B       		.uleb128 0xb
+ 1910 0b4a 74       		.byte	0x74
+ 1911 0b4b 00       		.sleb128 0
+ 1912 0b4c 32       		.byte	0x32
+ 1913 0b4d 24       		.byte	0x24
+ 1914 0b4e 91       		.byte	0x91
+ 1915 0b4f 00       		.sleb128 0
+ 1916 0b50 22       		.byte	0x22
+ 1917 0b51 0A       		.byte	0xa
+ 1918 0b52 D00F     		.2byte	0xfd0
+ 1919 0b54 1C       		.byte	0x1c
+ 1920 0b55 00       		.byte	0
+ 1921 0b56 25       		.uleb128 0x25
+ 1922 0b57 D0010000 		.4byte	.LVL52
+ 1923 0b5b AC0D0000 		.4byte	0xdac
+ 1924 0b5f 790B0000 		.4byte	0xb79
+ 1925 0b63 26       		.uleb128 0x26
+ 1926 0b64 01       		.uleb128 0x1
+ 1927 0b65 50       		.byte	0x50
+ 1928 0b66 02       		.uleb128 0x2
+ 1929 0b67 91       		.byte	0x91
+ 1930 0b68 50       		.sleb128 -48
+ 1931 0b69 26       		.uleb128 0x26
+ 1932 0b6a 01       		.uleb128 0x1
+ 1933 0b6b 51       		.byte	0x51
+ 1934 0b6c 05       		.uleb128 0x5
+ 1935 0b6d 03       		.byte	0x3
+ 1936 0b6e 3C000000 		.4byte	.LC3
+ 1937 0b72 26       		.uleb128 0x26
+ 1938 0b73 01       		.uleb128 0x1
+ 1939 0b74 52       		.byte	0x52
+ 1940 0b75 02       		.uleb128 0x2
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 38
+
+
+ 1941 0b76 78       		.byte	0x78
+ 1942 0b77 00       		.sleb128 0
+ 1943 0b78 00       		.byte	0
+ 1944 0b79 25       		.uleb128 0x25
+ 1945 0b7a D8010000 		.4byte	.LVL53
+ 1946 0b7e 690D0000 		.4byte	0xd69
+ 1947 0b82 8D0B0000 		.4byte	0xb8d
+ 1948 0b86 26       		.uleb128 0x26
+ 1949 0b87 01       		.uleb128 0x1
+ 1950 0b88 50       		.byte	0x50
+ 1951 0b89 02       		.uleb128 0x2
+ 1952 0b8a 91       		.byte	0x91
+ 1953 0b8b 50       		.sleb128 -48
+ 1954 0b8c 00       		.byte	0
+ 1955 0b8d 25       		.uleb128 0x25
+ 1956 0b8e E8010000 		.4byte	.LVL54
+ 1957 0b92 AC0D0000 		.4byte	0xdac
+ 1958 0b96 AA0B0000 		.4byte	0xbaa
+ 1959 0b9a 26       		.uleb128 0x26
+ 1960 0b9b 01       		.uleb128 0x1
+ 1961 0b9c 50       		.byte	0x50
+ 1962 0b9d 02       		.uleb128 0x2
+ 1963 0b9e 91       		.byte	0x91
+ 1964 0b9f 50       		.sleb128 -48
+ 1965 0ba0 26       		.uleb128 0x26
+ 1966 0ba1 01       		.uleb128 0x1
+ 1967 0ba2 51       		.byte	0x51
+ 1968 0ba3 05       		.uleb128 0x5
+ 1969 0ba4 03       		.byte	0x3
+ 1970 0ba5 48000000 		.4byte	.LC4
+ 1971 0ba9 00       		.byte	0
+ 1972 0baa 25       		.uleb128 0x25
+ 1973 0bab F0010000 		.4byte	.LVL55
+ 1974 0baf 690D0000 		.4byte	0xd69
+ 1975 0bb3 BE0B0000 		.4byte	0xbbe
+ 1976 0bb7 26       		.uleb128 0x26
+ 1977 0bb8 01       		.uleb128 0x1
+ 1978 0bb9 50       		.byte	0x50
+ 1979 0bba 02       		.uleb128 0x2
+ 1980 0bbb 91       		.byte	0x91
+ 1981 0bbc 50       		.sleb128 -48
+ 1982 0bbd 00       		.byte	0
+ 1983 0bbe 25       		.uleb128 0x25
+ 1984 0bbf FC010000 		.4byte	.LVL56
+ 1985 0bc3 AC0D0000 		.4byte	0xdac
+ 1986 0bc7 DB0B0000 		.4byte	0xbdb
+ 1987 0bcb 26       		.uleb128 0x26
+ 1988 0bcc 01       		.uleb128 0x1
+ 1989 0bcd 50       		.byte	0x50
+ 1990 0bce 02       		.uleb128 0x2
+ 1991 0bcf 91       		.byte	0x91
+ 1992 0bd0 50       		.sleb128 -48
+ 1993 0bd1 26       		.uleb128 0x26
+ 1994 0bd2 01       		.uleb128 0x1
+ 1995 0bd3 51       		.byte	0x51
+ 1996 0bd4 05       		.uleb128 0x5
+ 1997 0bd5 03       		.byte	0x3
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 39
+
+
+ 1998 0bd6 50000000 		.4byte	.LC5
+ 1999 0bda 00       		.byte	0
+ 2000 0bdb 25       		.uleb128 0x25
+ 2001 0bdc 04020000 		.4byte	.LVL57
+ 2002 0be0 690D0000 		.4byte	0xd69
+ 2003 0be4 EF0B0000 		.4byte	0xbef
+ 2004 0be8 26       		.uleb128 0x26
+ 2005 0be9 01       		.uleb128 0x1
+ 2006 0bea 50       		.byte	0x50
+ 2007 0beb 02       		.uleb128 0x2
+ 2008 0bec 91       		.byte	0x91
+ 2009 0bed 50       		.sleb128 -48
+ 2010 0bee 00       		.byte	0
+ 2011 0bef 25       		.uleb128 0x25
+ 2012 0bf0 12020000 		.4byte	.LVL58
+ 2013 0bf4 AC0D0000 		.4byte	0xdac
+ 2014 0bf8 0C0C0000 		.4byte	0xc0c
+ 2015 0bfc 26       		.uleb128 0x26
+ 2016 0bfd 01       		.uleb128 0x1
+ 2017 0bfe 50       		.byte	0x50
+ 2018 0bff 02       		.uleb128 0x2
+ 2019 0c00 91       		.byte	0x91
+ 2020 0c01 50       		.sleb128 -48
+ 2021 0c02 26       		.uleb128 0x26
+ 2022 0c03 01       		.uleb128 0x1
+ 2023 0c04 51       		.byte	0x51
+ 2024 0c05 05       		.uleb128 0x5
+ 2025 0c06 03       		.byte	0x3
+ 2026 0c07 58000000 		.4byte	.LC6
+ 2027 0c0b 00       		.byte	0
+ 2028 0c0c 25       		.uleb128 0x25
+ 2029 0c0d 1A020000 		.4byte	.LVL59
+ 2030 0c11 690D0000 		.4byte	0xd69
+ 2031 0c15 200C0000 		.4byte	0xc20
+ 2032 0c19 26       		.uleb128 0x26
+ 2033 0c1a 01       		.uleb128 0x1
+ 2034 0c1b 50       		.byte	0x50
+ 2035 0c1c 02       		.uleb128 0x2
+ 2036 0c1d 91       		.byte	0x91
+ 2037 0c1e 50       		.sleb128 -48
+ 2038 0c1f 00       		.byte	0
+ 2039 0c20 25       		.uleb128 0x25
+ 2040 0c21 26020000 		.4byte	.LVL60
+ 2041 0c25 AC0D0000 		.4byte	0xdac
+ 2042 0c29 3D0C0000 		.4byte	0xc3d
+ 2043 0c2d 26       		.uleb128 0x26
+ 2044 0c2e 01       		.uleb128 0x1
+ 2045 0c2f 50       		.byte	0x50
+ 2046 0c30 02       		.uleb128 0x2
+ 2047 0c31 91       		.byte	0x91
+ 2048 0c32 50       		.sleb128 -48
+ 2049 0c33 26       		.uleb128 0x26
+ 2050 0c34 01       		.uleb128 0x1
+ 2051 0c35 51       		.byte	0x51
+ 2052 0c36 05       		.uleb128 0x5
+ 2053 0c37 03       		.byte	0x3
+ 2054 0c38 68000000 		.4byte	.LC7
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 40
+
+
+ 2055 0c3c 00       		.byte	0
+ 2056 0c3d 25       		.uleb128 0x25
+ 2057 0c3e 2E020000 		.4byte	.LVL61
+ 2058 0c42 690D0000 		.4byte	0xd69
+ 2059 0c46 510C0000 		.4byte	0xc51
+ 2060 0c4a 26       		.uleb128 0x26
+ 2061 0c4b 01       		.uleb128 0x1
+ 2062 0c4c 50       		.byte	0x50
+ 2063 0c4d 02       		.uleb128 0x2
+ 2064 0c4e 91       		.byte	0x91
+ 2065 0c4f 50       		.sleb128 -48
+ 2066 0c50 00       		.byte	0
+ 2067 0c51 25       		.uleb128 0x25
+ 2068 0c52 3C020000 		.4byte	.LVL62
+ 2069 0c56 AC0D0000 		.4byte	0xdac
+ 2070 0c5a 6E0C0000 		.4byte	0xc6e
+ 2071 0c5e 26       		.uleb128 0x26
+ 2072 0c5f 01       		.uleb128 0x1
+ 2073 0c60 50       		.byte	0x50
+ 2074 0c61 02       		.uleb128 0x2
+ 2075 0c62 91       		.byte	0x91
+ 2076 0c63 50       		.sleb128 -48
+ 2077 0c64 26       		.uleb128 0x26
+ 2078 0c65 01       		.uleb128 0x1
+ 2079 0c66 51       		.byte	0x51
+ 2080 0c67 05       		.uleb128 0x5
+ 2081 0c68 03       		.byte	0x3
+ 2082 0c69 74000000 		.4byte	.LC8
+ 2083 0c6d 00       		.byte	0
+ 2084 0c6e 25       		.uleb128 0x25
+ 2085 0c6f 44020000 		.4byte	.LVL63
+ 2086 0c73 690D0000 		.4byte	0xd69
+ 2087 0c77 820C0000 		.4byte	0xc82
+ 2088 0c7b 26       		.uleb128 0x26
+ 2089 0c7c 01       		.uleb128 0x1
+ 2090 0c7d 50       		.byte	0x50
+ 2091 0c7e 02       		.uleb128 0x2
+ 2092 0c7f 91       		.byte	0x91
+ 2093 0c80 50       		.sleb128 -48
+ 2094 0c81 00       		.byte	0
+ 2095 0c82 27       		.uleb128 0x27
+ 2096 0c83 6E020000 		.4byte	.LVL65
+ 2097 0c87 B70D0000 		.4byte	0xdb7
+ 2098 0c8b 26       		.uleb128 0x26
+ 2099 0c8c 01       		.uleb128 0x1
+ 2100 0c8d 50       		.byte	0x50
+ 2101 0c8e 03       		.uleb128 0x3
+ 2102 0c8f 91       		.byte	0x91
+ 2103 0c90 B060     		.sleb128 -4048
+ 2104 0c92 26       		.uleb128 0x26
+ 2105 0c93 01       		.uleb128 0x1
+ 2106 0c94 51       		.byte	0x51
+ 2107 0c95 03       		.uleb128 0x3
+ 2108 0c96 0A       		.byte	0xa
+ 2109 0c97 F401     		.2byte	0x1f4
+ 2110 0c99 26       		.uleb128 0x26
+ 2111 0c9a 01       		.uleb128 0x1
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 41
+
+
+ 2112 0c9b 52       		.byte	0x52
+ 2113 0c9c 03       		.uleb128 0x3
+ 2114 0c9d 91       		.byte	0x91
+ 2115 0c9e 8070     		.sleb128 -2048
+ 2116 0ca0 26       		.uleb128 0x26
+ 2117 0ca1 01       		.uleb128 0x1
+ 2118 0ca2 53       		.byte	0x53
+ 2119 0ca3 03       		.uleb128 0x3
+ 2120 0ca4 91       		.byte	0x91
+ 2121 0ca5 AC60     		.sleb128 -4052
+ 2122 0ca7 26       		.uleb128 0x26
+ 2123 0ca8 02       		.uleb128 0x2
+ 2124 0ca9 7D       		.byte	0x7d
+ 2125 0caa 00       		.sleb128 0
+ 2126 0cab 03       		.uleb128 0x3
+ 2127 0cac 91       		.byte	0x91
+ 2128 0cad AB60     		.sleb128 -4053
+ 2129 0caf 26       		.uleb128 0x26
+ 2130 0cb0 02       		.uleb128 0x2
+ 2131 0cb1 7D       		.byte	0x7d
+ 2132 0cb2 04       		.sleb128 4
+ 2133 0cb3 03       		.uleb128 0x3
+ 2134 0cb4 91       		.byte	0x91
+ 2135 0cb5 A460     		.sleb128 -4060
+ 2136 0cb7 26       		.uleb128 0x26
+ 2137 0cb8 02       		.uleb128 0x2
+ 2138 0cb9 7D       		.byte	0x7d
+ 2139 0cba 08       		.sleb128 8
+ 2140 0cbb 03       		.uleb128 0x3
+ 2141 0cbc 91       		.byte	0x91
+ 2142 0cbd A360     		.sleb128 -4061
+ 2143 0cbf 00       		.byte	0
+ 2144 0cc0 00       		.byte	0
+ 2145 0cc1 0A       		.uleb128 0xa
+ 2146 0cc2 D1000000 		.4byte	0xd1
+ 2147 0cc6 D10C0000 		.4byte	0xcd1
+ 2148 0cca 0B       		.uleb128 0xb
+ 2149 0ccb 42010000 		.4byte	0x142
+ 2150 0ccf 0E       		.byte	0xe
+ 2151 0cd0 00       		.byte	0
+ 2152 0cd1 0A       		.uleb128 0xa
+ 2153 0cd2 B8000000 		.4byte	0xb8
+ 2154 0cd6 E20C0000 		.4byte	0xce2
+ 2155 0cda 28       		.uleb128 0x28
+ 2156 0cdb 42010000 		.4byte	0x142
+ 2157 0cdf F301     		.2byte	0x1f3
+ 2158 0ce1 00       		.byte	0
+ 2159 0ce2 29       		.uleb128 0x29
+ 2160 0ce3 4F010000 		.4byte	.LASF141
+ 2161 0ce7 07       		.byte	0x7
+ 2162 0ce8 FD02     		.2byte	0x2fd
+ 2163 0cea 8C040000 		.4byte	0x48c
+ 2164 0cee 29       		.uleb128 0x29
+ 2165 0cef D6040000 		.4byte	.LASF142
+ 2166 0cf3 08       		.byte	0x8
+ 2167 0cf4 1207     		.2byte	0x712
+ 2168 0cf6 FA0C0000 		.4byte	0xcfa
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 42
+
+
+ 2169 0cfa 2A       		.uleb128 0x2a
+ 2170 0cfb AD000000 		.4byte	0xad
+ 2171 0cff 2B       		.uleb128 0x2b
+ 2172 0d00 EE040000 		.4byte	.LASF143
+ 2173 0d04 01       		.byte	0x1
+ 2174 0d05 11       		.byte	0x11
+ 2175 0d06 CA000000 		.4byte	0xca
+ 2176 0d0a 05       		.uleb128 0x5
+ 2177 0d0b 03       		.byte	0x3
+ 2178 0d0c 00000000 		.4byte	temp
+ 2179 0d10 2B       		.uleb128 0x2b
+ 2180 0d11 AF020000 		.4byte	.LASF144
+ 2181 0d15 01       		.byte	0x1
+ 2182 0d16 11       		.byte	0x11
+ 2183 0d17 CA000000 		.4byte	0xca
+ 2184 0d1b 05       		.uleb128 0x5
+ 2185 0d1c 03       		.byte	0x3
+ 2186 0d1d 00000000 		.4byte	temp1
+ 2187 0d21 2B       		.uleb128 0x2b
+ 2188 0d22 24000000 		.4byte	.LASF145
+ 2189 0d26 01       		.byte	0x1
+ 2190 0d27 11       		.byte	0x11
+ 2191 0d28 CA000000 		.4byte	0xca
+ 2192 0d2c 05       		.uleb128 0x5
+ 2193 0d2d 03       		.byte	0x3
+ 2194 0d2e 00000000 		.4byte	temp_frac
+ 2195 0d32 2C       		.uleb128 0x2c
+ 2196 0d33 D3000000 		.4byte	.LASF146
+ 2197 0d37 D3000000 		.4byte	.LASF146
+ 2198 0d3b 09       		.byte	0x9
+ 2199 0d3c 93       		.byte	0x93
+ 2200 0d3d 2C       		.uleb128 0x2c
+ 2201 0d3e 6C050000 		.4byte	.LASF147
+ 2202 0d42 6C050000 		.4byte	.LASF147
+ 2203 0d46 0A       		.byte	0xa
+ 2204 0d47 54       		.byte	0x54
+ 2205 0d48 2C       		.uleb128 0x2c
+ 2206 0d49 2E000000 		.4byte	.LASF148
+ 2207 0d4d 2E000000 		.4byte	.LASF148
+ 2208 0d51 0B       		.byte	0xb
+ 2209 0d52 24       		.byte	0x24
+ 2210 0d53 2C       		.uleb128 0x2c
+ 2211 0d54 07000000 		.4byte	.LASF149
+ 2212 0d58 07000000 		.4byte	.LASF149
+ 2213 0d5c 0C       		.byte	0xc
+ 2214 0d5d 76       		.byte	0x76
+ 2215 0d5e 2C       		.uleb128 0x2c
+ 2216 0d5f 0A060000 		.4byte	.LASF150
+ 2217 0d63 0A060000 		.4byte	.LASF150
+ 2218 0d67 0B       		.byte	0xb
+ 2219 0d68 23       		.byte	0x23
+ 2220 0d69 2C       		.uleb128 0x2c
+ 2221 0d6a 2F040000 		.4byte	.LASF151
+ 2222 0d6e 2F040000 		.4byte	.LASF151
+ 2223 0d72 0A       		.byte	0xa
+ 2224 0d73 8B       		.byte	0x8b
+ 2225 0d74 2C       		.uleb128 0x2c
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 43
+
+
+ 2226 0d75 8B010000 		.4byte	.LASF152
+ 2227 0d79 8B010000 		.4byte	.LASF152
+ 2228 0d7d 0A       		.byte	0xa
+ 2229 0d7e 71       		.byte	0x71
+ 2230 0d7f 2D       		.uleb128 0x2d
+ 2231 0d80 9C040000 		.4byte	.LASF153
+ 2232 0d84 9C040000 		.4byte	.LASF153
+ 2233 0d88 0D       		.byte	0xd
+ 2234 0d89 3102     		.2byte	0x231
+ 2235 0d8b 2C       		.uleb128 0x2c
+ 2236 0d8c E9020000 		.4byte	.LASF154
+ 2237 0d90 E9020000 		.4byte	.LASF154
+ 2238 0d94 0B       		.byte	0xb
+ 2239 0d95 22       		.byte	0x22
+ 2240 0d96 2C       		.uleb128 0x2c
+ 2241 0d97 23040000 		.4byte	.LASF155
+ 2242 0d9b 23040000 		.4byte	.LASF155
+ 2243 0d9f 0E       		.byte	0xe
+ 2244 0da0 29       		.byte	0x29
+ 2245 0da1 2C       		.uleb128 0x2c
+ 2246 0da2 B4010000 		.4byte	.LASF156
+ 2247 0da6 B4010000 		.4byte	.LASF156
+ 2248 0daa 0B       		.byte	0xb
+ 2249 0dab 26       		.byte	0x26
+ 2250 0dac 2C       		.uleb128 0x2c
+ 2251 0dad 94040000 		.4byte	.LASF157
+ 2252 0db1 94040000 		.4byte	.LASF157
+ 2253 0db5 0D       		.byte	0xd
+ 2254 0db6 E7       		.byte	0xe7
+ 2255 0db7 2C       		.uleb128 0x2c
+ 2256 0db8 E7030000 		.4byte	.LASF158
+ 2257 0dbc E7030000 		.4byte	.LASF158
+ 2258 0dc0 0F       		.byte	0xf
+ 2259 0dc1 4F       		.byte	0x4f
+ 2260 0dc2 00       		.byte	0
+ 2261              		.section	.debug_abbrev,"",%progbits
+ 2262              	.Ldebug_abbrev0:
+ 2263 0000 01       		.uleb128 0x1
+ 2264 0001 11       		.uleb128 0x11
+ 2265 0002 01       		.byte	0x1
+ 2266 0003 25       		.uleb128 0x25
+ 2267 0004 0E       		.uleb128 0xe
+ 2268 0005 13       		.uleb128 0x13
+ 2269 0006 0B       		.uleb128 0xb
+ 2270 0007 03       		.uleb128 0x3
+ 2271 0008 0E       		.uleb128 0xe
+ 2272 0009 1B       		.uleb128 0x1b
+ 2273 000a 0E       		.uleb128 0xe
+ 2274 000b 55       		.uleb128 0x55
+ 2275 000c 17       		.uleb128 0x17
+ 2276 000d 11       		.uleb128 0x11
+ 2277 000e 01       		.uleb128 0x1
+ 2278 000f 10       		.uleb128 0x10
+ 2279 0010 17       		.uleb128 0x17
+ 2280 0011 00       		.byte	0
+ 2281 0012 00       		.byte	0
+ 2282 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 44
+
+
+ 2283 0014 16       		.uleb128 0x16
+ 2284 0015 00       		.byte	0
+ 2285 0016 03       		.uleb128 0x3
+ 2286 0017 0E       		.uleb128 0xe
+ 2287 0018 3A       		.uleb128 0x3a
+ 2288 0019 0B       		.uleb128 0xb
+ 2289 001a 3B       		.uleb128 0x3b
+ 2290 001b 0B       		.uleb128 0xb
+ 2291 001c 49       		.uleb128 0x49
+ 2292 001d 13       		.uleb128 0x13
+ 2293 001e 00       		.byte	0
+ 2294 001f 00       		.byte	0
+ 2295 0020 03       		.uleb128 0x3
+ 2296 0021 24       		.uleb128 0x24
+ 2297 0022 00       		.byte	0
+ 2298 0023 0B       		.uleb128 0xb
+ 2299 0024 0B       		.uleb128 0xb
+ 2300 0025 3E       		.uleb128 0x3e
+ 2301 0026 0B       		.uleb128 0xb
+ 2302 0027 03       		.uleb128 0x3
+ 2303 0028 0E       		.uleb128 0xe
+ 2304 0029 00       		.byte	0
+ 2305 002a 00       		.byte	0
+ 2306 002b 04       		.uleb128 0x4
+ 2307 002c 24       		.uleb128 0x24
+ 2308 002d 00       		.byte	0
+ 2309 002e 0B       		.uleb128 0xb
+ 2310 002f 0B       		.uleb128 0xb
+ 2311 0030 3E       		.uleb128 0x3e
+ 2312 0031 0B       		.uleb128 0xb
+ 2313 0032 03       		.uleb128 0x3
+ 2314 0033 08       		.uleb128 0x8
+ 2315 0034 00       		.byte	0
+ 2316 0035 00       		.byte	0
+ 2317 0036 05       		.uleb128 0x5
+ 2318 0037 0F       		.uleb128 0xf
+ 2319 0038 00       		.byte	0
+ 2320 0039 0B       		.uleb128 0xb
+ 2321 003a 0B       		.uleb128 0xb
+ 2322 003b 49       		.uleb128 0x49
+ 2323 003c 13       		.uleb128 0x13
+ 2324 003d 00       		.byte	0
+ 2325 003e 00       		.byte	0
+ 2326 003f 06       		.uleb128 0x6
+ 2327 0040 15       		.uleb128 0x15
+ 2328 0041 00       		.byte	0
+ 2329 0042 27       		.uleb128 0x27
+ 2330 0043 19       		.uleb128 0x19
+ 2331 0044 00       		.byte	0
+ 2332 0045 00       		.byte	0
+ 2333 0046 07       		.uleb128 0x7
+ 2334 0047 16       		.uleb128 0x16
+ 2335 0048 00       		.byte	0
+ 2336 0049 03       		.uleb128 0x3
+ 2337 004a 0E       		.uleb128 0xe
+ 2338 004b 3A       		.uleb128 0x3a
+ 2339 004c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 45
+
+
+ 2340 004d 3B       		.uleb128 0x3b
+ 2341 004e 05       		.uleb128 0x5
+ 2342 004f 49       		.uleb128 0x49
+ 2343 0050 13       		.uleb128 0x13
+ 2344 0051 00       		.byte	0
+ 2345 0052 00       		.byte	0
+ 2346 0053 08       		.uleb128 0x8
+ 2347 0054 17       		.uleb128 0x17
+ 2348 0055 01       		.byte	0x1
+ 2349 0056 0B       		.uleb128 0xb
+ 2350 0057 0B       		.uleb128 0xb
+ 2351 0058 3A       		.uleb128 0x3a
+ 2352 0059 0B       		.uleb128 0xb
+ 2353 005a 3B       		.uleb128 0x3b
+ 2354 005b 0B       		.uleb128 0xb
+ 2355 005c 01       		.uleb128 0x1
+ 2356 005d 13       		.uleb128 0x13
+ 2357 005e 00       		.byte	0
+ 2358 005f 00       		.byte	0
+ 2359 0060 09       		.uleb128 0x9
+ 2360 0061 0D       		.uleb128 0xd
+ 2361 0062 00       		.byte	0
+ 2362 0063 03       		.uleb128 0x3
+ 2363 0064 0E       		.uleb128 0xe
+ 2364 0065 3A       		.uleb128 0x3a
+ 2365 0066 0B       		.uleb128 0xb
+ 2366 0067 3B       		.uleb128 0x3b
+ 2367 0068 0B       		.uleb128 0xb
+ 2368 0069 49       		.uleb128 0x49
+ 2369 006a 13       		.uleb128 0x13
+ 2370 006b 00       		.byte	0
+ 2371 006c 00       		.byte	0
+ 2372 006d 0A       		.uleb128 0xa
+ 2373 006e 01       		.uleb128 0x1
+ 2374 006f 01       		.byte	0x1
+ 2375 0070 49       		.uleb128 0x49
+ 2376 0071 13       		.uleb128 0x13
+ 2377 0072 01       		.uleb128 0x1
+ 2378 0073 13       		.uleb128 0x13
+ 2379 0074 00       		.byte	0
+ 2380 0075 00       		.byte	0
+ 2381 0076 0B       		.uleb128 0xb
+ 2382 0077 21       		.uleb128 0x21
+ 2383 0078 00       		.byte	0
+ 2384 0079 49       		.uleb128 0x49
+ 2385 007a 13       		.uleb128 0x13
+ 2386 007b 2F       		.uleb128 0x2f
+ 2387 007c 0B       		.uleb128 0xb
+ 2388 007d 00       		.byte	0
+ 2389 007e 00       		.byte	0
+ 2390 007f 0C       		.uleb128 0xc
+ 2391 0080 13       		.uleb128 0x13
+ 2392 0081 01       		.byte	0x1
+ 2393 0082 0B       		.uleb128 0xb
+ 2394 0083 0B       		.uleb128 0xb
+ 2395 0084 3A       		.uleb128 0x3a
+ 2396 0085 0B       		.uleb128 0xb
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 46
+
+
+ 2397 0086 3B       		.uleb128 0x3b
+ 2398 0087 0B       		.uleb128 0xb
+ 2399 0088 01       		.uleb128 0x1
+ 2400 0089 13       		.uleb128 0x13
+ 2401 008a 00       		.byte	0
+ 2402 008b 00       		.byte	0
+ 2403 008c 0D       		.uleb128 0xd
+ 2404 008d 0D       		.uleb128 0xd
+ 2405 008e 00       		.byte	0
+ 2406 008f 03       		.uleb128 0x3
+ 2407 0090 0E       		.uleb128 0xe
+ 2408 0091 3A       		.uleb128 0x3a
+ 2409 0092 0B       		.uleb128 0xb
+ 2410 0093 3B       		.uleb128 0x3b
+ 2411 0094 0B       		.uleb128 0xb
+ 2412 0095 49       		.uleb128 0x49
+ 2413 0096 13       		.uleb128 0x13
+ 2414 0097 38       		.uleb128 0x38
+ 2415 0098 0B       		.uleb128 0xb
+ 2416 0099 00       		.byte	0
+ 2417 009a 00       		.byte	0
+ 2418 009b 0E       		.uleb128 0xe
+ 2419 009c 0F       		.uleb128 0xf
+ 2420 009d 00       		.byte	0
+ 2421 009e 0B       		.uleb128 0xb
+ 2422 009f 0B       		.uleb128 0xb
+ 2423 00a0 00       		.byte	0
+ 2424 00a1 00       		.byte	0
+ 2425 00a2 0F       		.uleb128 0xf
+ 2426 00a3 13       		.uleb128 0x13
+ 2427 00a4 01       		.byte	0x1
+ 2428 00a5 03       		.uleb128 0x3
+ 2429 00a6 0E       		.uleb128 0xe
+ 2430 00a7 0B       		.uleb128 0xb
+ 2431 00a8 0B       		.uleb128 0xb
+ 2432 00a9 3A       		.uleb128 0x3a
+ 2433 00aa 0B       		.uleb128 0xb
+ 2434 00ab 3B       		.uleb128 0x3b
+ 2435 00ac 0B       		.uleb128 0xb
+ 2436 00ad 01       		.uleb128 0x1
+ 2437 00ae 13       		.uleb128 0x13
+ 2438 00af 00       		.byte	0
+ 2439 00b0 00       		.byte	0
+ 2440 00b1 10       		.uleb128 0x10
+ 2441 00b2 0D       		.uleb128 0xd
+ 2442 00b3 00       		.byte	0
+ 2443 00b4 03       		.uleb128 0x3
+ 2444 00b5 08       		.uleb128 0x8
+ 2445 00b6 3A       		.uleb128 0x3a
+ 2446 00b7 0B       		.uleb128 0xb
+ 2447 00b8 3B       		.uleb128 0x3b
+ 2448 00b9 0B       		.uleb128 0xb
+ 2449 00ba 49       		.uleb128 0x49
+ 2450 00bb 13       		.uleb128 0x13
+ 2451 00bc 38       		.uleb128 0x38
+ 2452 00bd 0B       		.uleb128 0xb
+ 2453 00be 00       		.byte	0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 47
+
+
+ 2454 00bf 00       		.byte	0
+ 2455 00c0 11       		.uleb128 0x11
+ 2456 00c1 13       		.uleb128 0x13
+ 2457 00c2 01       		.byte	0x1
+ 2458 00c3 03       		.uleb128 0x3
+ 2459 00c4 0E       		.uleb128 0xe
+ 2460 00c5 0B       		.uleb128 0xb
+ 2461 00c6 05       		.uleb128 0x5
+ 2462 00c7 3A       		.uleb128 0x3a
+ 2463 00c8 0B       		.uleb128 0xb
+ 2464 00c9 3B       		.uleb128 0x3b
+ 2465 00ca 0B       		.uleb128 0xb
+ 2466 00cb 01       		.uleb128 0x1
+ 2467 00cc 13       		.uleb128 0x13
+ 2468 00cd 00       		.byte	0
+ 2469 00ce 00       		.byte	0
+ 2470 00cf 12       		.uleb128 0x12
+ 2471 00d0 0D       		.uleb128 0xd
+ 2472 00d1 00       		.byte	0
+ 2473 00d2 03       		.uleb128 0x3
+ 2474 00d3 0E       		.uleb128 0xe
+ 2475 00d4 3A       		.uleb128 0x3a
+ 2476 00d5 0B       		.uleb128 0xb
+ 2477 00d6 3B       		.uleb128 0x3b
+ 2478 00d7 0B       		.uleb128 0xb
+ 2479 00d8 49       		.uleb128 0x49
+ 2480 00d9 13       		.uleb128 0x13
+ 2481 00da 38       		.uleb128 0x38
+ 2482 00db 05       		.uleb128 0x5
+ 2483 00dc 00       		.byte	0
+ 2484 00dd 00       		.byte	0
+ 2485 00de 13       		.uleb128 0x13
+ 2486 00df 15       		.uleb128 0x15
+ 2487 00e0 01       		.byte	0x1
+ 2488 00e1 27       		.uleb128 0x27
+ 2489 00e2 19       		.uleb128 0x19
+ 2490 00e3 49       		.uleb128 0x49
+ 2491 00e4 13       		.uleb128 0x13
+ 2492 00e5 01       		.uleb128 0x1
+ 2493 00e6 13       		.uleb128 0x13
+ 2494 00e7 00       		.byte	0
+ 2495 00e8 00       		.byte	0
+ 2496 00e9 14       		.uleb128 0x14
+ 2497 00ea 05       		.uleb128 0x5
+ 2498 00eb 00       		.byte	0
+ 2499 00ec 49       		.uleb128 0x49
+ 2500 00ed 13       		.uleb128 0x13
+ 2501 00ee 00       		.byte	0
+ 2502 00ef 00       		.byte	0
+ 2503 00f0 15       		.uleb128 0x15
+ 2504 00f1 13       		.uleb128 0x13
+ 2505 00f2 01       		.byte	0x1
+ 2506 00f3 03       		.uleb128 0x3
+ 2507 00f4 0E       		.uleb128 0xe
+ 2508 00f5 0B       		.uleb128 0xb
+ 2509 00f6 05       		.uleb128 0x5
+ 2510 00f7 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 48
+
+
+ 2511 00f8 0B       		.uleb128 0xb
+ 2512 00f9 3B       		.uleb128 0x3b
+ 2513 00fa 05       		.uleb128 0x5
+ 2514 00fb 01       		.uleb128 0x1
+ 2515 00fc 13       		.uleb128 0x13
+ 2516 00fd 00       		.byte	0
+ 2517 00fe 00       		.byte	0
+ 2518 00ff 16       		.uleb128 0x16
+ 2519 0100 0D       		.uleb128 0xd
+ 2520 0101 00       		.byte	0
+ 2521 0102 03       		.uleb128 0x3
+ 2522 0103 0E       		.uleb128 0xe
+ 2523 0104 3A       		.uleb128 0x3a
+ 2524 0105 0B       		.uleb128 0xb
+ 2525 0106 3B       		.uleb128 0x3b
+ 2526 0107 05       		.uleb128 0x5
+ 2527 0108 49       		.uleb128 0x49
+ 2528 0109 13       		.uleb128 0x13
+ 2529 010a 38       		.uleb128 0x38
+ 2530 010b 0B       		.uleb128 0xb
+ 2531 010c 00       		.byte	0
+ 2532 010d 00       		.byte	0
+ 2533 010e 17       		.uleb128 0x17
+ 2534 010f 0D       		.uleb128 0xd
+ 2535 0110 00       		.byte	0
+ 2536 0111 03       		.uleb128 0x3
+ 2537 0112 0E       		.uleb128 0xe
+ 2538 0113 3A       		.uleb128 0x3a
+ 2539 0114 0B       		.uleb128 0xb
+ 2540 0115 3B       		.uleb128 0x3b
+ 2541 0116 05       		.uleb128 0x5
+ 2542 0117 49       		.uleb128 0x49
+ 2543 0118 13       		.uleb128 0x13
+ 2544 0119 38       		.uleb128 0x38
+ 2545 011a 05       		.uleb128 0x5
+ 2546 011b 00       		.byte	0
+ 2547 011c 00       		.byte	0
+ 2548 011d 18       		.uleb128 0x18
+ 2549 011e 26       		.uleb128 0x26
+ 2550 011f 00       		.byte	0
+ 2551 0120 49       		.uleb128 0x49
+ 2552 0121 13       		.uleb128 0x13
+ 2553 0122 00       		.byte	0
+ 2554 0123 00       		.byte	0
+ 2555 0124 19       		.uleb128 0x19
+ 2556 0125 13       		.uleb128 0x13
+ 2557 0126 01       		.byte	0x1
+ 2558 0127 03       		.uleb128 0x3
+ 2559 0128 0E       		.uleb128 0xe
+ 2560 0129 0B       		.uleb128 0xb
+ 2561 012a 0B       		.uleb128 0xb
+ 2562 012b 3A       		.uleb128 0x3a
+ 2563 012c 0B       		.uleb128 0xb
+ 2564 012d 3B       		.uleb128 0x3b
+ 2565 012e 05       		.uleb128 0x5
+ 2566 012f 01       		.uleb128 0x1
+ 2567 0130 13       		.uleb128 0x13
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 49
+
+
+ 2568 0131 00       		.byte	0
+ 2569 0132 00       		.byte	0
+ 2570 0133 1A       		.uleb128 0x1a
+ 2571 0134 13       		.uleb128 0x13
+ 2572 0135 01       		.byte	0x1
+ 2573 0136 0B       		.uleb128 0xb
+ 2574 0137 0B       		.uleb128 0xb
+ 2575 0138 3A       		.uleb128 0x3a
+ 2576 0139 0B       		.uleb128 0xb
+ 2577 013a 3B       		.uleb128 0x3b
+ 2578 013b 05       		.uleb128 0x5
+ 2579 013c 01       		.uleb128 0x1
+ 2580 013d 13       		.uleb128 0x13
+ 2581 013e 00       		.byte	0
+ 2582 013f 00       		.byte	0
+ 2583 0140 1B       		.uleb128 0x1b
+ 2584 0141 17       		.uleb128 0x17
+ 2585 0142 01       		.byte	0x1
+ 2586 0143 0B       		.uleb128 0xb
+ 2587 0144 0B       		.uleb128 0xb
+ 2588 0145 3A       		.uleb128 0x3a
+ 2589 0146 0B       		.uleb128 0xb
+ 2590 0147 3B       		.uleb128 0x3b
+ 2591 0148 05       		.uleb128 0x5
+ 2592 0149 01       		.uleb128 0x1
+ 2593 014a 13       		.uleb128 0x13
+ 2594 014b 00       		.byte	0
+ 2595 014c 00       		.byte	0
+ 2596 014d 1C       		.uleb128 0x1c
+ 2597 014e 0D       		.uleb128 0xd
+ 2598 014f 00       		.byte	0
+ 2599 0150 03       		.uleb128 0x3
+ 2600 0151 0E       		.uleb128 0xe
+ 2601 0152 3A       		.uleb128 0x3a
+ 2602 0153 0B       		.uleb128 0xb
+ 2603 0154 3B       		.uleb128 0x3b
+ 2604 0155 05       		.uleb128 0x5
+ 2605 0156 49       		.uleb128 0x49
+ 2606 0157 13       		.uleb128 0x13
+ 2607 0158 00       		.byte	0
+ 2608 0159 00       		.byte	0
+ 2609 015a 1D       		.uleb128 0x1d
+ 2610 015b 15       		.uleb128 0x15
+ 2611 015c 01       		.byte	0x1
+ 2612 015d 27       		.uleb128 0x27
+ 2613 015e 19       		.uleb128 0x19
+ 2614 015f 01       		.uleb128 0x1
+ 2615 0160 13       		.uleb128 0x13
+ 2616 0161 00       		.byte	0
+ 2617 0162 00       		.byte	0
+ 2618 0163 1E       		.uleb128 0x1e
+ 2619 0164 2E       		.uleb128 0x2e
+ 2620 0165 01       		.byte	0x1
+ 2621 0166 3F       		.uleb128 0x3f
+ 2622 0167 19       		.uleb128 0x19
+ 2623 0168 03       		.uleb128 0x3
+ 2624 0169 0E       		.uleb128 0xe
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 50
+
+
+ 2625 016a 3A       		.uleb128 0x3a
+ 2626 016b 0B       		.uleb128 0xb
+ 2627 016c 3B       		.uleb128 0x3b
+ 2628 016d 0B       		.uleb128 0xb
+ 2629 016e 27       		.uleb128 0x27
+ 2630 016f 19       		.uleb128 0x19
+ 2631 0170 49       		.uleb128 0x49
+ 2632 0171 13       		.uleb128 0x13
+ 2633 0172 8701     		.uleb128 0x87
+ 2634 0174 19       		.uleb128 0x19
+ 2635 0175 11       		.uleb128 0x11
+ 2636 0176 01       		.uleb128 0x1
+ 2637 0177 12       		.uleb128 0x12
+ 2638 0178 06       		.uleb128 0x6
+ 2639 0179 40       		.uleb128 0x40
+ 2640 017a 18       		.uleb128 0x18
+ 2641 017b 9642     		.uleb128 0x2116
+ 2642 017d 19       		.uleb128 0x19
+ 2643 017e 01       		.uleb128 0x1
+ 2644 017f 13       		.uleb128 0x13
+ 2645 0180 00       		.byte	0
+ 2646 0181 00       		.byte	0
+ 2647 0182 1F       		.uleb128 0x1f
+ 2648 0183 34       		.uleb128 0x34
+ 2649 0184 00       		.byte	0
+ 2650 0185 03       		.uleb128 0x3
+ 2651 0186 08       		.uleb128 0x8
+ 2652 0187 3A       		.uleb128 0x3a
+ 2653 0188 0B       		.uleb128 0xb
+ 2654 0189 3B       		.uleb128 0x3b
+ 2655 018a 0B       		.uleb128 0xb
+ 2656 018b 49       		.uleb128 0x49
+ 2657 018c 13       		.uleb128 0x13
+ 2658 018d 02       		.uleb128 0x2
+ 2659 018e 18       		.uleb128 0x18
+ 2660 018f 00       		.byte	0
+ 2661 0190 00       		.byte	0
+ 2662 0191 20       		.uleb128 0x20
+ 2663 0192 34       		.uleb128 0x34
+ 2664 0193 00       		.byte	0
+ 2665 0194 03       		.uleb128 0x3
+ 2666 0195 0E       		.uleb128 0xe
+ 2667 0196 3A       		.uleb128 0x3a
+ 2668 0197 0B       		.uleb128 0xb
+ 2669 0198 3B       		.uleb128 0x3b
+ 2670 0199 0B       		.uleb128 0xb
+ 2671 019a 49       		.uleb128 0x49
+ 2672 019b 13       		.uleb128 0x13
+ 2673 019c 02       		.uleb128 0x2
+ 2674 019d 18       		.uleb128 0x18
+ 2675 019e 00       		.byte	0
+ 2676 019f 00       		.byte	0
+ 2677 01a0 21       		.uleb128 0x21
+ 2678 01a1 34       		.uleb128 0x34
+ 2679 01a2 00       		.byte	0
+ 2680 01a3 03       		.uleb128 0x3
+ 2681 01a4 0E       		.uleb128 0xe
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 51
+
+
+ 2682 01a5 3A       		.uleb128 0x3a
+ 2683 01a6 0B       		.uleb128 0xb
+ 2684 01a7 3B       		.uleb128 0x3b
+ 2685 01a8 0B       		.uleb128 0xb
+ 2686 01a9 49       		.uleb128 0x49
+ 2687 01aa 13       		.uleb128 0x13
+ 2688 01ab 1C       		.uleb128 0x1c
+ 2689 01ac 05       		.uleb128 0x5
+ 2690 01ad 00       		.byte	0
+ 2691 01ae 00       		.byte	0
+ 2692 01af 22       		.uleb128 0x22
+ 2693 01b0 34       		.uleb128 0x34
+ 2694 01b1 00       		.byte	0
+ 2695 01b2 03       		.uleb128 0x3
+ 2696 01b3 0E       		.uleb128 0xe
+ 2697 01b4 3A       		.uleb128 0x3a
+ 2698 01b5 0B       		.uleb128 0xb
+ 2699 01b6 3B       		.uleb128 0x3b
+ 2700 01b7 0B       		.uleb128 0xb
+ 2701 01b8 49       		.uleb128 0x49
+ 2702 01b9 13       		.uleb128 0x13
+ 2703 01ba 02       		.uleb128 0x2
+ 2704 01bb 17       		.uleb128 0x17
+ 2705 01bc 00       		.byte	0
+ 2706 01bd 00       		.byte	0
+ 2707 01be 23       		.uleb128 0x23
+ 2708 01bf 34       		.uleb128 0x34
+ 2709 01c0 00       		.byte	0
+ 2710 01c1 03       		.uleb128 0x3
+ 2711 01c2 08       		.uleb128 0x8
+ 2712 01c3 3A       		.uleb128 0x3a
+ 2713 01c4 0B       		.uleb128 0xb
+ 2714 01c5 3B       		.uleb128 0x3b
+ 2715 01c6 0B       		.uleb128 0xb
+ 2716 01c7 49       		.uleb128 0x49
+ 2717 01c8 13       		.uleb128 0x13
+ 2718 01c9 02       		.uleb128 0x2
+ 2719 01ca 17       		.uleb128 0x17
+ 2720 01cb 00       		.byte	0
+ 2721 01cc 00       		.byte	0
+ 2722 01cd 24       		.uleb128 0x24
+ 2723 01ce 898201   		.uleb128 0x4109
+ 2724 01d1 00       		.byte	0
+ 2725 01d2 11       		.uleb128 0x11
+ 2726 01d3 01       		.uleb128 0x1
+ 2727 01d4 31       		.uleb128 0x31
+ 2728 01d5 13       		.uleb128 0x13
+ 2729 01d6 00       		.byte	0
+ 2730 01d7 00       		.byte	0
+ 2731 01d8 25       		.uleb128 0x25
+ 2732 01d9 898201   		.uleb128 0x4109
+ 2733 01dc 01       		.byte	0x1
+ 2734 01dd 11       		.uleb128 0x11
+ 2735 01de 01       		.uleb128 0x1
+ 2736 01df 31       		.uleb128 0x31
+ 2737 01e0 13       		.uleb128 0x13
+ 2738 01e1 01       		.uleb128 0x1
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 52
+
+
+ 2739 01e2 13       		.uleb128 0x13
+ 2740 01e3 00       		.byte	0
+ 2741 01e4 00       		.byte	0
+ 2742 01e5 26       		.uleb128 0x26
+ 2743 01e6 8A8201   		.uleb128 0x410a
+ 2744 01e9 00       		.byte	0
+ 2745 01ea 02       		.uleb128 0x2
+ 2746 01eb 18       		.uleb128 0x18
+ 2747 01ec 9142     		.uleb128 0x2111
+ 2748 01ee 18       		.uleb128 0x18
+ 2749 01ef 00       		.byte	0
+ 2750 01f0 00       		.byte	0
+ 2751 01f1 27       		.uleb128 0x27
+ 2752 01f2 898201   		.uleb128 0x4109
+ 2753 01f5 01       		.byte	0x1
+ 2754 01f6 11       		.uleb128 0x11
+ 2755 01f7 01       		.uleb128 0x1
+ 2756 01f8 31       		.uleb128 0x31
+ 2757 01f9 13       		.uleb128 0x13
+ 2758 01fa 00       		.byte	0
+ 2759 01fb 00       		.byte	0
+ 2760 01fc 28       		.uleb128 0x28
+ 2761 01fd 21       		.uleb128 0x21
+ 2762 01fe 00       		.byte	0
+ 2763 01ff 49       		.uleb128 0x49
+ 2764 0200 13       		.uleb128 0x13
+ 2765 0201 2F       		.uleb128 0x2f
+ 2766 0202 05       		.uleb128 0x5
+ 2767 0203 00       		.byte	0
+ 2768 0204 00       		.byte	0
+ 2769 0205 29       		.uleb128 0x29
+ 2770 0206 34       		.uleb128 0x34
+ 2771 0207 00       		.byte	0
+ 2772 0208 03       		.uleb128 0x3
+ 2773 0209 0E       		.uleb128 0xe
+ 2774 020a 3A       		.uleb128 0x3a
+ 2775 020b 0B       		.uleb128 0xb
+ 2776 020c 3B       		.uleb128 0x3b
+ 2777 020d 05       		.uleb128 0x5
+ 2778 020e 49       		.uleb128 0x49
+ 2779 020f 13       		.uleb128 0x13
+ 2780 0210 3F       		.uleb128 0x3f
+ 2781 0211 19       		.uleb128 0x19
+ 2782 0212 3C       		.uleb128 0x3c
+ 2783 0213 19       		.uleb128 0x19
+ 2784 0214 00       		.byte	0
+ 2785 0215 00       		.byte	0
+ 2786 0216 2A       		.uleb128 0x2a
+ 2787 0217 35       		.uleb128 0x35
+ 2788 0218 00       		.byte	0
+ 2789 0219 49       		.uleb128 0x49
+ 2790 021a 13       		.uleb128 0x13
+ 2791 021b 00       		.byte	0
+ 2792 021c 00       		.byte	0
+ 2793 021d 2B       		.uleb128 0x2b
+ 2794 021e 34       		.uleb128 0x34
+ 2795 021f 00       		.byte	0
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 53
+
+
+ 2796 0220 03       		.uleb128 0x3
+ 2797 0221 0E       		.uleb128 0xe
+ 2798 0222 3A       		.uleb128 0x3a
+ 2799 0223 0B       		.uleb128 0xb
+ 2800 0224 3B       		.uleb128 0x3b
+ 2801 0225 0B       		.uleb128 0xb
+ 2802 0226 49       		.uleb128 0x49
+ 2803 0227 13       		.uleb128 0x13
+ 2804 0228 3F       		.uleb128 0x3f
+ 2805 0229 19       		.uleb128 0x19
+ 2806 022a 02       		.uleb128 0x2
+ 2807 022b 18       		.uleb128 0x18
+ 2808 022c 00       		.byte	0
+ 2809 022d 00       		.byte	0
+ 2810 022e 2C       		.uleb128 0x2c
+ 2811 022f 2E       		.uleb128 0x2e
+ 2812 0230 00       		.byte	0
+ 2813 0231 3F       		.uleb128 0x3f
+ 2814 0232 19       		.uleb128 0x19
+ 2815 0233 3C       		.uleb128 0x3c
+ 2816 0234 19       		.uleb128 0x19
+ 2817 0235 6E       		.uleb128 0x6e
+ 2818 0236 0E       		.uleb128 0xe
+ 2819 0237 03       		.uleb128 0x3
+ 2820 0238 0E       		.uleb128 0xe
+ 2821 0239 3A       		.uleb128 0x3a
+ 2822 023a 0B       		.uleb128 0xb
+ 2823 023b 3B       		.uleb128 0x3b
+ 2824 023c 0B       		.uleb128 0xb
+ 2825 023d 00       		.byte	0
+ 2826 023e 00       		.byte	0
+ 2827 023f 2D       		.uleb128 0x2d
+ 2828 0240 2E       		.uleb128 0x2e
+ 2829 0241 00       		.byte	0
+ 2830 0242 3F       		.uleb128 0x3f
+ 2831 0243 19       		.uleb128 0x19
+ 2832 0244 3C       		.uleb128 0x3c
+ 2833 0245 19       		.uleb128 0x19
+ 2834 0246 6E       		.uleb128 0x6e
+ 2835 0247 0E       		.uleb128 0xe
+ 2836 0248 03       		.uleb128 0x3
+ 2837 0249 0E       		.uleb128 0xe
+ 2838 024a 3A       		.uleb128 0x3a
+ 2839 024b 0B       		.uleb128 0xb
+ 2840 024c 3B       		.uleb128 0x3b
+ 2841 024d 05       		.uleb128 0x5
+ 2842 024e 00       		.byte	0
+ 2843 024f 00       		.byte	0
+ 2844 0250 00       		.byte	0
+ 2845              		.section	.debug_loc,"",%progbits
+ 2846              	.Ldebug_loc0:
+ 2847              	.LLST0:
+ 2848 0000 7A000000 		.4byte	.LVL9
+ 2849 0004 86000000 		.4byte	.LVL11
+ 2850 0008 0600     		.2byte	0x6
+ 2851 000a 0C       		.byte	0xc
+ 2852 000b FFFF0300 		.4byte	0x3ffff
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 54
+
+
+ 2853 000f 9F       		.byte	0x9f
+ 2854 0010 86000000 		.4byte	.LVL11
+ 2855 0014 02010000 		.4byte	.LVL23
+ 2856 0018 0100     		.2byte	0x1
+ 2857 001a 55       		.byte	0x55
+ 2858 001b 02010000 		.4byte	.LVL23
+ 2859 001f 0A010000 		.4byte	.LVL24
+ 2860 0023 0600     		.2byte	0x6
+ 2861 0025 0C       		.byte	0xc
+ 2862 0026 FFFF0300 		.4byte	0x3ffff
+ 2863 002a 9F       		.byte	0x9f
+ 2864 002b 0A010000 		.4byte	.LVL24
+ 2865 002f A0020000 		.4byte	.LFE64
+ 2866 0033 0100     		.2byte	0x1
+ 2867 0035 56       		.byte	0x56
+ 2868 0036 00000000 		.4byte	0
+ 2869 003a 00000000 		.4byte	0
+ 2870              	.LLST1:
+ 2871 003e 7A000000 		.4byte	.LVL9
+ 2872 0042 86000000 		.4byte	.LVL11
+ 2873 0046 0200     		.2byte	0x2
+ 2874 0048 30       		.byte	0x30
+ 2875 0049 9F       		.byte	0x9f
+ 2876 004a 86000000 		.4byte	.LVL11
+ 2877 004e 02010000 		.4byte	.LVL23
+ 2878 0052 0100     		.2byte	0x1
+ 2879 0054 56       		.byte	0x56
+ 2880 0055 02010000 		.4byte	.LVL23
+ 2881 0059 0A010000 		.4byte	.LVL24
+ 2882 005d 0200     		.2byte	0x2
+ 2883 005f 30       		.byte	0x30
+ 2884 0060 9F       		.byte	0x9f
+ 2885 0061 0A010000 		.4byte	.LVL24
+ 2886 0065 A0020000 		.4byte	.LFE64
+ 2887 0069 0100     		.2byte	0x1
+ 2888 006b 57       		.byte	0x57
+ 2889 006c 00000000 		.4byte	0
+ 2890 0070 00000000 		.4byte	0
+ 2891              	.LLST2:
+ 2892 0074 4C010000 		.4byte	.LVL29
+ 2893 0078 76010000 		.4byte	.LVL33
+ 2894 007c 0100     		.2byte	0x1
+ 2895 007e 59       		.byte	0x59
+ 2896 007f 94010000 		.4byte	.LVL40
+ 2897 0083 9E010000 		.4byte	.LVL42
+ 2898 0087 0100     		.2byte	0x1
+ 2899 0089 59       		.byte	0x59
+ 2900 008a 00000000 		.4byte	0
+ 2901 008e 00000000 		.4byte	0
+ 2902              	.LLST3:
+ 2903 0092 7A000000 		.4byte	.LVL9
+ 2904 0096 02010000 		.4byte	.LVL23
+ 2905 009a 0200     		.2byte	0x2
+ 2906 009c 30       		.byte	0x30
+ 2907 009d 9F       		.byte	0x9f
+ 2908 009e 02010000 		.4byte	.LVL23
+ 2909 00a2 8E010000 		.4byte	.LVL38
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 55
+
+
+ 2910 00a6 0100     		.2byte	0x1
+ 2911 00a8 55       		.byte	0x55
+ 2912 00a9 8E010000 		.4byte	.LVL38
+ 2913 00ad 90010000 		.4byte	.LVL39
+ 2914 00b1 0600     		.2byte	0x6
+ 2915 00b3 75       		.byte	0x75
+ 2916 00b4 00       		.sleb128 0
+ 2917 00b5 70       		.byte	0x70
+ 2918 00b6 00       		.sleb128 0
+ 2919 00b7 1C       		.byte	0x1c
+ 2920 00b8 9F       		.byte	0x9f
+ 2921 00b9 90010000 		.4byte	.LVL39
+ 2922 00bd C0010000 		.4byte	.LVL49
+ 2923 00c1 0100     		.2byte	0x1
+ 2924 00c3 55       		.byte	0x55
+ 2925 00c4 C2010000 		.4byte	.LVL50
+ 2926 00c8 A0020000 		.4byte	.LFE64
+ 2927 00cc 0100     		.2byte	0x1
+ 2928 00ce 55       		.byte	0x55
+ 2929 00cf 00000000 		.4byte	0
+ 2930 00d3 00000000 		.4byte	0
+ 2931              	.LLST4:
+ 2932 00d7 76010000 		.4byte	.LVL33
+ 2933 00db 78010000 		.4byte	.LVL34
+ 2934 00df 0100     		.2byte	0x1
+ 2935 00e1 50       		.byte	0x50
+ 2936 00e2 78010000 		.4byte	.LVL34
+ 2937 00e6 84010000 		.4byte	.LVL36
+ 2938 00ea 0100     		.2byte	0x1
+ 2939 00ec 59       		.byte	0x59
+ 2940 00ed 84010000 		.4byte	.LVL36
+ 2941 00f1 89010000 		.4byte	.LVL37-1
+ 2942 00f5 0100     		.2byte	0x1
+ 2943 00f7 50       		.byte	0x50
+ 2944 00f8 8A010000 		.4byte	.LVL37
+ 2945 00fc 8D010000 		.4byte	.LVL38-1
+ 2946 0100 0100     		.2byte	0x1
+ 2947 0102 50       		.byte	0x50
+ 2948 0103 9E010000 		.4byte	.LVL42
+ 2949 0107 A0010000 		.4byte	.LVL43
+ 2950 010b 0100     		.2byte	0x1
+ 2951 010d 50       		.byte	0x50
+ 2952 010e A0010000 		.4byte	.LVL43
+ 2953 0112 AC010000 		.4byte	.LVL45
+ 2954 0116 0100     		.2byte	0x1
+ 2955 0118 59       		.byte	0x59
+ 2956 0119 AC010000 		.4byte	.LVL45
+ 2957 011d B1010000 		.4byte	.LVL46-1
+ 2958 0121 0100     		.2byte	0x1
+ 2959 0123 50       		.byte	0x50
+ 2960 0124 B2010000 		.4byte	.LVL46
+ 2961 0128 B5010000 		.4byte	.LVL47-1
+ 2962 012c 0100     		.2byte	0x1
+ 2963 012e 50       		.byte	0x50
+ 2964 012f 00000000 		.4byte	0
+ 2965 0133 00000000 		.4byte	0
+ 2966              	.LLST5:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 56
+
+
+ 2967 0137 7E000000 		.4byte	.LVL10
+ 2968 013b 86000000 		.4byte	.LVL11
+ 2969 013f 0200     		.2byte	0x2
+ 2970 0141 30       		.byte	0x30
+ 2971 0142 9F       		.byte	0x9f
+ 2972 0143 D8000000 		.4byte	.LVL19
+ 2973 0147 DA000000 		.4byte	.LVL20
+ 2974 014b 0300     		.2byte	0x3
+ 2975 014d 74       		.byte	0x74
+ 2976 014e 01       		.sleb128 1
+ 2977 014f 9F       		.byte	0x9f
+ 2978 0150 02010000 		.4byte	.LVL23
+ 2979 0154 0A010000 		.4byte	.LVL24
+ 2980 0158 0300     		.2byte	0x3
+ 2981 015a 08       		.byte	0x8
+ 2982 015b 64       		.byte	0x64
+ 2983 015c 9F       		.byte	0x9f
+ 2984 015d 0A010000 		.4byte	.LVL24
+ 2985 0161 42010000 		.4byte	.LVL28
+ 2986 0165 0100     		.2byte	0x1
+ 2987 0167 53       		.byte	0x53
+ 2988 0168 42010000 		.4byte	.LVL28
+ 2989 016c A0020000 		.4byte	.LFE64
+ 2990 0170 0100     		.2byte	0x1
+ 2991 0172 54       		.byte	0x54
+ 2992 0173 00000000 		.4byte	0
+ 2993 0177 00000000 		.4byte	0
+ 2994              		.section	.debug_aranges,"",%progbits
+ 2995 0000 1C000000 		.4byte	0x1c
+ 2996 0004 0200     		.2byte	0x2
+ 2997 0006 00000000 		.4byte	.Ldebug_info0
+ 2998 000a 04       		.byte	0x4
+ 2999 000b 00       		.byte	0
+ 3000 000c 0000     		.2byte	0
+ 3001 000e 0000     		.2byte	0
+ 3002 0010 00000000 		.4byte	.LFB64
+ 3003 0014 A0020000 		.4byte	.LFE64-.LFB64
+ 3004 0018 00000000 		.4byte	0
+ 3005 001c 00000000 		.4byte	0
+ 3006              		.section	.debug_ranges,"",%progbits
+ 3007              	.Ldebug_ranges0:
+ 3008 0000 00000000 		.4byte	.LFB64
+ 3009 0004 A0020000 		.4byte	.LFE64
+ 3010 0008 00000000 		.4byte	0
+ 3011 000c 00000000 		.4byte	0
+ 3012              		.section	.debug_line,"",%progbits
+ 3013              	.Ldebug_line0:
+ 3014 0000 A3030000 		.section	.debug_str,"MS",%progbits,1
+ 3014      0200A202 
+ 3014      00000201 
+ 3014      FB0E0D00 
+ 3014      01010101 
+ 3015              	.LASF131:
+ 3016 0000 6E5F7370 		.ascii	"n_sp02\000"
+ 3016      303200
+ 3017              	.LASF149:
+ 3018 0007 43794465 		.ascii	"CyDelay\000"
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 57
+
+
+ 3018      6C617900 
+ 3019              	.LASF160:
+ 3020 000f 6D61696E 		.ascii	"main.c\000"
+ 3020      2E6300
+ 3021              	.LASF48:
+ 3022 0016 5F6F6E5F 		.ascii	"_on_exit_args\000"
+ 3022      65786974 
+ 3022      5F617267 
+ 3022      7300
+ 3023              	.LASF145:
+ 3024 0024 74656D70 		.ascii	"temp_frac\000"
+ 3024      5F667261 
+ 3024      6300
+ 3025              	.LASF148:
+ 3026 002e 6D61785F 		.ascii	"max_Reset\000"
+ 3026      52657365 
+ 3026      7400
+ 3027              	.LASF115:
+ 3028 0038 5F776374 		.ascii	"_wctomb_state\000"
+ 3028      6F6D625F 
+ 3028      73746174 
+ 3028      6500
+ 3029              	.LASF132:
+ 3030 0046 63685F73 		.ascii	"ch_spo2_valid\000"
+ 3030      706F325F 
+ 3030      76616C69 
+ 3030      6400
+ 3031              	.LASF112:
+ 3032 0054 5F723438 		.ascii	"_r48\000"
+ 3032      00
+ 3033              	.LASF117:
+ 3034 0059 5F736967 		.ascii	"_signal_buf\000"
+ 3034      6E616C5F 
+ 3034      62756600 
+ 3035              	.LASF12:
+ 3036 0065 756E7369 		.ascii	"unsigned int\000"
+ 3036      676E6564 
+ 3036      20696E74 
+ 3036      00
+ 3037              	.LASF129:
+ 3038 0072 61756E5F 		.ascii	"aun_ir_buffer\000"
+ 3038      69725F62 
+ 3038      75666665 
+ 3038      7200
+ 3039              	.LASF62:
+ 3040 0080 5F6C6266 		.ascii	"_lbfsize\000"
+ 3040      73697A65 
+ 3040      00
+ 3041              	.LASF60:
+ 3042 0089 5F666C61 		.ascii	"_flags\000"
+ 3042      677300
+ 3043              	.LASF6:
+ 3044 0090 5F5F696E 		.ascii	"__int32_t\000"
+ 3044      7433325F 
+ 3044      7400
+ 3045              	.LASF77:
+ 3046 009a 5F657272 		.ascii	"_errno\000"
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 58
+
+
+ 3046      6E6F00
+ 3047              	.LASF134:
+ 3048 00a1 63685F68 		.ascii	"ch_hr_valid\000"
+ 3048      725F7661 
+ 3048      6C696400 
+ 3049              	.LASF21:
+ 3050 00ad 5F4C4F43 		.ascii	"_LOCK_RECURSIVE_T\000"
+ 3050      4B5F5245 
+ 3050      43555253 
+ 3050      4956455F 
+ 3050      5400
+ 3051              	.LASF64:
+ 3052 00bf 5F726561 		.ascii	"_read\000"
+ 3052      6400
+ 3053              	.LASF119:
+ 3054 00c5 5F6D6272 		.ascii	"_mbrlen_state\000"
+ 3054      6C656E5F 
+ 3054      73746174 
+ 3054      6500
+ 3055              	.LASF146:
+ 3056 00d3 4932435F 		.ascii	"I2C_Start\000"
+ 3056      53746172 
+ 3056      7400
+ 3057              	.LASF79:
+ 3058 00dd 5F737464 		.ascii	"_stdout\000"
+ 3058      6F757400 
+ 3059              	.LASF23:
+ 3060 00e5 5F66706F 		.ascii	"_fpos_t\000"
+ 3060      735F7400 
+ 3061              	.LASF55:
+ 3062 00ed 5F666E73 		.ascii	"_fns\000"
+ 3062      00
+ 3063              	.LASF63:
+ 3064 00f2 5F636F6F 		.ascii	"_cookie\000"
+ 3064      6B696500 
+ 3065              	.LASF135:
+ 3066 00fa 7563685F 		.ascii	"uch_dummy\000"
+ 3066      64756D6D 
+ 3066      7900
+ 3067              	.LASF37:
+ 3068 0104 5F426967 		.ascii	"_Bigint\000"
+ 3068      696E7400 
+ 3069              	.LASF45:
+ 3070 010c 5F5F746D 		.ascii	"__tm_wday\000"
+ 3070      5F776461 
+ 3070      7900
+ 3071              	.LASF87:
+ 3072 0116 5F726573 		.ascii	"_result\000"
+ 3072      756C7400 
+ 3073              	.LASF16:
+ 3074 011e 75696E74 		.ascii	"uint32_t\000"
+ 3074      33325F74 
+ 3074      00
+ 3075              	.LASF13:
+ 3076 0127 696E7438 		.ascii	"int8_t\000"
+ 3076      5F7400
+ 3077              	.LASF41:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 59
+
+
+ 3078 012e 5F5F746D 		.ascii	"__tm_hour\000"
+ 3078      5F686F75 
+ 3078      7200
+ 3079              	.LASF28:
+ 3080 0138 5F5F636F 		.ascii	"__count\000"
+ 3080      756E7400 
+ 3081              	.LASF17:
+ 3082 0140 666C6F61 		.ascii	"float\000"
+ 3082      7400
+ 3083              	.LASF40:
+ 3084 0146 5F5F746D 		.ascii	"__tm_min\000"
+ 3084      5F6D696E 
+ 3084      00
+ 3085              	.LASF141:
+ 3086 014f 5F696D70 		.ascii	"_impure_ptr\000"
+ 3086      7572655F 
+ 3086      70747200 
+ 3087              	.LASF125:
+ 3088 015b 5F6E6578 		.ascii	"_nextf\000"
+ 3088      746600
+ 3089              	.LASF102:
+ 3090 0162 5F72616E 		.ascii	"_rand48\000"
+ 3090      64343800 
+ 3091              	.LASF88:
+ 3092 016a 5F726573 		.ascii	"_result_k\000"
+ 3092      756C745F 
+ 3092      6B00
+ 3093              	.LASF11:
+ 3094 0174 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3094      206C6F6E 
+ 3094      6720756E 
+ 3094      7369676E 
+ 3094      65642069 
+ 3095              	.LASF152:
+ 3096 018b 55415254 		.ascii	"UART_1_GetChar\000"
+ 3096      5F315F47 
+ 3096      65744368 
+ 3096      617200
+ 3097              	.LASF108:
+ 3098 019a 5F617363 		.ascii	"_asctime_buf\000"
+ 3098      74696D65 
+ 3098      5F627566 
+ 3098      00
+ 3099              	.LASF59:
+ 3100 01a7 5F5F7346 		.ascii	"__sFILE\000"
+ 3100      494C4500 
+ 3101              	.LASF36:
+ 3102 01af 5F776473 		.ascii	"_wds\000"
+ 3102      00
+ 3103              	.LASF156:
+ 3104 01b4 6D61785F 		.ascii	"max_Read_FIFO\000"
+ 3104      52656164 
+ 3104      5F464946 
+ 3104      4F00
+ 3105              	.LASF98:
+ 3106 01c2 5F5F4649 		.ascii	"__FILE\000"
+ 3106      4C4500
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 60
+
+
+ 3107              	.LASF130:
+ 3108 01c9 6E5F6972 		.ascii	"n_ir_buffer_length\000"
+ 3108      5F627566 
+ 3108      6665725F 
+ 3108      6C656E67 
+ 3108      746800
+ 3109              	.LASF71:
+ 3110 01dc 5F6F6666 		.ascii	"_offset\000"
+ 3110      73657400 
+ 3111              	.LASF161:
+ 3112 01e4 433A5C55 		.ascii	"C:\\Users\\furka\\Desktop\\Workspace10\\Design01.cy"
+ 3112      73657273 
+ 3112      5C667572 
+ 3112      6B615C44 
+ 3112      65736B74 
+ 3113 0212 64736E00 		.ascii	"dsn\000"
+ 3114              	.LASF82:
+ 3115 0216 5F656D65 		.ascii	"_emergency\000"
+ 3115      7267656E 
+ 3115      637900
+ 3116              	.LASF159:
+ 3117 0221 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3117      43313120 
+ 3117      352E342E 
+ 3117      31203230 
+ 3117      31363036 
+ 3118 0254 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 3118      20726576 
+ 3118      6973696F 
+ 3118      6E203233 
+ 3118      37373135 
+ 3119 0287 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 3119      66756E63 
+ 3119      74696F6E 
+ 3119      2D736563 
+ 3119      74696F6E 
+ 3120              	.LASF144:
+ 3121 02af 74656D70 		.ascii	"temp1\000"
+ 3121      3100
+ 3122              	.LASF39:
+ 3123 02b5 5F5F746D 		.ascii	"__tm_sec\000"
+ 3123      5F736563 
+ 3123      00
+ 3124              	.LASF46:
+ 3125 02be 5F5F746D 		.ascii	"__tm_yday\000"
+ 3125      5F796461 
+ 3125      7900
+ 3126              	.LASF81:
+ 3127 02c8 5F696E63 		.ascii	"_inc\000"
+ 3127      00
+ 3128              	.LASF54:
+ 3129 02cd 5F696E64 		.ascii	"_ind\000"
+ 3129      00
+ 3130              	.LASF33:
+ 3131 02d2 5F6E6578 		.ascii	"_next\000"
+ 3131      7400
+ 3132              	.LASF121:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 61
+
+
+ 3133 02d8 5F6D6273 		.ascii	"_mbsrtowcs_state\000"
+ 3133      72746F77 
+ 3133      63735F73 
+ 3133      74617465 
+ 3133      00
+ 3134              	.LASF154:
+ 3135 02e9 6D617869 		.ascii	"maxim_max30102_init\000"
+ 3135      6D5F6D61 
+ 3135      78333031 
+ 3135      30325F69 
+ 3135      6E697400 
+ 3136              	.LASF140:
+ 3137 02fd 665F7465 		.ascii	"f_temp\000"
+ 3137      6D7000
+ 3138              	.LASF29:
+ 3139 0304 5F5F7661 		.ascii	"__value\000"
+ 3139      6C756500 
+ 3140              	.LASF89:
+ 3141 030c 5F703573 		.ascii	"_p5s\000"
+ 3141      00
+ 3142              	.LASF128:
+ 3143 0311 61756E5F 		.ascii	"aun_red_buffer\000"
+ 3143      7265645F 
+ 3143      62756666 
+ 3143      657200
+ 3144              	.LASF123:
+ 3145 0320 5F776373 		.ascii	"_wcsrtombs_state\000"
+ 3145      72746F6D 
+ 3145      62735F73 
+ 3145      74617465 
+ 3145      00
+ 3146              	.LASF113:
+ 3147 0331 5F6D626C 		.ascii	"_mblen_state\000"
+ 3147      656E5F73 
+ 3147      74617465 
+ 3147      00
+ 3148              	.LASF19:
+ 3149 033e 63686172 		.ascii	"char\000"
+ 3149      00
+ 3150              	.LASF42:
+ 3151 0343 5F5F746D 		.ascii	"__tm_mday\000"
+ 3151      5F6D6461 
+ 3151      7900
+ 3152              	.LASF95:
+ 3153 034d 5F736967 		.ascii	"_sig_func\000"
+ 3153      5F66756E 
+ 3153      6300
+ 3154              	.LASF120:
+ 3155 0357 5F6D6272 		.ascii	"_mbrtowc_state\000"
+ 3155      746F7763 
+ 3155      5F737461 
+ 3155      746500
+ 3156              	.LASF94:
+ 3157 0366 5F617465 		.ascii	"_atexit0\000"
+ 3157      78697430 
+ 3157      00
+ 3158              	.LASF31:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 62
+
+
+ 3159 036f 5F666C6F 		.ascii	"_flock_t\000"
+ 3159      636B5F74 
+ 3159      00
+ 3160              	.LASF25:
+ 3161 0378 5F5F7763 		.ascii	"__wch\000"
+ 3161      6800
+ 3162              	.LASF101:
+ 3163 037e 5F696F62 		.ascii	"_iobs\000"
+ 3163      7300
+ 3164              	.LASF14:
+ 3165 0384 75696E74 		.ascii	"uint8_t\000"
+ 3165      385F7400 
+ 3166              	.LASF67:
+ 3167 038c 5F636C6F 		.ascii	"_close\000"
+ 3167      736500
+ 3168              	.LASF85:
+ 3169 0393 5F5F7364 		.ascii	"__sdidinit\000"
+ 3169      6964696E 
+ 3169      697400
+ 3170              	.LASF137:
+ 3171 039e 756E5F6D 		.ascii	"un_max\000"
+ 3171      617800
+ 3172              	.LASF78:
+ 3173 03a5 5F737464 		.ascii	"_stdin\000"
+ 3173      696E00
+ 3174              	.LASF110:
+ 3175 03ac 5F67616D 		.ascii	"_gamma_signgam\000"
+ 3175      6D615F73 
+ 3175      69676E67 
+ 3175      616D00
+ 3176              	.LASF10:
+ 3177 03bb 6C6F6E67 		.ascii	"long long int\000"
+ 3177      206C6F6E 
+ 3177      6720696E 
+ 3177      7400
+ 3178              	.LASF57:
+ 3179 03c9 5F626173 		.ascii	"_base\000"
+ 3179      6500
+ 3180              	.LASF90:
+ 3181 03cf 5F667265 		.ascii	"_freelist\000"
+ 3181      656C6973 
+ 3181      7400
+ 3182              	.LASF104:
+ 3183 03d9 5F6D756C 		.ascii	"_mult\000"
+ 3183      7400
+ 3184              	.LASF32:
+ 3185 03df 5F5F554C 		.ascii	"__ULong\000"
+ 3185      6F6E6700 
+ 3186              	.LASF158:
+ 3187 03e7 6D617869 		.ascii	"maxim_heart_rate_and_oxygen_saturation\000"
+ 3187      6D5F6865 
+ 3187      6172745F 
+ 3187      72617465 
+ 3187      5F616E64 
+ 3188              	.LASF122:
+ 3189 040e 5F776372 		.ascii	"_wcrtomb_state\000"
+ 3189      746F6D62 
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 63
+
+
+ 3189      5F737461 
+ 3189      746500
+ 3190              	.LASF61:
+ 3191 041d 5F66696C 		.ascii	"_file\000"
+ 3191      6500
+ 3192              	.LASF155:
+ 3193 0423 4D617849 		.ascii	"MaxINT_Read\000"
+ 3193      4E545F52 
+ 3193      65616400 
+ 3194              	.LASF151:
+ 3195 042f 55415254 		.ascii	"UART_1_PutString\000"
+ 3195      5F315F50 
+ 3195      75745374 
+ 3195      72696E67 
+ 3195      00
+ 3196              	.LASF86:
+ 3197 0440 5F5F636C 		.ascii	"__cleanup\000"
+ 3197      65616E75 
+ 3197      7000
+ 3198              	.LASF30:
+ 3199 044a 5F6D6273 		.ascii	"_mbstate_t\000"
+ 3199      74617465 
+ 3199      5F7400
+ 3200              	.LASF47:
+ 3201 0455 5F5F746D 		.ascii	"__tm_isdst\000"
+ 3201      5F697364 
+ 3201      737400
+ 3202              	.LASF124:
+ 3203 0460 5F685F65 		.ascii	"_h_errno\000"
+ 3203      72726E6F 
+ 3203      00
+ 3204              	.LASF139:
+ 3205 0469 6E5F6272 		.ascii	"n_brightness\000"
+ 3205      69676874 
+ 3205      6E657373 
+ 3205      00
+ 3206              	.LASF0:
+ 3207 0476 5F5F696E 		.ascii	"__int8_t\000"
+ 3207      74385F74 
+ 3207      00
+ 3208              	.LASF43:
+ 3209 047f 5F5F746D 		.ascii	"__tm_mon\000"
+ 3209      5F6D6F6E 
+ 3209      00
+ 3210              	.LASF20:
+ 3211 0488 6C6F6E67 		.ascii	"long double\000"
+ 3211      20646F75 
+ 3211      626C6500 
+ 3212              	.LASF157:
+ 3213 0494 73707269 		.ascii	"sprintf\000"
+ 3213      6E746600 
+ 3214              	.LASF153:
+ 3215 049c 5F5F7372 		.ascii	"__srget_r\000"
+ 3215      6765745F 
+ 3215      7200
+ 3216              	.LASF162:
+ 3217 04a6 6D61696E 		.ascii	"main\000"
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 64
+
+
+ 3217      00
+ 3218              	.LASF65:
+ 3219 04ab 5F777269 		.ascii	"_write\000"
+ 3219      746500
+ 3220              	.LASF53:
+ 3221 04b2 5F617465 		.ascii	"_atexit\000"
+ 3221      78697400 
+ 3222              	.LASF74:
+ 3223 04ba 5F6D6273 		.ascii	"_mbstate\000"
+ 3223      74617465 
+ 3223      00
+ 3224              	.LASF4:
+ 3225 04c3 73686F72 		.ascii	"short int\000"
+ 3225      7420696E 
+ 3225      7400
+ 3226              	.LASF7:
+ 3227 04cd 6C6F6E67 		.ascii	"long int\000"
+ 3227      20696E74 
+ 3227      00
+ 3228              	.LASF142:
+ 3229 04d6 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 3229      52784275 
+ 3229      66666572 
+ 3229      00
+ 3230              	.LASF97:
+ 3231 04e3 5F5F7366 		.ascii	"__sf\000"
+ 3231      00
+ 3232              	.LASF35:
+ 3233 04e8 5F736967 		.ascii	"_sign\000"
+ 3233      6E00
+ 3234              	.LASF143:
+ 3235 04ee 74656D70 		.ascii	"temp\000"
+ 3235      00
+ 3236              	.LASF84:
+ 3237 04f3 5F637572 		.ascii	"_current_locale\000"
+ 3237      72656E74 
+ 3237      5F6C6F63 
+ 3237      616C6500 
+ 3238              	.LASF72:
+ 3239 0503 5F646174 		.ascii	"_data\000"
+ 3239      6100
+ 3240              	.LASF26:
+ 3241 0509 5F5F7763 		.ascii	"__wchb\000"
+ 3241      686200
+ 3242              	.LASF44:
+ 3243 0510 5F5F746D 		.ascii	"__tm_year\000"
+ 3243      5F796561 
+ 3243      7200
+ 3244              	.LASF109:
+ 3245 051a 5F6C6F63 		.ascii	"_localtime_buf\000"
+ 3245      616C7469 
+ 3245      6D655F62 
+ 3245      756600
+ 3246              	.LASF127:
+ 3247 0529 5F756E75 		.ascii	"_unused\000"
+ 3247      73656400 
+ 3248              	.LASF1:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 65
+
+
+ 3249 0531 5F5F7569 		.ascii	"__uint8_t\000"
+ 3249      6E74385F 
+ 3249      7400
+ 3250              	.LASF93:
+ 3251 053b 5F6E6577 		.ascii	"_new\000"
+ 3251      00
+ 3252              	.LASF91:
+ 3253 0540 5F637674 		.ascii	"_cvtlen\000"
+ 3253      6C656E00 
+ 3254              	.LASF34:
+ 3255 0548 5F6D6178 		.ascii	"_maxwds\000"
+ 3255      77647300 
+ 3256              	.LASF116:
+ 3257 0550 5F6C3634 		.ascii	"_l64a_buf\000"
+ 3257      615F6275 
+ 3257      6600
+ 3258              	.LASF83:
+ 3259 055a 5F637572 		.ascii	"_current_category\000"
+ 3259      72656E74 
+ 3259      5F636174 
+ 3259      65676F72 
+ 3259      7900
+ 3260              	.LASF147:
+ 3261 056c 55415254 		.ascii	"UART_1_Start\000"
+ 3261      5F315F53 
+ 3261      74617274 
+ 3261      00
+ 3262              	.LASF138:
+ 3263 0579 756E5F70 		.ascii	"un_prev_data\000"
+ 3263      7265765F 
+ 3263      64617461 
+ 3263      00
+ 3264              	.LASF70:
+ 3265 0586 5F626C6B 		.ascii	"_blksize\000"
+ 3265      73697A65 
+ 3265      00
+ 3266              	.LASF38:
+ 3267 058f 5F5F746D 		.ascii	"__tm\000"
+ 3267      00
+ 3268              	.LASF73:
+ 3269 0594 5F6C6F63 		.ascii	"_lock\000"
+ 3269      6B00
+ 3270              	.LASF27:
+ 3271 059a 73697A65 		.ascii	"sizetype\000"
+ 3271      74797065 
+ 3271      00
+ 3272              	.LASF9:
+ 3273 05a3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3273      20756E73 
+ 3273      69676E65 
+ 3273      6420696E 
+ 3273      7400
+ 3274              	.LASF100:
+ 3275 05b5 5F6E696F 		.ascii	"_niobs\000"
+ 3275      627300
+ 3276              	.LASF24:
+ 3277 05bc 77696E74 		.ascii	"wint_t\000"
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 66
+
+
+ 3277      5F7400
+ 3278              	.LASF15:
+ 3279 05c3 696E7433 		.ascii	"int32_t\000"
+ 3279      325F7400 
+ 3280              	.LASF50:
+ 3281 05cb 5F64736F 		.ascii	"_dso_handle\000"
+ 3281      5F68616E 
+ 3281      646C6500 
+ 3282              	.LASF92:
+ 3283 05d7 5F637674 		.ascii	"_cvtbuf\000"
+ 3283      62756600 
+ 3284              	.LASF3:
+ 3285 05df 756E7369 		.ascii	"unsigned char\000"
+ 3285      676E6564 
+ 3285      20636861 
+ 3285      7200
+ 3286              	.LASF8:
+ 3287 05ed 5F5F7569 		.ascii	"__uint32_t\000"
+ 3287      6E743332 
+ 3287      5F7400
+ 3288              	.LASF118:
+ 3289 05f8 5F676574 		.ascii	"_getdate_err\000"
+ 3289      64617465 
+ 3289      5F657272 
+ 3289      00
+ 3290              	.LASF105:
+ 3291 0605 5F616464 		.ascii	"_add\000"
+ 3291      00
+ 3292              	.LASF150:
+ 3293 060a 6D61785F 		.ascii	"max_ReadReg\000"
+ 3293      52656164 
+ 3293      52656700 
+ 3294              	.LASF133:
+ 3295 0616 6E5F6865 		.ascii	"n_heart_rate\000"
+ 3295      6172745F 
+ 3295      72617465 
+ 3295      00
+ 3296              	.LASF56:
+ 3297 0623 5F5F7362 		.ascii	"__sbuf\000"
+ 3297      756600
+ 3298              	.LASF99:
+ 3299 062a 5F676C75 		.ascii	"_glue\000"
+ 3299      6500
+ 3300              	.LASF96:
+ 3301 0630 5F5F7367 		.ascii	"__sglue\000"
+ 3301      6C756500 
+ 3302              	.LASF107:
+ 3303 0638 5F737472 		.ascii	"_strtok_last\000"
+ 3303      746F6B5F 
+ 3303      6C617374 
+ 3303      00
+ 3304              	.LASF114:
+ 3305 0645 5F6D6274 		.ascii	"_mbtowc_state\000"
+ 3305      6F77635F 
+ 3305      73746174 
+ 3305      6500
+ 3306              	.LASF49:
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 67
+
+
+ 3307 0653 5F666E61 		.ascii	"_fnargs\000"
+ 3307      72677300 
+ 3308              	.LASF2:
+ 3309 065b 7369676E 		.ascii	"signed char\000"
+ 3309      65642063 
+ 3309      68617200 
+ 3310              	.LASF76:
+ 3311 0667 5F726565 		.ascii	"_reent\000"
+ 3311      6E7400
+ 3312              	.LASF5:
+ 3313 066e 73686F72 		.ascii	"short unsigned int\000"
+ 3313      7420756E 
+ 3313      7369676E 
+ 3313      65642069 
+ 3313      6E7400
+ 3314              	.LASF51:
+ 3315 0681 5F666E74 		.ascii	"_fntypes\000"
+ 3315      79706573 
+ 3315      00
+ 3316              	.LASF58:
+ 3317 068a 5F73697A 		.ascii	"_size\000"
+ 3317      6500
+ 3318              	.LASF18:
+ 3319 0690 646F7562 		.ascii	"double\000"
+ 3319      6C6500
+ 3320              	.LASF22:
+ 3321 0697 5F6F6666 		.ascii	"_off_t\000"
+ 3321      5F7400
+ 3322              	.LASF69:
+ 3323 069e 5F6E6275 		.ascii	"_nbuf\000"
+ 3323      6600
+ 3324              	.LASF106:
+ 3325 06a4 5F756E75 		.ascii	"_unused_rand\000"
+ 3325      7365645F 
+ 3325      72616E64 
+ 3325      00
+ 3326              	.LASF75:
+ 3327 06b1 5F666C61 		.ascii	"_flags2\000"
+ 3327      67733200 
+ 3328              	.LASF52:
+ 3329 06b9 5F69735F 		.ascii	"_is_cxa\000"
+ 3329      63786100 
+ 3330              	.LASF103:
+ 3331 06c1 5F736565 		.ascii	"_seed\000"
+ 3331      6400
+ 3332              	.LASF111:
+ 3333 06c7 5F72616E 		.ascii	"_rand_next\000"
+ 3333      645F6E65 
+ 3333      787400
+ 3334              	.LASF66:
+ 3335 06d2 5F736565 		.ascii	"_seek\000"
+ 3335      6B00
+ 3336              	.LASF80:
+ 3337 06d8 5F737464 		.ascii	"_stderr\000"
+ 3337      65727200 
+ 3338              	.LASF126:
+ 3339 06e0 5F6E6D61 		.ascii	"_nmalloc\000"
+ARM GAS  C:\Users\furka\AppData\Local\Temp\ccNNSXMf.s 			page 68
+
+
+ 3339      6C6C6F63 
+ 3339      00
+ 3340              	.LASF68:
+ 3341 06e9 5F756275 		.ascii	"_ubuf\000"
+ 3341      6600
+ 3342              	.LASF136:
+ 3343 06ef 756E5F6D 		.ascii	"un_min\000"
+ 3343      696E00
+ 3344              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
